@@ -1,0 +1,16 @@
+<div class="container">
+    <a routerLink="/sign_up">Sign-up</a> 
+    <a routerLink="/sign_in">Sign-in</a>
+    <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile><a routerLink="/">LiliShop</a></mat-grid-tile>
+        <mat-grid-tile [colspan]="2">
+            <mat-form-field appearance="outline" class="search">   
+                <input matInput placeholder="Search" >
+            </mat-form-field>
+            <mat-icon>search</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-icon>shopping_cart</mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
