@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { FormControl, FormGroup} from '@angular/forms'
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms'
+
+const preFile = new File([], "file");
 
 @Component({
   selector: 'app-sign-up',
@@ -8,9 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor() { }
+  AccountRegistrationForm: FormGroup;
+  // genders: ['male', 'female'];
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder) { }
+
+  ngOnInit(): void {
+    this.AccountRegistrationForm = this.fb.group ({
+      username: new FormControl(''),
+      password: new FormControl(''),
+      password_comfirm: new FormControl(''),
+      // gender: new FormControl(),
+      gender: ['', [Validators.required]],
+      dob: new FormControl(''),
+      address: new FormControl(''),
+      phone_number: new FormControl(''),
+    })
+  }
+
+  onSubmit() {
+    console.log(this.AccountRegistrationForm.value);
   }
 
 }

@@ -1,10 +1,75 @@
 <div class="container">
-    <form>
-        <h3>Account Registration Form</h3>
-        <div class="example-container">
-            <mat-form-field>
-              <input matInput placeholder="Input">
-            </mat-form-field>
-          </div>
-    </form>
+  <form [formGroup]="AccountRegistrationForm" (ngSubmit)="onSubmit()">
+    <h3>Account Registration Form</h3>
+    <!-- input tag not show, must import this lib for form rendering properly in file styles.scss-->
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field class="example-full-width" >
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName='password'>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field class="example-full-width" >
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput formControlName='password_comfirm'>
+      </mat-form-field>
+    </div>
+    
+    <!--  get value in angular material diferent with bootstrap -->
+    <div class="form-group">
+      <mat-radio-group formControlName="gender">
+        <mat-label>Gender</mat-label>
+        <!-- the same value make error in radio-button -->
+        <mat-radio-button value="male" name="gender" >Male</mat-radio-button>
+        <mat-radio-button value="female" name="gender" >Female</mat-radio-button>
+      </mat-radio-group> 
+    </div> 
+       
+    <div class="form-group">
+      <mat-form-field>
+        <!-- must import MatNativeDateModule beside MatDatepickerModule to use Datepicker -->
+        <mat-label>Date of Birth</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+      </mat-form-field>
+    </div>
+    
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phone_number">
+      </mat-form-field>
+    </div>
+    
+
+    <mat-form-field>
+      <!-- use ngx-material-file-input, review on readlist -->
+      <mat-label>Avatar</mat-label>
+      <ngx-mat-file-input ></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field> 
+
+    <section>
+      <div class="example-label"></div>
+        <button mat-raised-button type="submit" color="primary">Sign-Up</button>
+        <button mat-raised-button color="primary">Back</button>
+    </section>
+
+  </form>
 </div>
