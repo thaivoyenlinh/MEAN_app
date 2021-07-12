@@ -18,7 +18,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MaterialFileInputModule} from 'ngx-material-file-input';
+// import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {MatButtonModule} from '@angular/material/button';
 
 
@@ -43,7 +43,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MaterialFileInputModule,
+    // MaterialFileInputModule,
     MatButtonModule,
   ],
   providers: [],

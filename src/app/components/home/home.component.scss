@@ -1,7 +1,72 @@
 .container {
-    background-color: rgb(241, 208, 241);
+  
+  background-color: rgb(220, 202, 238);
+  font-size: 13px;
+  margin: 0 auto;
+  // border:orange 1px solid;
+  height: 140px;
 
+  .authentication{
+    // border: solid blue 1px;
+    height: 40px;
+    
+    overflow: hidden;
+    a {
+      // border: hotpink solid 2px;
+      font-size: 15px;
+      float: right;
+      padding: 10px;
+      font-family: Calibri;
+
+      &:hover {
+        background: white;
+        transition: 0.4s;
+      }
+    }
+    
   }
+
+
+  .logomall {
+    font-size: 40px;
+    padding: 2%;
+    padding-left: 70px;
+    float: left;
+    a {
+      // border: red 1px solid;
+      display: inline;
+      color: rgb(143, 143, 233);
+    }
+  }
+
+  .search {
+  
+    mat-form-field{
+      // border: green 3px solid;
+      width: 50%;
+      padding: 2%;
+      margin-left: 30px;
+    }
+
+    button {
+      // border: blueviolet 3px solid;
+      font-size: 10px;
+      overflow: hidden;
+    }
+  }
+
+  .cart {
+    // border: solid blue 1px;
+    float: right;
+    margin-top: -85px;
+    margin-right: 100px;
+
+    mat-icon {
+      font-size: 30px;
+    }
+  }
+
+}
   
   
   

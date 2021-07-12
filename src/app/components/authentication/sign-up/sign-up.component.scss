@@ -1,6 +1,58 @@
 .container {
 
-    .example-form {
-        padding-left: 50px;
-    }
+    margin: 0 auto;
+    width: 40%;
+    border: blueviolet 1px solid;
+    border-radius: 10px;
+    margin-top: 14px;
+    margin-bottom: 14px;
+
+    form {
+    
+        margin: 0;
+        font-size: 14px;
+        
+
+        .form-group {
+            text-align: center;
+            
+
+            mat-form-field {
+                width: 70%;
+            }
+
+            .button {
+                // border: blueviolet 2px solid;
+                margin-bottom: 20px;
+
+                button {
+                    background-color: rgb(176, 117, 231);
+                    color: white;
+                    // border: brown 1px solid;
+                    width: 80px;
+                    margin-left: 20px;
+                }
+
+                a {
+                    text-decoration: none;
+                    color:white;
+                }
+            }
+        }
+
+        .gender {
+            
+            // border: red 1px solid;
+            mat-radio-group { 
+                text-align: left;
+                padding: 68px;
+                color: grey;
+                
+                mat-radio-button {
+                    margin-left: 10px;
+                    margin-right: 10px;
+                }
+            } 
+        }
+   }
 }

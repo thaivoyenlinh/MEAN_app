@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms'
 
-const preFile = new File([], "file");
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -12,6 +10,8 @@ export class SignUpComponent implements OnInit {
 
   AccountRegistrationForm: FormGroup;
   // genders: ['male', 'female'];
+  hide = true;
+  hide_passconfirm = true;
 
   constructor(private fb: FormBuilder) { }
 
@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
     this.AccountRegistrationForm = this.fb.group ({
       username: new FormControl(''),
       password: new FormControl(''),
-      password_comfirm: new FormControl(''),
+      password_confirm: new FormControl(''),
       // gender: new FormControl(),
       gender: ['', [Validators.required]],
       dob: new FormControl(''),
@@ -32,4 +32,5 @@ export class SignUpComponent implements OnInit {
     console.log(this.AccountRegistrationForm.value);
   }
 
+  
 }

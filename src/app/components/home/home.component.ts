@@ -12,4 +12,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  // * use to reload page/component
+  refresh(): void {
+    window.location.reload();
+  }
 }
