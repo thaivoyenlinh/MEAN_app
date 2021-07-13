@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   }
 
   // * use to reload page/component
-  refresh(): void {
+  reload_page(): void {
     window.location.reload();
   }
 }

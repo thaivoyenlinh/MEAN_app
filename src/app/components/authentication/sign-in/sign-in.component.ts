@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,7 +11,7 @@ export class SignInComponent implements OnInit {
 
   SignInForm: FormGroup
   hide = true;
-  constructor() { }
+  constructor(protected router: Router) { }
 
   ngOnInit() {
     this.SignInForm = new FormGroup ({

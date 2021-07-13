@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,7 @@ export class SignUpComponent implements OnInit {
   hide = true;
   hide_passconfirm = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, protected router: Router) { }
 
   ngOnInit(): void {
     this.AccountRegistrationForm = this.fb.group ({
@@ -26,6 +27,10 @@ export class SignUpComponent implements OnInit {
       address: new FormControl(''),
       phone_number: new FormControl(''),
     })
+  }
+
+  previous_page(): void {
+    this.router.navigateByUrl('/');
   }
 
   onSubmit() {

@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="header">
+        <div class="logomall">
+            <a (click)="reload_page()">LiliMall</a>
+        </div>
+
+        <div class="authentication">
+            <a routerLink="/sign_out">Sign-out</a>
+        </div>
+    </div>
+
+    <div class="sidenav">
+        <!-- <mat-toolbar>
+            Responsive side navigation
+        </mat-toolbar> -->
+
+        <mat-sidenav-container>
+            <mat-sidenav class="mat-elevation-z8" mode="side" opened="true">
+                <button mat-button class="menu-button">
+                    <!-- <mat-icon>home</mat-icon> -->
+                    <span>Dashboard</span>
+                </button>
+                <button mat-button class="menu-button" routerLink="./admin/category">
+                    <!-- <mat-icon>person</mat-icon> -->
+                    <span>Category</span>
+                </button>
+                <button mat-button class="menu-button">
+                    <!-- <mat-icon>info</mat-icon> -->
+                    <span>Item</span>
+                </button>
+                <button mat-button class="menu-button">
+                    <!-- <mat-icon>help</mat-icon> -->
+                    <span>User</span>
+                </button>
+                
+                <!-- <mat-divider></mat-divider> -->
+
+            </mat-sidenav>
+
+            <mat-sidenav-content>
+                <div class="content mat-elevation-z8">
+                    <router-outlet></router-outlet>
+                </div>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </div>
+</div>
+
