@@ -10,10 +10,6 @@
     </div>
 
     <div class="sidenav">
-        <!-- <mat-toolbar>
-            Responsive side navigation
-        </mat-toolbar> -->
-
         <mat-sidenav-container>
             <mat-sidenav class="mat-elevation-z8" mode="side" opened="true">
                 <button mat-button class="menu-button">
@@ -39,7 +35,9 @@
 
             <mat-sidenav-content>
                 <div class="content mat-elevation-z8">
-                    <router-outlet></router-outlet>
+                    <div class="display">
+                        <router-outlet></router-outlet>
+                    </div>
                 </div>
             </mat-sidenav-content>
         </mat-sidenav-container>
