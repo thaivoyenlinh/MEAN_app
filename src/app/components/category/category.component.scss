@@ -3,10 +3,18 @@ p {
     color: blue;
     // border: chartreuse 3px solid;
     margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.create_button {
+  // border: solid red 2px;
+  float: right;
+  margin-top: -10px;
 }
 
 table {
-    width: auto;
+    // float: right;
+    width:max-content;
     td, th {
       padding: 0px 90px;
     }

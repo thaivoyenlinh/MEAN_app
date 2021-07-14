@@ -12,6 +12,11 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CategoryComponent } from './components/category/category.component';
 import { UserComponent } from './components/user/user.component';
 import { ItemComponent } from './components/item/item.component';
+import { EditComponent } from './components/admin/edit/edit.component';
+import { DeleteComponent } from './components/admin/delete/delete.component';
+
+//! Lazy-loading Component is import at that component
+// import { CreateComponent } from './components/admin/create/create.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +41,7 @@ import { MatDividerModule } from '@angular/material/divider';
 //* use table
 import {MatTableModule} from '@angular/material/table';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +54,9 @@ import {MatTableModule} from '@angular/material/table';
     CategoryComponent,
     UserComponent,
     ItemComponent,
+    // CreateComponent,
+    EditComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,
