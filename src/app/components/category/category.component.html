@@ -24,7 +24,7 @@
       <tr><th mat-header-cell *matHeaderCellDef></th></tr>
       <tr>
         <td mat-cell *matCellDef="let row" style="width:40%">
-          <button mat-icon-button color="accent" title="Edit Category"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="accent" title="Edit Category" (click)="clickEdit(row)"><mat-icon>edit</mat-icon></button>
           <button mat-icon-button color="primary" title="Delete Category"><mat-icon>delete</mat-icon></button>
           <!-- ! (click)="edit_category(row)" -->
         </td>

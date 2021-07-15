@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -15,6 +15,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -24,9 +25,14 @@ export class CategoryComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'symbol', 'action'];
   dataSource = ELEMENT_DATA;
-  constructor() { }
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  clickEdit(row) {
+    console.log("position", row.position)
   }
 
 }

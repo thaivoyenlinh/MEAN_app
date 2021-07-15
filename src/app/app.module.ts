@@ -41,6 +41,7 @@ import {MatTableModule} from '@angular/material/table';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +54,7 @@ import {MatTableModule} from '@angular/material/table';
     CategoryComponent,
     UserComponent,
     ItemComponent,
+    // EditCategoryComponent,
     // CreateCategoryComponent,
   
   ],

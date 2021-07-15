@@ -17,7 +17,12 @@ const routes: Routes = [
 
     { path: 'admin/category/create',
       loadChildren: () => import('./components/category/create-category/create-category.module').then(m => m.CreateCategoryModule)
+    },
+
+    { path: 'admin/category/edit',
+      loadChildren: () => import('./components/category/edit-category/edit-category.module').then(m => m.EditCategoryModule)
     }
+
   ]},
 
   { path: 'sign_up', component: SignUpComponent},
