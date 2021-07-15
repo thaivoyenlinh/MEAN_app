@@ -1,23 +1,20 @@
 <p>Category</p>
 <div class="create_button">
-  <button mat-icon-button color="primary" title="Create Category" routerLink="./create"><mat-icon>add</mat-icon></button>
+  <button mat-icon-button color="primary" title="Create Category" routerLink="/admin/admin/category/create"><mat-icon>add</mat-icon></button>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.position}} </td>
     </ng-container>
   
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     </ng-container>
 
-    <!-- Symbol Column -->
     <ng-container matColumnDef="symbol">
       <th mat-header-cell *matHeaderCellDef> Symbol </th>
       <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>

@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, children: [
     { path: 'admin/category', component: CategoryComponent},
 
-    { path: 'admin/category',
-      loadChildren: () => import('./components/admin/create/create.module').then(m => m.CreateModule)
+    { path: 'admin/category/create',
+      loadChildren: () => import('./components/category/create-category/create-category.module').then(m => m.CreateCategoryModule)
     }
   ]},
 

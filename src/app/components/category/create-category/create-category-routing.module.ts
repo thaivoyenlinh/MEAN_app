@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { CreateComponent } from './create.component'; 
+import { CreateCategoryComponent } from './create-category.component';
 
 const routes: Routes = [
-    { path: 'create', component: CreateComponent}
+    { path: '', component: CreateCategoryComponent}
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    // Error so no need => export: [RouterModule]
+    exports: [RouterModule]
 })
 
-export class CreateRoutingModule {}
+export class CreateCategoryRoutingModule { }

@@ -14,8 +14,7 @@ export class AdminComponent implements OnInit {
   }
 
   reload_page(): void {
-    // window.location.reload();
     this.router.navigateByUrl('/admin');
   }
-
 }
+
