@@ -1,1 +1,25 @@
-<p>edit-category works!</p>
+
+<div class="container">
+    <form [formGroup]="EditCategoryForm" (ngSubmit)="onSubmit()">
+        <h3>Edit Category</h3>
+        <div class="form-group" >
+            <mat-form-field>
+                <mat-label>Category Name Replace</mat-label>
+                <input matInput formControlName="category_name_replace">
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Avatar Replace</mat-label>
+                <input matInput formControlName="category_avatar_replace">
+            </mat-form-field>
+        </div>
+            
+        <div class="form-group">
+            <div class="button">
+                <button mat-raised-button type="submit">Submit</button>
+                <button mat-raised-button (click)="router.navigateByUrl('/admin/admin/category')">Back</button>
+            </div>
+        </div> 
+    </form>
+</div>

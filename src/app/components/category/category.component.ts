@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  symbol: string;
-  
-}
+//! Interface tương tự cấu trúc tư định nghĩa. Import từ file interfaces/category (file định nghĩa)
+import { Category } from '../../interfaces/category/category';
+//!
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', symbol: 'H'},
-  {position: 2, name: 'Helium', symbol: 'He'},
-  {position: 3, name: 'Lithium', symbol: 'Li'},
+
+//! send data without showing in URL
+import { NavigationExtras } from '@angular/router';
+
+const ELEMENT_DATA: Category[] = [
+  {category_name: 'Hydrogen', category_avatar: 'H'},
+  { category_name: 'Lilimall', category_avatar: 'A'},
 ];
-
-
 
 @Component({
   selector: 'app-category',
@@ -23,16 +21,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class CategoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'symbol', 'action'];
+  displayedColumns: string[] = ['category_name', 'category_avatar', 'action'];
   dataSource = ELEMENT_DATA;
+  
 
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  clickEdit(row) {
-    console.log("position", row.position)
+  gotoEdit(category_name: string) {
+    // console.log("position", row.position)
+    let navigationExtras: NavigationExtras = {
+      queryParams: { name: category_name },
+    };
+    this.router.navigate(['/admin/admin/category/edit'], navigationExtras);
   }
 
 }
