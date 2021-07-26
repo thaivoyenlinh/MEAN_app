@@ -15,6 +15,8 @@ import { ItemComponent } from './components/item/item.component';
 
 //! Lazy-loading Component is import at that component
 // import { CreateCategoryComponent } from './components/category/create-category/create-category.component';
+// import { CreateItemComponent } from './components/item/create-item/create-item.component';
+// import { EditItemComponent } from './components/item/edit-item/edit-item.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,7 +43,6 @@ import {MatTableModule} from '@angular/material/table';
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +55,8 @@ import {MatTableModule} from '@angular/material/table';
     CategoryComponent,
     UserComponent,
     ItemComponent,
+    // EditItemComponent,
+    // CreateItemComponent,
     // EditCategoryComponent,
     // CreateCategoryComponent,
   

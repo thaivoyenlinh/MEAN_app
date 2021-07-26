@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Navigation } from '@angular/router';
 
 //! Interface tương tự cấu trúc tư định nghĩa. Import từ file interfaces/category (file định nghĩa)
 import { Category } from '../../interfaces/category/category';
@@ -9,8 +10,9 @@ import { Category } from '../../interfaces/category/category';
 //! send data without showing in URL
 import { NavigationExtras } from '@angular/router';
 
+//? Category được import 
 const ELEMENT_DATA: Category[] = [
-  {category_name: 'Hydrogen', category_avatar: 'H'},
+  { category_name: 'Hydrogen', category_avatar: 'H'},
   { category_name: 'Lilimall', category_avatar: 'A'},
 ];
 
@@ -35,7 +37,7 @@ export class CategoryComponent implements OnInit {
     let navigationExtras: NavigationExtras = {
       queryParams: { name: category_name },
     };
-    this.router.navigate(['/admin/admin/category/edit'], navigationExtras);
+    this.router.navigate(['/admin/category/edit'], navigationExtras);
   }
 
 }
