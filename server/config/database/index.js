@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 //Set up default mongoose connection
 
-async function Connect () {
+async function connect () {
 
     try {
         await mongoose.connect('mongodb://127.0.0.1/MEAN_app', {
@@ -17,5 +17,5 @@ async function Connect () {
 
 }
 
-module.exports = { Connect };
+module.exports = { connect };
 

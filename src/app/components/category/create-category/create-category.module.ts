@@ -9,6 +9,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 
+//? send data to server
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
     declarations: [
         CreateCategoryComponent,
@@ -20,6 +23,7 @@ import {MatButtonModule} from '@angular/material/button';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        HttpClientModule,
     ],
 })
 

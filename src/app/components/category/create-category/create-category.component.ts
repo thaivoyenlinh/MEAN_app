@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-category',
@@ -11,13 +12,16 @@ export class CreateCategoryComponent implements OnInit {
 
   CreateCategoryForm: FormGroup
 
-  constructor(protected router: Router) { }
+  constructor(protected router: Router, private http: HttpClient) { 
+
+  }
 
   ngOnInit() {
     this.CreateCategoryForm = new FormGroup ({
       category_name: new FormControl(''),
       category_avatar: new FormControl(''),
-    })
+    });
+    
   }
 
   onSubmit() {

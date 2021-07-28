@@ -41,7 +41,7 @@ import { MatDividerModule } from '@angular/material/divider';
 //* use table
 import {MatTableModule} from '@angular/material/table';
 
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -80,6 +80,7 @@ import {MatTableModule} from '@angular/material/table';
     MatSidenavModule,
     MatDividerModule,
     MatTableModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

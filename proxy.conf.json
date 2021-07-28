@@ -1,0 +1,8 @@
+{
+    "/admin/category/create/*" : {
+        "target": "httphttp://localhost:4200/admin/cartegory/create",
+        "pathRewrite" : {
+            "^/admin/category/create": ""
+        }
+    }
+}
