@@ -3,16 +3,14 @@ class CategoryController{
     // get all categories
     getListOfCategories(req, res){
 
-        console.log(req);
-        // object send to client
-        // const tempObj = {
-        //     name: 'abc',
-        //     avatar: 'nnn'
-        // }
+        // console.log(req);
+        //* object send to client
+        const tempObj = {
+            name: 'abc',
+            avatar: 'nnn'
+        }
 
-        return res.status(200).json({ name: 'abc', avatar: 'nnn'});
-
-        // return res.status(200).json(tempObj);
+        return res.status(200).json(tempObj);
     }
 }
 

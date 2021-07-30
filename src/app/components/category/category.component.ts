@@ -38,16 +38,11 @@ export class CategoryComponent implements OnInit {
 	ngOnInit() {
 
 		//* get data from server by subscribe() to emit value into Observable
-		// this.categoryService.getListOfCategories().subscribe(
-		// 	(res) => {
-		// 		console.log('testtt');
-		// 		console.log(res);
-		// 	}
-		// );
-		// this.categoryService.getListOfCategories().pipe(
-		// 	tap((res) => { console.log(res)})
-		// ).subscribe();
-		this.http.get(this.SERVER_URL).subscribe(res => console.log(res));
+		this.categoryService.getListOfCategories().subscribe(
+			(res) => {
+				console.log(res);
+			}
+		)
 	}
 
 	gotoEdit(category_name: string) {
