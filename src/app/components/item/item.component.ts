@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Item } from 'src/app/interfaces/category/category';
+import { Item } from '../../interfaces/item/item';
 
 import { NavigationExtras } from '@angular/router';
 

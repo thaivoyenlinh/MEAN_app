@@ -7,7 +7,7 @@ const app = express()
 const dotenv = require('dotenv');
 //* dotenv configuration
 dotenv.config({ path: '../.env' });
-const connectDatabase = require('./config/database')
+
 const route = require('./routers/index');
 
 //! *ERROR: Access to XMLHttpRequest at 'http://localhost:4100/categories' from origin 'http://localhost:4200' 
@@ -15,6 +15,7 @@ const route = require('./routers/index');
 const cors = require('cors');
 
 //databse connection
+const connectDatabase = require('./config/database')
 connectDatabase.connect();
 
 // app.use(morgan('combined'))

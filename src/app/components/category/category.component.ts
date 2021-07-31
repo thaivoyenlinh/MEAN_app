@@ -10,8 +10,7 @@ import { Category } from '../../interfaces/category/category';
 import { NavigationExtras } from '@angular/router';
 
 //! call service from server
-import { CategoryService } from '../../services/category/category.service'
-import { HttpClient } from '@angular/common/http';
+import { CategoryService } from '../../services/category/category.service';
 
 //? Category được import 
 const ELEMENT_DATA: Category[] = [
@@ -32,15 +31,19 @@ export class CategoryComponent implements OnInit {
 	SERVER_URL = 'http://localhost:4100/categories'
 
 	constructor(private router: Router, 
-				private categoryService: CategoryService,
-				private http: HttpClient) { }
+				private categoryService: CategoryService,) { }
 
 	ngOnInit() {
 
 		//* get data from server by subscribe() to emit value into Observable
+		//* like console.log, data is saved in observable just display 
+		//* when we call subcribe()
 		this.categoryService.getListOfCategories().subscribe(
 			(res) => {
-				console.log(res);
+				console.log("RESPONSE: ", res);
+			},
+			(error) => {
+				console.log("ERROR: ", error);
 			}
 		)
 	}
