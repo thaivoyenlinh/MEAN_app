@@ -20,7 +20,7 @@
       <tr>
         <td mat-cell *matCellDef="let row" style="width:40%">
           <!-- ? Use category id instead name -->
-          <button mat-icon-button color="accent" title="Edit Category" (click)="gotoEdit(row.category_name)"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="accent" title="Edit Category" (click)="editCategory(row._id)"><mat-icon>edit</mat-icon></button>
           <button mat-icon-button color="primary" title="Delete Category" (click)="deleteCategory(row._id)"><mat-icon>delete</mat-icon></button>
         </td>
       <tr>

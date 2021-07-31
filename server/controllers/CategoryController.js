@@ -81,6 +81,61 @@ class CategoryController{
         }
     }
 
+    //TODO EDIT FEATURE
+    /**
+     * Function to get a category by its category id
+     * @param {*} req : request from client
+     * @param {*} res : response from server
+     * @returns response object
+     */
+    getCategory(req, res){
+        try {
+            const categoryId = req.params.id;
+            Category
+                .findOne({_id: categoryId})
+                .then((data) => {
+                    //? return message to notify, 
+                    //? with status to set condition navigaion to different page 
+                    //? transmis data from Server to Client
+                    return res.status(200).json({message: "Fetch successfully a category",  
+                                                 status: 1, 
+                                                 data: data});
+                }) 
+        } catch (error) {
+            return res.status(200).json({message: "ERROR: Fetch a category is failure!!",  
+                                         status: 0});
+        }
+    }
+
+    /**
+     * Function to update a category by its category id
+     * @param {*} req : request from client
+     * @param {*} res : response from server
+     * @returns response object
+     */
+    updateCategory(req, res){
+        try {
+            const categoryId = req.params.id,
+                  data = req.body;
+            // console.log(newCategory);
+            let newCategory = {
+                category_name: data.category_name_replace,
+                category_avatar: data.category_avatar_replace
+            };
+            Category
+                .updateOne({_id: categoryId}, newCategory)
+                .then(() => {
+                    //? return message to notify, 
+                    //? with status to set condition navigaion to different page 
+                    return res.status(200).json({message: "Update new information is successful",  
+                                                 status: 1});
+                }) 
+        } catch (error) {
+            return res.status(200).json({message: "ERROR: Update a category is failure!!",  
+                                         status: 0});
+        }
+    }
+
 }
 
 module.exports = new CategoryController();

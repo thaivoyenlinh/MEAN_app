@@ -52,4 +52,24 @@ export class CategoryService {
 		//* use delete method
 		return this.http.delete<void>(`${this.SERVER_URL}/${categoryId}?_method=DELETE`);
 	}
+
+	/**
+	 * Function to get a category by its category id
+	 * @param categoryId : category id
+	 * @returns an Observable of response
+	 */
+	getCategory(categoryId: string) : Observable<Category> {
+		//* use put or patch method to update data
+		return this.http.get<Category>(`${this.SERVER_URL}/${categoryId}`) ;
+	}
+
+	/**
+	 * Function to update a new category by its category id
+	 * @param categoryId : category id
+	 * @param newCategory : new category data
+	 * @returns an Observable of response
+	 */
+	updateCategory(categoryId: string, newCategory: Category) : Observable<void> {
+		return this.http.put<void>(`${this.SERVER_URL}/${categoryId}?_method=PUT`, newCategory);
+	}
 }

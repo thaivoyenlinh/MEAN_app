@@ -50,14 +50,6 @@ export class CategoryComponent implements OnInit {
 		)
 	}
 
-	gotoEdit(category_name: string) {
-		// console.log("position", row.position)
-		let navigationExtras: NavigationExtras = {
-			queryParams: { name: category_name },
-		};
-		this.router.navigate(['/admin/category/edit'], navigationExtras);
-	}
-
 	deleteCategory(categoryId: string) {
 		// console.log(row);
 		this.categoryService.deleteCategory(categoryId).subscribe(
@@ -73,6 +65,13 @@ export class CategoryComponent implements OnInit {
 				}
 			}
 		);
+	}
+
+	editCategory(categoryId: string) {
+		let navigationExtras: NavigationExtras = {
+			queryParams: { id: categoryId },
+		};
+		this.router.navigate(['/admin/category/edit'], navigationExtras);
 	}
 
 }
