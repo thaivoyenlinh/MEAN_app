@@ -36,13 +36,21 @@ class CategoryController{
      * @returns response object
      */
     getListOfCategories(req, res){
-        // console.log("REQUEST :", req)
-        //* object send to client
-        const tempObj = {
-            name: 'abc',
-            avatar: 'nnn'
+        try {
+            Category
+                .find({})
+                .then((data) => {
+                    //? return message to notify, 
+                    //? with status to set condition navigaion to different page 
+                    //? transmis data from Server to Client
+                    return res.status(200).json({message: "Fetch successfully list of categories",  
+                                                 status: 1, 
+                                                 data: data});
+                }) 
+        } catch (error) {
+            return res.status(200).json({message: "ERROR: Fetch list of categories is failure!!",  
+                                         status: 0});
         }
-        return res.json(tempObj);
     }
 }
 

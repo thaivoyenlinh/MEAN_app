@@ -12,11 +12,11 @@ import { NavigationExtras } from '@angular/router';
 //! call service from server
 import { CategoryService } from '../../services/category/category.service';
 
-//? Category được import 
-const ELEMENT_DATA: Category[] = [
-	{ category_name: 'Hydrogen', category_avatar: 'H'},
-	{ category_name: 'Lilimall', category_avatar: 'A'},
-];
+//? Category infor được gán cứng tạm thời
+// const ELEMENT_DATA: Category[] = [
+// 	{ category_name: 'Hydrogen', category_avatar: 'H'},
+// 	{ category_name: 'Lilimall', category_avatar: 'A'},
+// ];
 
 @Component({
 	selector: 'app-category',
@@ -27,7 +27,9 @@ const ELEMENT_DATA: Category[] = [
 export class CategoryComponent implements OnInit {
 
 	displayedColumns: string[] = ['category_name', 'category_avatar', 'action'];
-	dataSource = ELEMENT_DATA;
+	// dataSource = ELEMENT_DATA; //? Đang gán cứng, thay bằng DL lấy về
+	dataSource: Category[] = []; //? Khai báo và có thể khởi tạo giá trị là mảng rỗng
+	
 	SERVER_URL = 'http://localhost:4100/categories'
 
 	constructor(private router: Router, 
@@ -40,11 +42,11 @@ export class CategoryComponent implements OnInit {
 		//* when we call subcribe()
 		this.categoryService.getListOfCategories().subscribe(
 			(res) => {
-				console.log("RESPONSE: ", res);
+				const listOfCategories = res['data'];
+				// console.log(listOfCategories);
+				this.dataSource = listOfCategories;
 			},
-			(error) => {
-				console.log("ERROR: ", error);
-			}
+
 		)
 	}
 

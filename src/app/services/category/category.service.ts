@@ -32,8 +32,14 @@ export class CategoryService {
 	}
 
 	//*basic function: is used to show the communication between Client and Server
-	getListOfCategories () : Observable<any> {
+	/**
+	 * Function to fetch list of categories from database
+	 * @returns an Observable of response
+	 */
+	getListOfCategories () : Observable<Category[]> {
 		//* use HTTP Client service is provided by Angular
+		//* response from server is array categories
+		//* so data type of Observable emit is array category (Category[])
 		return this.http.get<any>(this.SERVER_URL);
 	} 
 
