@@ -58,4 +58,21 @@ export class CategoryComponent implements OnInit {
 		this.router.navigate(['/admin/category/edit'], navigationExtras);
 	}
 
+	deleteCategory(categoryId: string) {
+		// console.log(row);
+		this.categoryService.deleteCategory(categoryId).subscribe(
+			(res) => {
+				// console.log(res);
+				if(res['status'] == 1){
+					// update table, handle after
+					// now use simple handle is reload page
+					window.location.reload();
+				}
+				else {
+					console.log(res['message']);
+				}
+			}
+		);
+	}
+
 }

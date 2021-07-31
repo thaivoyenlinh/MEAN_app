@@ -43,4 +43,13 @@ export class CategoryService {
 		return this.http.get<any>(this.SERVER_URL);
 	} 
 
+	/**
+	 * Function to dalete category by its category id
+	 * @param categoryId : category id
+	 * @returns an Observable of response
+	 */
+	deleteCategory(categoryId: string) : Observable<void> {
+		//* use delete method
+		return this.http.delete<void>(`${this.SERVER_URL}/${categoryId}?_method=DELETE`);
+	}
 }

@@ -52,6 +52,35 @@ class CategoryController{
                                          status: 0});
         }
     }
+
+    /**
+     * Function to delete a category by its category id  (use remove method)
+     * This function just already to delete, 
+     * not update this auto reload to update content, handle in client side
+     * @param {*} req 
+     * @param {*} res 
+     * @returns 
+     */
+    deleteCategory(req, res) {
+        // console.log("RES: ",req); //? id in params
+        //* router.delete('/:id', CategoryController.deleteCategory) => id in terminal
+        
+        try {
+            const categoryId = req.params.id;
+            Category
+                .remove({_id: categoryId})
+                .then(() => {
+                    //? return message to notify, 
+                    //? with status to set condition navigaion to different page 
+                    return res.status(200).json({message: "Delete is successful",  
+                                                 status: 1});
+                }) 
+        } catch (error) {
+            return res.status(200).json({message: "ERROR: Delete is failure!!",  
+                                         status: 0});
+        }
+    }
+
 }
 
 module.exports = new CategoryController();
