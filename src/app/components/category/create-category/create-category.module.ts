@@ -10,7 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 
 //? send data to server
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -23,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        HttpClientModule,
+        // HttpClientModule,
     ],
 })
 

@@ -1,5 +1,5 @@
 .container {
-  
+
     background-color: rgb(220, 202, 238);
     font-size: 13px;
     margin: 0 auto;
@@ -57,13 +57,14 @@
   }
   
   .content {
+    // border: black 2px solid;
       height: calc(100vh - 98px);
       border-radius: 10px;
       margin: 16px;
       margin-left: 32px;
       
       display: flex;
-      justify-content: center;
+      // justify-content: ;
       align-items: center;
   
       font-size: 2rem;

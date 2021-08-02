@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { Category } from '../../interfaces/category/category';
 
 @Injectable({
-  providedIn: 'root'
+  	providedIn: 'root'
 })
 export class CategoryService {
 
@@ -20,7 +20,7 @@ export class CategoryService {
 	//! Please hover on method and write instruction
 
 	/**
-	 * Function to send a category to server (justn send)
+	 * Function to send a category to server (just send)
 	 * (save is handled on the server side, will write after this function)
 	 * @param category : category data (e.g: data get from the category form)
 	 * @returns an Observable of response
