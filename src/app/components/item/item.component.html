@@ -34,7 +34,7 @@
           <th mat-header-cell *matHeaderCellDef></th>
             <td id="action" mat-cell *matCellDef="let row" style="width:16%">
               <button mat-icon-button color="primary" title="Delete Item" (click)="deleteItem(row._id)"><mat-icon>delete</mat-icon></button>
-              <button mat-icon-button color="accent" title="Edit Item" (click)="gotoEdit(row.item_name)"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="accent" title="Edit Item" (click)="editItem(row._id)"><mat-icon>edit</mat-icon></button>
             </td>
         </ng-container>
 

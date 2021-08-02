@@ -30,13 +30,6 @@ export class ItemComponent implements OnInit {
 		)
 	}	
 
-	gotoEdit(item_name: string) {
-		let navigationExtras: NavigationExtras = {
-		queryParams: { name: item_name },
-		};
-		this.router.navigate(['/admin/item/edit'], navigationExtras);
-	}
-
 	deleteItem(itemId: string) {
 		// console.log(row);
 		this.itemService.deleteItem(itemId).subscribe(
@@ -50,6 +43,13 @@ export class ItemComponent implements OnInit {
 				}
 			} 
 		);
+	}
+
+	editItem(itemId: string) {
+		let navigationExtras: NavigationExtras = {
+		queryParams: { id: itemId },
+		};
+		this.router.navigate(['/admin/item/edit'], navigationExtras);
 	}
 
 }

@@ -36,8 +36,26 @@ export class ItemService {
 	 * @returns an Observable of response
 	 */
 	deleteItem(itemId: string) : Observable<void>{
-		return this.http.delete<void>(`${this.SERVER_URL}/${itemId}?_method=DELETE`) ;
+		return this.http.delete<void>(`${this.SERVER_URL}/${itemId}?_method=DELETE`);
 	}
 
+	/**
+	 * Function to fetch item by its item id
+	 * @param itemId : item id
+	 * @returns an Observable of response
+	 */
+	getItem(itemId: string) : Observable<Item>{
+		return this.http.get<Item>(`${this.SERVER_URL}/${itemId}`);
+	}
+
+	/**
+	 * Function to update item by its item id
+	 * @param itemId : item id
+	 * @param newItem : new item data after modify
+	 * @returns an Observable of response
+	 */
+	updateItem(itemId: string, newItem: Item) : Observable<void> {
+		return this.http.put<void>(`${this.SERVER_URL}/${itemId}?_method=PUT`, newItem);
+	}
 
 }
