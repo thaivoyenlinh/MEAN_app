@@ -22,8 +22,21 @@ export class ItemService {
 		return this.http.post<void>(`${this.SERVER_URL}/store`, item);
 	}
 
+	/**
+	 * Function to get list of items from database
+	 * @returns an Observable of response
+	 */
 	getListOfItems() : Observable<Item[]>{
 		return this.http.get<any>(this.SERVER_URL);
+	}
+
+	/**
+	 * Function to delete a item by its item id
+	 * @param itemId 
+	 * @returns an Observable of response
+	 */
+	deleteItem(itemId: string) : Observable<void>{
+		return this.http.delete<void>(`${this.SERVER_URL}/${itemId}?_method=DELETE`) ;
 	}
 
 

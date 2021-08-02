@@ -18,7 +18,7 @@ class ItemController{
         }
     }
 
-    getListOfItem(req, res){
+    getListOfItems(req, res){
         try {
             Item
                 .find()
@@ -29,6 +29,23 @@ class ItemController{
                 })
         } catch (error) {
             return res.json({message: "Fetch list of items failure!!", 
+                            status: 0});
+            
+        }
+    }
+
+    deleteItem(req, res){
+        // console.log("REQ: ", req);
+        try {
+            const itemId = req.params.id;
+            Item
+                .remove({_id: itemId})
+                .then(() => {
+                    return res.json({message: "Delete item successful!!", 
+                                    status: 1});
+                })
+        } catch (error) {
+            return res.json({message: "Delete item failure!!", 
                             status: 0});
             
         }

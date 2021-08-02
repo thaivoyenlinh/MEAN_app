@@ -37,8 +37,7 @@ export class CreateItemComponent implements OnInit {
 					this.router.navigateByUrl('/admin/item');
 				}
 				else{
-					console.log("Response from server: ", res['message']);
-					
+					console.log("Response from server: ", res['message']);	
 				}
 			}
 		)
