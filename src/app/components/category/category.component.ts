@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs/'
 import { map, tap } from 'rxjs/operators';
 
 //! Interface tương tự cấu trúc tư định nghĩa. Import từ file interfaces/category (file định nghĩa)
@@ -28,9 +30,11 @@ export class CategoryComponent implements OnInit {
 
 	displayedColumns: string[] = ['category_name', 'category_avatar', 'action'];
 	// dataSource = ELEMENT_DATA; //? Đang gán cứng, thay bằng DL lấy về
-	dataSource: Category[] = []; //? Khai báo và có thể khởi tạo giá trị là mảng rỗng
+	// dataSource: Category[] = []; //? Khai báo và có thể khởi tạo giá trị là mảng rỗng
 	
 	SERVER_URL = 'http://localhost:4100/categories'
+
+	categories$ : Observable<Category[]>;
 
 	constructor(private router: Router, 
 				private categoryService: CategoryService,) { }
@@ -40,14 +44,14 @@ export class CategoryComponent implements OnInit {
 		//* get data from server by subscribe() to emit value into Observable
 		//* like console.log, data is saved in observable just display 
 		//* when we call subcribe()
-		this.categoryService.getListOfCategories().subscribe(
-			(res) => {
-				const listOfCategories = res['data'];
-				// console.log(listOfCategories);
-				this.dataSource = listOfCategories;
-			},
-
-		)
+		this.categories$ =  this.categoryService.getListOfCategories();
+		// .subscribe(
+		// 	(res) => {
+		// 		const listOfCategories = res;
+		// 		// console.log(listOfCategories);
+		// 		this.dataSource = listOfCategories;
+		// 	},
+		// )
 	}
 
 	deleteCategory(categoryId: string) {

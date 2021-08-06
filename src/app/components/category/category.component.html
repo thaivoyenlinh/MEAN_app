@@ -3,7 +3,7 @@
   <button mat-icon-button color="primary" title="Create Category" routerLink="/admin/category/create"><mat-icon>add</mat-icon></button>
 </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="categories$ | async" class="mat-elevation-z8">
   
     <ng-container matColumnDef="category_name">
       <th mat-header-cell *matHeaderCellDef> Name </th>

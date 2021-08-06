@@ -3,7 +3,7 @@
     <div class="create_button">
       <button id="create_button" mat-icon-button color="primary" title="Create Item" routerLink="/admin/item/create"><mat-icon>add</mat-icon></button>
     </div>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <table mat-table [dataSource]="item$ | async" class="mat-elevation-z8">
 
         <ng-container matColumnDef="item_name">
           <th mat-header-cell *matHeaderCellDef> Name </th>

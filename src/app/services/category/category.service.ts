@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 //* Observable save data is sent from server
 //* it is midleware to communicate between server and client
 import { Observable } from 'rxjs';
+//* map method to transform data
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 //* import Category interface to storeCategory function
@@ -11,7 +13,7 @@ import { Category } from '../../interfaces/category/category';
   	providedIn: 'root'
 })
 export class CategoryService {
-
+ 
   //* Full path for category route on server
   	SERVER_URL = 'http://localhost:4100/categories' // base url
 
@@ -37,10 +39,14 @@ export class CategoryService {
 	 * @returns an Observable of response
 	 */
 	getListOfCategories () : Observable<Category[]> {
-		//* use HTTP Client service is provided by Angular
-		//* response from server is array categories
-		//* so data type of Observable emit is array category (Category[])
-		return this.http.get<any>(this.SERVER_URL);
+		// return this.http.get<any>(this.SERVER_URL);
+		//* use side effect outside subcribe(), through pipe()
+		//* directly return response just have data, and client side can not call res['data'] to get only data
+		//! Transform data: map()
+		return this.http.get<any>(this.SERVER_URL).pipe(
+			map((res) => res['data'])
+		);
+
 	} 
 
 	/**

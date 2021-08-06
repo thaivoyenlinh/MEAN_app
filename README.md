@@ -2,7 +2,7 @@
 
 # Environtment setup
 
-# # Install Node.js and Angular in Window OS
+## Install Node.js and Angular in Window OS
 
 1. Node.js
 - Download Node.js here (choose Windows Installer): https://nodejs.org/en/download/
@@ -18,23 +18,23 @@ npm --version # or npm -v
 - Check the installation: `ng --version`
 
 
-# # Install MongoDB Server
+## Install MongoDB Server
 - Download here (choose Platform Windows): https://www.mongodb.com/try/download/community
 - Add Mongo’s bin folder to the Path Environment Variable: https://dangphongvanthanh.wordpress.com/2017/06/12/add-mongos-bin-folder-to-the-path-environment-variable/
 - Check the installation: in the terminal and run command: `mongo`
 
 # Run the project
 
-# # Preparing
+## Preparing
 
 - Open the terminal and run: `npm install`
 - Rename `.env_example` file to `.env`
 - Create a new folder named "data" in server directory for MongoDB data store directory. Then, run the command in your terminal: `mongod --dbpath 
 [your_absolute_path_to_project/server/data]`. Example: `mongod --dbpath "D:\MEAN-stack\server\data"`
 
-# # Running
+## Running
 
-# # # Server side
+### Server side
 Open terminal and run 
 
 ```
@@ -42,7 +42,7 @@ cd server
 nodemon index.js
 ```
 
-# # # Client side
+### Client side
 Open the second terminal
 
 1. Development server
@@ -75,7 +75,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 # Create a new workspace
 
-# # Create a new project
+## Create a new project
 
 ```
 cd your-dir

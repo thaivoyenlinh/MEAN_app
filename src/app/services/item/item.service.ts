@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'; 
 
 import { Item } from '../../interfaces/item/item';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   	providedIn: 'root'
@@ -26,8 +27,13 @@ export class ItemService {
 	 * Function to get list of items from database
 	 * @returns an Observable of response
 	 */
+
 	getListOfItems() : Observable<Item[]>{
-		return this.http.get<any>(this.SERVER_URL);
+		return this.http.get<any>(this.SERVER_URL).pipe(
+			// tap((res) => console.log("BEFORE: ",res)),
+			map((res) => res['data']),
+			// tap((res) => console.log("AFTER: ",res)),
+		)
 	}
 
 	/**

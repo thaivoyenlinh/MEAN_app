@@ -4,6 +4,7 @@ import { NavigationExtras } from '@angular/router';
 
 import { Item } from '../../interfaces/item/item';
 import { ItemService } from 'src/app/services/item/item.service';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-item',
@@ -13,7 +14,8 @@ import { ItemService } from 'src/app/services/item/item.service';
 export class ItemComponent implements OnInit {
 
 	displayedColumns: string[] = ['item_name', 'item_price', 'item_category', 'item_discription', 'item_image', 'action'];
-	dataSource: Item[] = [];
+	// dataSource: Item[] = [];
+	item$: Observable<Item[]>
 
 	SERVER_URL = 'http://localhost:4100/items'
 
@@ -21,13 +23,14 @@ export class ItemComponent implements OnInit {
 				private itemService: ItemService) { }
 
 	ngOnInit() {
-		this.itemService.getListOfItems().subscribe(
-			(res) => {
-				// console.log("RES: ", res);
-				const listOfItems = res['data'];
-				this.dataSource = listOfItems;
-			}
-		)
+		this.item$ = this.itemService.getListOfItems();
+		// .subscribe(
+		// 	(res) => {
+		// 		// console.log("RES: ", res);
+		// 		const listOfItems = res['data'];
+		// 		this.dataSource = listOfItems;
+		// 	}
+		// )
 	}	
 
 	deleteItem(itemId: string) {

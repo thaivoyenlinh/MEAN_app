@@ -16,9 +16,17 @@
         </div>
 
         <div class="form-group">
-            <mat-form-field>
+            <!-- <mat-form-field>
                 <mat-label>Category Replace</mat-label>
                 <input matInput formControlName="item_category_replace">
+            </mat-form-field> -->
+            <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="item_category_replace">
+                    <mat-option *ngFor="let category of listOfCategories" [value]="category.category_name">
+                        {{category.category_name}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 
