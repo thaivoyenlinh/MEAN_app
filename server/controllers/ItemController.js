@@ -68,6 +68,23 @@ class ItemController{
         }
     }
 
+    getItemByName(req, res){
+        try {
+            const itemName = req.params.name;
+            Item
+                .find({item_name: itemName})
+                .then((data) => {
+                    return res.json({message: "Fetch item successful!!", 
+                                    status: 1,
+                                    data: data});
+                })
+        } catch (error) {
+            return res.json({message: "Fetch item failure!!", 
+                            status: 0});
+            
+        }
+    }
+
     updateItem(req, res){
         try {
             const itemId = req.params.id,

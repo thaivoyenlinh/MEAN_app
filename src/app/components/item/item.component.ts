@@ -4,7 +4,9 @@ import { NavigationExtras } from '@angular/router';
 
 import { Item } from '../../interfaces/item/item';
 import { ItemService } from 'src/app/services/item/item.service';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
+import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
 	selector: 'app-item',
@@ -16,6 +18,8 @@ export class ItemComponent implements OnInit {
 	displayedColumns: string[] = ['item_name', 'item_price', 'item_category', 'item_discription', 'item_image', 'action'];
 	// dataSource: Item[] = [];
 	item$: Observable<Item[]>
+	searchText: FormControl = new FormControl('');
+	search$: Observable<Item[]>
 
 	SERVER_URL = 'http://localhost:4100/items'
 
@@ -23,29 +27,35 @@ export class ItemComponent implements OnInit {
 				private itemService: ItemService) { }
 
 	ngOnInit() {
-		this.item$ = this.itemService.getListOfItems();
-		// .subscribe(
-		// 	(res) => {
-		// 		// console.log("RES: ", res);
-		// 		const listOfItems = res['data'];
-		// 		this.dataSource = listOfItems;
-		// 	}
-		// )
+		this.init();
 	}	
 
 	deleteItem(itemId: string) {
 		// console.log(row);
-		this.itemService.deleteItem(itemId).subscribe(
-			(res) => {
-				// console.log(res);
-				if(res['status'] == 1){
-					window.location.reload();
-				}
-				else {
-					console.log(res['message']);
-				}
-			} 
-		);
+		this.itemService.deleteItem(itemId).pipe(
+			tap(()=> {
+				this.init();
+			})
+		).subscribe();
+	}
+
+	init() {
+		// this.item$ = this.itemService.getListOfItems();
+		this.search$ = this.searchText.valueChanges.pipe(
+			startWith(''),
+			tap((data) => {console.log(data)}),
+			debounceTime(200),
+			distinctUntilChanged(),
+			switchMap((data) => data ? this.itemService.getItemByName(data) : of(null)),
+			map(res => res && res['data']),
+			tap((data) => console.log(data)),
+		)
+		this.item$ = combineLatest([this.itemService.getListOfItems(), this.search$]).pipe(
+			map(([items, searchResult]) => {
+				const sourceData = searchResult ? searchResult : items;
+				return sourceData; 
+			})
+		)
 	}
 
 	editItem(itemId: string) {

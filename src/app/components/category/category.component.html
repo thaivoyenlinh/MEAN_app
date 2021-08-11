@@ -2,7 +2,7 @@
 <div class="create_button">
   <button mat-icon-button color="primary" title="Create Category" routerLink="/admin/category/create"><mat-icon>add</mat-icon></button>
 </div>
-
+<!--? async pipe dynamic -->
 <table mat-table [dataSource]="categories$ | async" class="mat-elevation-z8">
   
     <ng-container matColumnDef="category_name">

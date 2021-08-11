@@ -14,12 +14,6 @@ import { NavigationExtras } from '@angular/router';
 //! call service from server
 import { CategoryService } from '../../services/category/category.service';
 
-//? Category infor được gán cứng tạm thời
-// const ELEMENT_DATA: Category[] = [
-// 	{ category_name: 'Hydrogen', category_avatar: 'H'},
-// 	{ category_name: 'Lilimall', category_avatar: 'A'},
-// ];
-
 @Component({
 	selector: 'app-category',
 	templateUrl: './category.component.html',
@@ -40,35 +34,20 @@ export class CategoryComponent implements OnInit {
 				private categoryService: CategoryService,) { }
 
 	ngOnInit() {
+		this.init();
+	}
 
-		//* get data from server by subscribe() to emit value into Observable
-		//* like console.log, data is saved in observable just display 
-		//* when we call subcribe()
+	init() {
 		this.categories$ =  this.categoryService.getListOfCategories();
-		// .subscribe(
-		// 	(res) => {
-		// 		const listOfCategories = res;
-		// 		// console.log(listOfCategories);
-		// 		this.dataSource = listOfCategories;
-		// 	},
-		// )
 	}
 
 	deleteCategory(categoryId: string) {
 		// console.log(row);
-		this.categoryService.deleteCategory(categoryId).subscribe(
-			(res) => {
-				// console.log(res);
-				if(res['status'] == 1){
-					// update table, handle after
-					// now use simple handle is reload page
-					window.location.reload();
-				}
-				else {
-					console.log(res['message']);
-				}
-			}
-		);
+		this.categoryService.deleteCategory(categoryId).pipe(
+			tap(() => {
+				this.init();
+			})
+		).subscribe();
 	}
 
 	editCategory(categoryId: string) {

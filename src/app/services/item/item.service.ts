@@ -54,6 +54,10 @@ export class ItemService {
 		return this.http.get<Item>(`${this.SERVER_URL}/${itemId}`);
 	}
 
+	getItemByName(itemName: string) : Observable<Item[]>{
+		return this.http.get<Item[]>(`${this.SERVER_URL}/search/${itemName}`);
+	}
+
 	/**
 	 * Function to update item by its item id
 	 * @param itemId : item id
