@@ -3,14 +3,14 @@
     <form [formGroup]="CreateCategoryForm" (ngSubmit)="onSubmit()"> 
         <div class="form-group" >
             <mat-form-field>
-                <mat-label>Category Name</mat-label>
+                <mat-label>Name</mat-label>
                 <input matInput formControlName="category_name">
             </mat-form-field>
         </div>
         <div class="form-group">
             <mat-form-field>
-                <mat-label>Avatar</mat-label>
-                <input matInput formControlName="category_avatar">
+                <mat-label>Image</mat-label>
+                <input matInput formControlName="category_image">
             </mat-form-field>
         </div>
             

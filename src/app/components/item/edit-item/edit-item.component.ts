@@ -5,6 +5,7 @@ import { Router, Route, ActivatedRoute } from '@angular/router';
 import { ItemService } from '../../../services/item/item.service';
 import { CategoryService } from '../../../services/category/category.service';
 import { Category } from '../../../interfaces/category/category';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-edit-item',
@@ -15,7 +16,7 @@ export class EditItemComponent implements OnInit {
 
 	EditItemForm: FormGroup
 	itemId: string
-	listOfCategories: Category[]
+	listOfCategories$: Observable<Category[]>
 
 	constructor(protected router: Router, 
 				private fb: FormBuilder, 
@@ -23,16 +24,12 @@ export class EditItemComponent implements OnInit {
 				private itemService: ItemService,
 				private categoryService: CategoryService) {
 		
-		this.categoryService.getListOfCategories().subscribe(
-			(res) => {
-				// console.log(res);
-				this.listOfCategories = res;
-			}
-		)
+		this.listOfCategories$ = this.categoryService.getListOfCategories()
+		
 		this.EditItemForm = this.fb.group({
 			item_name_replace: new FormControl(''),
 			item_price_replace: new FormControl(''),
-			item_category_replace: new FormControl(this.listOfCategories),
+			item_category_replace: new FormControl(''),
 			item_discription_replace: new FormControl(''),
 		});
 

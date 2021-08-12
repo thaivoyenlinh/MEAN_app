@@ -22,7 +22,7 @@ export class CreateCategoryComponent implements OnInit {
 	ngOnInit() {
 		this.CreateCategoryForm = new FormGroup ({
 			category_name: new FormControl(''),
-			category_avatar: new FormControl(''),
+			category_image: new FormControl(''),
 		});
 	}
 

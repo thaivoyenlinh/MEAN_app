@@ -28,7 +28,7 @@ export class EditCategoryComponent implements OnInit {
 
 			this.EditCategoryForm = this.fb.group({
 				category_name_replace: new FormControl(''),
-				category_avatar_replace: new FormControl(''),
+				category_image_replace: new FormControl(''),
 		});
 		
 		//! catch the data 
@@ -54,7 +54,7 @@ export class EditCategoryComponent implements OnInit {
 				const category = res['data'];
 				this.EditCategoryForm.setValue({
 					category_name_replace: category.category_name,
-					category_avatar_replace: category.category_avatar,
+					category_image_replace: category.category_image,
 				});
 			}
 		);

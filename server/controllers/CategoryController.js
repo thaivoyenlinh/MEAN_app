@@ -120,7 +120,7 @@ class CategoryController{
             // console.log(newCategory);
             let newCategory = {
                 category_name: data.category_name_replace,
-                category_avatar: data.category_avatar_replace
+                category_image: data.category_image_replace
             };
             Category
                 .updateOne({_id: categoryId}, newCategory)

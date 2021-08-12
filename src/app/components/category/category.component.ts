@@ -22,7 +22,7 @@ import { CategoryService } from '../../services/category/category.service';
 
 export class CategoryComponent implements OnInit {
 
-	displayedColumns: string[] = ['category_name', 'category_avatar', 'action'];
+	displayedColumns: string[] = ['category_name', 'category_image', 'action'];
 	// dataSource = ELEMENT_DATA; //? Đang gán cứng, thay bằng DL lấy về
 	// dataSource: Category[] = []; //? Khai báo và có thể khởi tạo giá trị là mảng rỗng
 	
