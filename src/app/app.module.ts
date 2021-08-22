@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 // import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {MatButtonModule} from '@angular/material/button';
 
@@ -82,6 +83,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatTableModule,
     HttpClientModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

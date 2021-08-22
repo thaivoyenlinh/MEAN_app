@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 //* import Category service to perform the communication bewteen Client and Server
 import { CategoryService } from '../../../services/category/category.service';
+import { Category } from '../../../interfaces/category/category';
 
 @Component({
 	selector: 'app-create-category',
@@ -14,6 +15,8 @@ import { CategoryService } from '../../../services/category/category.service';
 export class CreateCategoryComponent implements OnInit {
 
   	CreateCategoryForm: FormGroup
+	category: Category
+	imageData: string
 
   	constructor(protected router: Router, 
              	private categoryService: CategoryService) { 
@@ -26,12 +29,23 @@ export class CreateCategoryComponent implements OnInit {
 		});
 	}
 
+	onFileSelectd(event: Event){
+		const file = (event.target as HTMLInputElement).files[0];
+		this.CreateCategoryForm.patchValue({ category_image: file });
+		const allowTypeImage = ['category_image/png', 'category_image/jpeg', 'category_image/jpg'];
+		if(file && allowTypeImage.includes(file.type)){
+			const reader = new FileReader();
+			reader.onload = () => {
+				this.imageData = reader.result as string;
+			}
+			reader.readAsDataURL(file);
+		}
+	}
+
 	onSubmit() {
-		// console.log(this.CreateCategoryForm.value);
 		
-		//! send the data is submited to server so call storeCategory in here
+
 		const category = this.CreateCategoryForm.value;
-		//* categoryService return Observable => subcribe()
 		this.categoryService.storeCategory(category).subscribe(
 			(res) => {
 				if(res['status'] == 1){
