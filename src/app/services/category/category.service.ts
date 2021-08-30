@@ -78,4 +78,5 @@ export class CategoryService {
 	updateCategory(categoryId: string, newCategory: Category) : Observable<void> {
 		return this.http.put<void>(`${this.SERVER_URL}/${categoryId}?_method=PUT`, newCategory);
 	}
+
 }

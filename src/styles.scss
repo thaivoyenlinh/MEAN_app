@@ -4,16 +4,20 @@
 //! note about input tag in here
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+// html, body { height: 100%; }
+// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+$color: #7048ec;
+html, body { height: 100%;font-family: Calibri; }
+body { margin: 0;}
 
-h3 {
-    color: rgb(180, 116, 240);
-    font-size: 25px;
-    text-align: center;
-}
+// h3 {
+//     color: rgb(180, 116, 240);
+//     font-size: 25px;
+//     text-align: center;
+// }
 
-a {
-    text-decoration:  none;
-}
+// a {
+//     text-decoration:  none;
+//     color: honeydew;
+// }

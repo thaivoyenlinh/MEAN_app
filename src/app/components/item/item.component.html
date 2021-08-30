@@ -1,71 +1,87 @@
-<div class="container">
-    <p>Item</p>
-    <div class="create_button">
-      <button id="create_button" mat-icon-button color="primary" title="Create Item" routerLink="/admin/item/create"><mat-icon>add</mat-icon></button>
-    </div>
+<div class="item-container">
+	<div class="header">
+		<div class="name">
+			<span>Item</span>
+		</div>
+		<div class="features">
+			<div class="search-text">
+				<mat-form-field>
+					<mat-label>Product name</mat-label>
+					<input matInput [formControl] ="searchText">
+				</mat-form-field>
+			</div>
+			
+			<div class="filter">
+				<div class="select-filter">
+					<mat-form-field appearance="fill">  
+						<mat-label>Category</mat-label>
+						<mat-select [formControl]="category" (selectionChange)="selectFilter($event.value)">
+							<mat-option *ngFor="let category of listOfCategories$ | async" [value]="category.category_name">
+								{{category.category_name}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+				
+				<div class="reset-button">
+					<button mat-raised-button (click)="reset()" color="primary">
+						<span>Cancel</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="create-button">
+			<button id="create_button" mat-icon-button color="primary" title="Create Item" routerLink="/admin/item/create"><mat-icon>add</mat-icon></button>
+		</div>
+	
+	</div>
+
+	<div class="main-content">
+		<div *ngIf="(item$ | async) as items">
+			<div *ngIf="items.length === 0; then noData else tableContent"></div>
+		</div>
+		<ng-template #noData>No Data</ng-template>
+		<ng-template #tableContent>
+			<table mat-table [dataSource]="item$ | async" class="mat-elevation-z8">
+				<ng-container matColumnDef="item_name">
+					<th mat-header-cell *matHeaderCellDef> Name </th>
+					<td mat-cell *matCellDef="let element"> {{element.item_name}} </td>
+				</ng-container>
+	
+				<ng-container matColumnDef="item_price">
+					<th mat-header-cell *matHeaderCellDef> Price </th>
+					<td mat-cell *matCellDef="let element"> {{element.item_price}} </td>
+				</ng-container>
+	
+				<ng-container matColumnDef="item_category">
+					<th mat-header-cell *matHeaderCellDef> Category </th>
+					<td mat-cell *matCellDef="let element"> {{element.item_category}} </td>
+				</ng-container>
+	
+				<ng-container matColumnDef="item_discription">
+					<th mat-header-cell *matHeaderCellDef> Discription </th>
+					<td mat-cell *matCellDef="let element"> {{element.item_discription}} </td>
+				</ng-container>
+	
+				<ng-container matColumnDef="item_image">
+					<th mat-header-cell *matHeaderCellDef> Image </th>
+					<td mat-cell *matCellDef="let element"> {{element.item_image}} </td>
+				</ng-container>
+				
+				<ng-container matColumnDef="action">
+					<th mat-header-cell *matHeaderCellDef></th>
+					<td id="action" mat-cell *matCellDef="let row">
+						<button mat-icon-button color="accent" title="Edit Item" (click)="editItem(row._id)"><mat-icon>edit</mat-icon></button>
+						<button mat-icon-button color="primary" title="Delete Item" (click)="deleteItem(row._id)"><mat-icon>delete</mat-icon></button>
+					</td>
+				</ng-container>
+	
+				<!-- !content of columns  -->
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+			</table>
+	  	</ng-template>
+	</div>
     
-    <!-- Search -->
-    <mat-form-field>
-        <!-- <mat-label>Search</mat-label> -->
-        <input matInput [formControl] ="searchText">
-    </mat-form-field>
-
-    <!-- Filter -->
-    <div class="form-group">
-      <mat-form-field appearance="fill">  
-          <mat-label>Category</mat-label>
-          <mat-select [formControl]="category" (selectionChange)="selectFilter($event.value)">
-              <mat-option *ngFor="let category of listOfCategories$ | async" [value]="category.category_name">
-                  {{category.category_name}}
-              </mat-option>
-          </mat-select>
-      </mat-form-field>
-    </div>
-
-    <button (click)="reset()">Reset</button>
-
-    <div *ngIf="(item$ | async) as items">
-      <div *ngIf="items.length === 0; then noData else tableContent"></div>
-    </div>
-    <ng-template #noData>No Data</ng-template>
-    <ng-template #tableContent>
-      <table mat-table [dataSource]="item$ | async" class="mat-elevation-z8">
-        <ng-container matColumnDef="item_name">
-          <th mat-header-cell *matHeaderCellDef> Name </th>
-          <td mat-cell *matCellDef="let element"> {{element.item_name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item_price">
-          <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.item_price}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item_category">
-          <th mat-header-cell *matHeaderCellDef> Category </th>
-          <td mat-cell *matCellDef="let element"> {{element.item_category}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item_discription">
-          <th mat-header-cell *matHeaderCellDef> Discription </th>
-          <td mat-cell *matCellDef="let element"> {{element.item_discription}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="item_image">
-          <th mat-header-cell *matHeaderCellDef> Image </th>
-          <td mat-cell *matCellDef="let element"> {{element.item_image}} </td>
-        </ng-container>
-        
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef></th>
-            <td id="action" mat-cell *matCellDef="let row" style="width:16%">
-              <button mat-icon-button color="primary" title="Delete Item" (click)="deleteItem(row._id)"><mat-icon>delete</mat-icon></button>
-              <button mat-icon-button color="accent" title="Edit Item" (click)="editItem(row._id)"><mat-icon>edit</mat-icon></button>
-            </td>
-        </ng-container>
-
-        <!-- !content of columns  -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
-      </table>
-    </ng-template>
 </div>

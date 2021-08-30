@@ -2,6 +2,11 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+const bodyParser = require("body-parser");
+const path = require('path')
+const multer = require('multer');
+const upload = multer({ dest: "public/files" });
+
 // const port = 4100
 
 const dotenv = require('dotenv');
@@ -33,6 +38,12 @@ app.use(
 	}),
 );
 app.use(express.json());
+
+app.use(
+    bodyParser.urlencoded({
+      extended: true,
+    })
+  );
 
 route(app);
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const CategoryController = require('../controllers/CategoryController');
+// const upload = multer({ dest: '../uploads' })
 
 //! First declare, client side use what method to send request to server side,
 //! declare this method again in here
@@ -17,6 +18,6 @@ router.get('/', CategoryController.getListOfCategories);
 router.put('/:id', CategoryController.updateCategory);
 
 //* [DELETE] /:slug
-router.delete('/:id', CategoryController.deleteCategory)
+router.delete('/:id', CategoryController.deleteCategory);
 
 module.exports = router;

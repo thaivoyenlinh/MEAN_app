@@ -1,99 +1,77 @@
-.container {
-
-    background-color: rgb(220, 202, 238);
-    font-size: 13px;
-    margin: 0 auto;
-    height: 60px;
-    
-    .header {
-        height: 60px;
-
-        .authentication{
-            height: 60px;
-            overflow: hidden;
-            float: right;
-
-            a {
-                font-size: 20px;
-                padding: 22px;
-                font-family: Calibri;
-                line-height: 50px;
-                color: white;
-
-                &:hover {
-                background: rgb(153, 153, 250);
-                transition: 0.4s;
-                }
-            }
-        }
-    }
-
-    .logomall {
-      font-size: 40px;
-      padding-left: 70px;
-      float: left;
-      margin: 5px;
-
-      a {
-        display: inline;
-        color: rgb(143, 143, 233);
-      }
-    }
-
-  // mat-toolbar {
-  //     background: rgb(220, 202, 238);
-  //     color: white;
-  // }
+.admin-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
   
-  mat-sidenav {
-      margin: 16px;
-      width: 160px;
-      border-right: none;
-      background: rgb(213, 190, 236);
-      color: white;
-      border-radius: 10px;
-      padding: 16px;
-      text-align: center;
-  }
-  
-  .content {
-    // border: black 2px solid;
-      height: calc(100vh - 98px);
-      border-radius: 10px;
-      margin: 16px;
-      margin-left: 32px;
-      
-      display: flex;
-      // justify-content: ;
-      align-items: center;
-  
-      font-size: 2rem;
-      color: lightgray;
-  }
-  
-  mat-sidenav-container {
-      height: calc(100vh - 65px);
-  }
+	.navbar {
+		background-color: #6E00B3; 
+		width: 100%;
+		height: 10%;
 
-  .display_main_content {
-    // border: 2px solid red;
-    height: calc(100vh - 98px);
-  }
+		.logo {
+			display: inline;
+			margin-left: 30px;
+			font-size: 30px;
+			line-height: 60px;
+			color: honeydew;
+		}
 
-  .menu-button {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 1rem;
-  }
+		.authentication {
+			display: inline;
+			float: right;
+			font-size: 18px;
+			padding: 18.5px;
+			color: honeydew;
 
-  mat-divider {
-    margin-top: 16px;
-    margin-bottom: 16px;
-    background-color: rgba(255, 255, 255, 0.5);
-}
+			&:hover {
+				background:white;
+				transition: 0.7s;
+				color: #6E00B3;
+			}
+		}
+  	}
+
+	.sidenav-container {
+		height: 90%;
+		width: 100%;
+		position: absolute;
+
+		.sidebar {
+			height: 100%;
+			width: 17%;
+			background: #8EE68B;
+			float: left;
+	
+			button {
+				width: 100%;
+				height: 8%;
+				display: flex;
+				align-items: center;
+				background: #8EE68B;
+				color: white;
+				font-size: 16px;
+	
+				mat-icon {
+					margin: 0px 10px;
+				}
+	
+				&:hover {
+					background: honeydew;
+					transition: 0.7s;
+					color: #68e763ea;
+				}
+			}
+		}
+	
+		.main-content {
+			margin-left: 17%;
+			width: 83%;
+			height: 100%;
+
+			.display-content {
+				margin: 2% 3%;
+			}
+		}
+	}
 
 }
-    
-    

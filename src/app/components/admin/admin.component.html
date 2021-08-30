@@ -1,46 +1,43 @@
-<div class="container">
-    <div class="header">
-        <div class="logomall">
-            <a (click)="reload_page()">LiliMall</a>
+<div class="admin-container">
+    <div class="navbar">
+        <div class="logo">
+            <a (click)="reload_page()">OnlineShoppingApp</a>
         </div>
-
         <div class="authentication">
-            <a routerLink="/sign_out">Sign-out</a>
+            <a>SignOut</a>
         </div>
     </div>
 
-    <div class="sidenav">
-        <mat-sidenav-container>
-            <mat-sidenav class="mat-elevation-z8" mode="side" opened="true">
-                <button mat-button class="menu-button">
-                    <!-- <mat-icon>home</mat-icon> -->
-                    <span>Dashboard</span>
-                </button>
-                <button mat-button class="menu-button" routerLink="./category">
-                    <!-- <mat-icon>person</mat-icon> -->
-                    <span>Category</span>
-                </button>
-                <button mat-button class="menu-button" routerLink="./item">
-                    <!-- <mat-icon>info</mat-icon> -->
-                    <span>Item</span>
-                </button>
-                <button mat-button class="menu-button">
-                    <!-- <mat-icon>help</mat-icon> -->
-                    <span>User</span>
-                </button>
-                
-                <!-- <mat-divider></mat-divider> -->
-
-            </mat-sidenav>
-
-            <mat-sidenav-content>
-                <div class="content mat-elevation-z8">
-                    <div class="display_main_content">
-                        <router-outlet></router-outlet>
-                    </div>
-                </div>
-            </mat-sidenav-content>
-        </mat-sidenav-container>
+    <div class="sidenav-container">
+        <div class="sidebar">
+            <button mat-button>
+                <mat-icon>dashboard</mat-icon>
+                <span>Dashboard</span>
+            </button>
+            <button mat-button routerLink="./category">
+                <mat-icon>category</mat-icon>
+                <span>Category</span>
+            </button>
+            <button mat-button routerLink="./item">
+                <mat-icon>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 172 172">
+                        <path d="M21.5,21.5c-3.956,0 -7.16667,3.21067 -7.16667,7.16667v21.5h143.33333v-21.5c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667zM21.5,64.5v71.66667c0,7.91917 6.41417,14.33333 14.33333,14.33333h100.33333c7.91917,0 14.33333,-6.41417 14.33333,-14.33333v-71.66667zM64.5,78.83333h43v14.33333h-43z"></path>
+                    </svg>
+                </mat-icon>
+                <span>Item</span>
+            </button>
+            <button mat-button>
+                <mat-icon>supervised_user_circle</mat-icon>
+                <span>User</span>
+            </button>
+        </div>    
+            
+        <div class="main-content">
+            <div class="display-content">
+                <router-outlet></router-outlet>
+            </div> 
+        </div>
     </div>
+    
 </div>
 
