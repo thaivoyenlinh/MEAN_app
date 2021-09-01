@@ -8,9 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
-//? send data to server
-// import { HttpClientModule } from '@angular/common/http';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     declarations: [
@@ -23,7 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        // HttpClientModule,
+        MatIconModule,
     ],
 })
 

@@ -1,58 +1,70 @@
 .container {
+    height: 100%;
+    position: relative;
+    background: #6deeae;
 
-    margin: 0 auto;
-    width: 40%;
-    border: blueviolet 1px solid;
-    border-radius: 10px;
-    margin-top: 14px;
-    margin-bottom: 14px;
+    .sign-up-content {
+        position: absolute;
+        width: 32%;
+        margin: 20px 34%;
+        text-align: center;
+        background: honeydew;
+        border: 1.5px solid #6E00B3;
+        border-radius: 25px;
 
-    form {
+        .name {
+            margin-top: 5px;
+            height: 40px;
     
-        margin: 0;
-        font-size: 14px;
-        
+            span {
+                font-size: 30px;
+                color: #6E00B3;
+            }
+        }
 
-        .form-group {
-            text-align: center;
-            
+        form {
 
             mat-form-field {
                 width: 70%;
+
+                mat-label {
+                    color: #6E00B3;
+                }
+            }
+
+            mat-radio-group {
+                display: block;
+                margin: 5px 9% 5px 0px;
+
+                mat-label {
+                    color: #6E00B3;
+                    font-size: 18px;
+                    margin-right: 8%;
+                }
+
+                mat-radio-button {
+                    color: rgb(85, 83, 83);
+                    margin-right: 15px;
+                    font-size: 14.5px;
+                }
+
             }
 
             .button {
-                // border: blueviolet 2px solid;
-                margin-bottom: 20px;
 
                 button {
-                    background-color: rgb(176, 117, 231);
+                    height: 38px;
+                    width: max-content;
+                    margin: -5px 5px 15px 5px;
+                    background: #6E00B3;
                     color: white;
-                    // border: brown 1px solid;
-                    width: 80px;
-                    margin-left: 20px;
-                }
 
-                a {
-                    text-decoration: none;
-                    color:white;
+                    &:hover {
+                        background: #6deeae;
+                        transition: 0.4s;
+                    }
                 }
             }
         }
-
-        .gender {
-            
-            // border: red 1px solid;
-            mat-radio-group { 
-                text-align: left;
-                padding: 68px;
-                color: grey;
-                
-                mat-radio-button {
-                    margin-left: 10px;
-                    margin-right: 10px;
-                }
-            } 
-        }
-   }
+    }
 }

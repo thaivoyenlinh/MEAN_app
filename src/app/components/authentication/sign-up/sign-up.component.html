@@ -1,84 +1,77 @@
 <div class="container">
-  <h3>Account Registration Form</h3>
-  <form [formGroup]="AccountRegistrationForm" (ngSubmit)="onSubmit()">  
-    
-    <!-- TODO input tag not show, must import this lib for form rendering properly in file styles.scss -->
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username">
-      </mat-form-field>
-    </div>
-    
-    <div class="form-group">
-      <mat-form-field class="example-full-width" >
-        <mat-label>Password</mat-label> 
-      <!-- TODO toggle click -->
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName='password'>
-        <button mat-icon-button matSuffix (click)="hide = !hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>  
-    
-    <div class="form-group">
-      <mat-form-field class="example-full-width" >
-        <mat-label>Confirm Password</mat-label>
-        <input matInput [type]="hide_passconfirm ? 'password' : 'text'" formControlName='password_confirm'>
-        <button mat-icon-button matSuffix (click)="hide_passconfirm = !hide_passconfirm ">
-          <mat-icon>{{hide_passconfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
-    
-    <!--  get value in angular material diferent with bootstrap -->
-    <div class="gender">
-      <mat-radio-group formControlName="gender">Gender
-        <!-- <mat-label></mat-label> -->
-        <!-- the same value make error in radio-button -->
-        <mat-radio-button value="male" name="gender" >Male</mat-radio-button>
-        <mat-radio-button value="female" name="gender" >Female</mat-radio-button>
-      </mat-radio-group> 
-    </div> 
-       
-    <div class="form-group">
-      <mat-form-field>
-        <!-- must import MatNativeDateModule beside MatDatepickerModule to use Datepicker -->
-        <mat-label>Date of Birth</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="dob">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-    </div>
-    
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="address">
-      </mat-form-field>
-    </div>
-    
-    <div class="form-group">
-      <mat-form-field>
-        <mat-label>Phone Number</mat-label>
-        <input matInput formControlName="phone_number">
-      </mat-form-field>
-    </div>
-    
-    <!-- use ngx-material-file-input, review on readlist -->
-    <!-- <mat-form-field>
-     
-      <mat-label>Avatar</mat-label>
-      <ngx-mat-file-input ></ngx-mat-file-input>
-      <mat-icon matSuffix>folder</mat-icon>
-    </mat-form-field>  -->
+	<div class="sign-up-content">
+		<div class="name">
+			<span>Account Registration</span>
+		</div>
+		<form [formGroup]="AccountRegistrationForm" (ngSubmit)="onSubmit()">  
 
-    <div class="form-group">
-      <div class="button">
-        <button mat-raised-button type="submit">Sign-Up</button>
-        <button mat-raised-button (click)="previous_page()">Back</button>
-      </div>
-    </div>
+			<!-- TODO input tag not show, must import this lib for form rendering properly in file styles.scss -->
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label>Username</mat-label>
+					<input matInput formControlName="username">
+				</mat-form-field>
+			</div>
+			
+			<div class="form-group">
+				<mat-form-field class="example-full-width" >
+					<mat-label>Password</mat-label> 
+					<!-- TODO toggle click -->
+					<input matInput [type]="hide ? 'password' : 'text'" formControlName='password'>
+					<button mat-icon-button matSuffix (click)="hide = !hide">
+						<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+					</button>
+				</mat-form-field>
+			</div>  
+			
+			<div class="form-group">
+				<mat-form-field class="example-full-width" >
+					<mat-label>Confirm Password</mat-label>
+					<input matInput [type]="hide_passconfirm ? 'password' : 'text'" formControlName='password_confirm'>
+					<button mat-icon-button matSuffix (click)="hide_passconfirm = !hide_passconfirm ">
+						<mat-icon>{{hide_passconfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+					</button>
+				</mat-form-field>
+			</div>
 
-  </form>
+			<div class="gender">
+				<mat-radio-group formControlName="gender">
+					<mat-label>Gender</mat-label>
+					<mat-radio-button color="primary" value="male" name="gender" >Male</mat-radio-button>
+					<mat-radio-button color="primary" value="female" name="gender" >Female</mat-radio-button>
+				</mat-radio-group> 
+			</div> 
+			
+			<div class="form-group">
+				<mat-form-field>
+					<!-- must import MatNativeDateModule beside MatDatepickerModule to use Datepicker -->
+					<mat-label>Date of Birth</mat-label>
+					<input matInput [matDatepicker]="picker" formControlName="dob">
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+			</div>
+			
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label>Address</mat-label>
+					<input matInput formControlName="address">
+				</mat-form-field>
+			</div>
+			
+			<div class="form-group">
+				<mat-form-field>
+					<mat-label>Phone Number</mat-label>
+					<input matInput formControlName="phone_number">
+				</mat-form-field>
+			</div>
+
+			<div class="form-group">
+				<div class="button">
+					<button mat-raised-button type="submit">Sign-Up</button>
+					<button mat-raised-button (click)="previous_page()">Back</button>
+				</div>
+			</div>
+		</form>		
+	</div>
 </div>

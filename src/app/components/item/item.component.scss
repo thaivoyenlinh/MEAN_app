@@ -12,7 +12,7 @@
 
 			span {
 				font-size: 32px;
-				color: #68e763ea;
+				color: #32e28a;
 			}
 		}
 
@@ -51,12 +51,11 @@
 					
 					
 					button {
-						background: #6E00B3;
-						// border: 1px solid red;
+						background: #7d06c7;
 						height: 44px;
 
 						&:hover {
-							background: #7ae676ea;
+							background: #52de97;
 							transition: 0.4s;
 						}
 					}
@@ -86,7 +85,7 @@
 			width: 100%;
 			
 			.mat-column-item_name {
-				width: 20%;
+				width: 25%;
 				max-width: 100px;
 				overflow: hidden;
 				text-overflow: ellipsis;
@@ -94,15 +93,15 @@
 			}
 
 			.mat-column-item_price {
-				width: 15%;
+				width: 10%;
 			}
 
 			.mat-column-item_category {
-				width: 15%;
+				width: 10%;
 			}
 
 			.mat-column-item_discription {
-				width: 20%;
+				width: 25%;
 				max-width: 100px;
 				overflow: hidden;
 				text-overflow: ellipsis;

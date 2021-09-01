@@ -1,23 +1,28 @@
-<div class="container">
-    <h3>Create Category</h3>
-    <form [formGroup]="CreateCategoryForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data"> 
-        <div class="form-group" >
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="category_name">
-        </div>
-        <div class="form-group">
-            <mat-label>Image</mat-label>
-            <input type="file" (change)="onFileSelectd($event)">
-        </div>
-        <!-- <div *ngIf="imageData">
-            <img [src]="imageData" [alt]="CreateCategoryForm.value.category_name">
-        </div> -->
-            
-        <div class="form-group">
-            <div class="button">
-                <button mat-raised-button type="submit">Create</button>
-                <button mat-raised-button (click)="router.navigateByUrl('/admin/category')">Back</button>
+<div class="create-container">
+    <div class="name">
+        <span>Create Category</span>
+    </div>
+    
+    <div class="main-content">
+        <form [formGroup]="CreateCategoryForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data"> 
+            <div class="form-group" >
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="category_name">
+                </mat-form-field>
             </div>
-        </div> 
-    </form>
+            <div class="upload-file">
+                <mat-label>Image</mat-label>
+                <input type="file" (change)="onFileSelectd($event)">
+            </div>
+    
+            <div class="form-group">
+                <div class="button">
+                    <button mat-raised-button type="submit">Create</button>
+                    <button mat-raised-button (click)="router.navigateByUrl('/admin/category')">Back</button>
+                </div>
+            </div> 
+        </form>
+    </div>
+    
 </div>

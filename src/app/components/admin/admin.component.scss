@@ -19,14 +19,14 @@
 		.authentication {
 			display: inline;
 			float: right;
-			font-size: 18px;
+			font-size: 17px;
 			padding: 18.5px;
 			color: honeydew;
 
 			&:hover {
-				background:white;
-				transition: 0.7s;
-				color: #6E00B3;
+				background:#6deeae;
+				transition: 0.5s;
+				color: white;
 			}
 		}
   	}
@@ -39,7 +39,7 @@
 		.sidebar {
 			height: 100%;
 			width: 17%;
-			background: #8EE68B;
+			background: #52de97;
 			float: left;
 	
 			button {
@@ -47,7 +47,7 @@
 				height: 8%;
 				display: flex;
 				align-items: center;
-				background: #8EE68B;
+				background: #52de97;
 				color: white;
 				font-size: 16px;
 	
@@ -58,7 +58,7 @@
 				&:hover {
 					background: honeydew;
 					transition: 0.7s;
-					color: #68e763ea;
+					color: #52de97;
 				}
 			}
 		}
@@ -67,6 +67,7 @@
 			margin-left: 17%;
 			width: 83%;
 			height: 100%;
+			position: absolute;
 
 			.display-content {
 				margin: 2% 3%;

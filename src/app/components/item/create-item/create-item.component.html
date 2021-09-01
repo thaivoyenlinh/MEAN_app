@@ -1,51 +1,47 @@
-<div class="container">
-    <h3>Create Item</h3>
-    <form [formGroup]="CreateItemForm" (ngSubmit)="onSubmit()"> 
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput formControlName="item_name">
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Price</mat-label>
-                <input matInput formControlName="item_price">
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field appearance="fill">
-                <mat-label>Category</mat-label>
-                <mat-select formControlName="item_category">
-                    <mat-option *ngFor="let category of listOfCategories$ | async" [value]="category.category_name">
-                        {{category.category_name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-      
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Discription</mat-label>
-                <input matInput formControlName="item_discription">
-            </mat-form-field>
-        </div>
-
-        <!-- <div class="form-group">
-            <mat-form-field>
-                <mat-label>Image</mat-label>
-                <input matInput formControlName="item_image">
-            </mat-form-field>
-        </div> -->
-            
-        <div class="form-group">
-            <div class="button">
-                <button mat-raised-button type="submit">Create</button>
-                <button mat-raised-button (click)="router.navigateByUrl('/admin/item')">Back</button>
+<div class="create-container">
+    <div class="name">
+        <span>Create Item</span>
+    </div>
+    <div class="main-content">
+        <form [formGroup]="CreateItemForm" (ngSubmit)="onSubmit()"> 
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="item_name">
+                </mat-form-field>
             </div>
-        </div> 
-    </form>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Price</mat-label>
+                    <input matInput formControlName="item_price">
+                </mat-form-field>
+            </div>
+    
+            <div class="form-group">
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="item_category">
+                        <mat-option *ngFor="let category of listOfCategories$ | async" [value]="category.category_name">
+                            {{category.category_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Discription</mat-label>
+                    <input matInput formControlName="item_discription">
+                </mat-form-field>
+            </div>
+                
+            <div class="form-group">
+                <div class="button">
+                    <button mat-raised-button type="submit">Create</button>
+                    <button mat-raised-button (click)="router.navigateByUrl('/admin/item')">Back</button>
+                </div>
+            </div> 
+        </form>
+    </div>
+
 </div>
