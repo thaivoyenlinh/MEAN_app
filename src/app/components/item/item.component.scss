@@ -1,3 +1,5 @@
+@import '../../colorCustom.scss';
+
 .item-container {
 	height: 100%;
 	width: 100%;
@@ -12,7 +14,7 @@
 
 			span {
 				font-size: 32px;
-				color: #32e28a;
+				color: $main-color;
 			}
 		}
 
@@ -51,12 +53,14 @@
 					
 					
 					button {
-						background: #7d06c7;
+						background: honeydew;
 						height: 44px;
+						color: $navbar-color;
 
 						&:hover {
-							background: #52de97;
+							background: $main-color;
 							transition: 0.4s;
+							color: white;
 						}
 					}
 				}

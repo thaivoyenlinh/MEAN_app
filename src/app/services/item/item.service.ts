@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs/operators';
 })
 export class ItemService {
 
-	SERVER_URL = 'http://localhost:4100/items'
+	SERVER_URL = 'http://localhost:4100'
 
 	constructor( private http: HttpClient) { }
 
@@ -19,8 +19,16 @@ export class ItemService {
 	 * @param item : item data (e.g: data get from the item form)
 	 * @returns an Observable of response
 	 */
-	storeItem(item: Item) : Observable<void>{
-		return this.http.post<void>(`${this.SERVER_URL}/store`, item);
+	storeItem(itemFormValues: any ,image: File) : Observable<void>{
+		let formData = new FormData();
+		formData.append('item_name', itemFormValues.item_name);  //!will be call on upload
+		formData.append('item_price', itemFormValues.item_price);
+		formData.append('item_category', itemFormValues.item_category);
+		formData.append('item_discription', itemFormValues.item_discription);
+		formData.append('item_image', image);
+		// formData.append('category', category);
+
+		return this.http.post<void>(`${this.SERVER_URL}/item`, formData);
 	}
 
 	/**
@@ -29,10 +37,8 @@ export class ItemService {
 	 */
 
 	getListOfItems() : Observable<Item[]>{
-		return this.http.get<any>(this.SERVER_URL).pipe(
-			// tap((res) => console.log("BEFORE: ",res)),
+		return this.http.get<any>(`${this.SERVER_URL}/items`).pipe(
 			map((res) => res['data']),
-			// tap((res) => console.log("AFTER: ",res)),
 		)
 	}
 
@@ -42,7 +48,7 @@ export class ItemService {
 	 * @returns an Observable of response
 	 */
 	deleteItem(itemId: string) : Observable<void>{
-		return this.http.delete<void>(`${this.SERVER_URL}/${itemId}?_method=DELETE`);
+		return this.http.delete<void>(`${this.SERVER_URL}/item/${itemId}?_method=DELETE`);
 	}
 
 	/**
@@ -51,11 +57,11 @@ export class ItemService {
 	 * @returns an Observable of response
 	 */
 	getItem(itemId: string) : Observable<Item>{
-		return this.http.get<Item>(`${this.SERVER_URL}/${itemId}`);
+		return this.http.get<Item>(`${this.SERVER_URL}/item/${itemId}`);
 	}
 
 	getItemByName(itemName: string) : Observable<Item[]>{
-		return this.http.get<Item[]>(`${this.SERVER_URL}/search/${itemName}`);
+		return this.http.get<Item[]>(`${this.SERVER_URL}/items/${itemName}`);
 	}
 
 	/**
@@ -65,7 +71,7 @@ export class ItemService {
 	 * @returns an Observable of response
 	 */
 	updateItem(itemId: string, newItem: Item) : Observable<void> {
-		return this.http.put<void>(`${this.SERVER_URL}/${itemId}?_method=PUT`, newItem);
+		return this.http.put<void>(`${this.SERVER_URL}/item/${itemId}?_method=PUT`, newItem);
 	}
 
 }

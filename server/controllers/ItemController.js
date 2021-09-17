@@ -1,28 +1,46 @@
 const Item = require('../models/item');
+const baseURL = 'http://localhost:4100';
 
 class ItemController{
 
     storeItem(req, res){
-        // console.log(req);
+        console.log("Controller");
+        const fileName = req.file;
+        // console.log(req.file);
         try {
-            const data = req.body;
+            const pathToImage = `/images/items/${req.body.item_name}/${req.file.filename}`;
+            console.log(pathToImage);
+            const obj = JSON.parse(JSON.stringify(req.body));
+            console.log(obj);
+            const data = {
+                item_name: obj.item_name,
+                item_price:  obj.item_price,
+                item_category:  obj.item_category,
+                item_discription:  obj.item_discription,
+                item_image: pathToImage,
+            };
             const item = new Item(data);
             item
                 .save()
                 .then(() => {
-                    return res.json({message: "Insert item successful!!", status: 1});
-                })
+                    //? return message to notify, 
+                    //? with status to set condition navigaion to different page 
+                    return res.status(200).json({message: "Insert data successful!!!",  status: 1});
+                }) 
         } catch (error) {
-            return res.json({message: "Insert item failure!!", status: 0});
-            
+            return res.status(200).json({message: "ERROR: insert data successful!!!",  status: 0});
         }
     }
 
     getListOfItems(req, res){
         try {
             Item
-                .find()
+                .find({})
                 .then((data) => {
+
+                    data.forEach(item => {
+                        item.item_image = baseURL + item.item_image;
+                    }); 
                     return res.json({message: "Fetch list of items successful!!", 
                                     status: 1, 
                                     data: data});

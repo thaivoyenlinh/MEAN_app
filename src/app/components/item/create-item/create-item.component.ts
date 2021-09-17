@@ -14,8 +14,9 @@ import { Observable } from 'rxjs';
 })
 export class CreateItemComponent implements OnInit {
 
-  	CreateItemForm: FormGroup
-	listOfCategories$: Observable<Category[]>
+  	CreateItemForm: FormGroup;
+	listOfCategories$: Observable<Category[]>;
+	imageData: File;
 
 	constructor(protected router: Router,
 				private itemService: ItemService,
@@ -28,14 +29,20 @@ export class CreateItemComponent implements OnInit {
 			item_price: new FormControl(''),
 			item_category: new FormControl(''),
 			item_discription: new FormControl(''),
-			item_image: new FormControl(''),
 		});
 	}
 
+	onChooseFile(event) {
+		// console.log("event: ", event.target.files[0]);
+		this.imageData = event.target.files[0];
+	}
+
 	onSubmit() {
-		const item = this.CreateItemForm.value;
-		this.itemService.storeItem(item).subscribe(
+		// console.log(this.imageData);
+
+		this.itemService.storeItem(this.CreateItemForm.value, this.imageData).subscribe(
 			(res) => {
+				console.log(res);
 				if(res['status'] == 1){
 					this.router.navigateByUrl('/admin/item');
 				}

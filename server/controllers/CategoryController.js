@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const baseURL = 'http://localhost:4100';
 
 class CategoryController{
 
@@ -10,9 +11,18 @@ class CategoryController{
      */
     //! handle to save data receive from client
     storeCategory(req, res){
-        // console.log("REQUEST FROM CREATE CATEGORY: ",req);
+        console.log(req);
+        const fileName = req.file;
+        console.log("Controller");
+        console.log(req.file);
+
         try {
-            const data = req.body;
+            const pathToImage = `/images/categories/${req.file.filename}`;
+            console.log(pathToImage);
+            const data = {
+                category_name: req.body.category_name,
+                category_image: pathToImage
+            };
             const category = new Category(data);
             category
                 .save()
@@ -24,8 +34,6 @@ class CategoryController{
         } catch (error) {
             return res.status(200).json({message: "ERROR: insert data successful!!!",  status: 0});
         }
-
-        
     }
     
     //! get all categories
@@ -40,9 +48,10 @@ class CategoryController{
             Category
                 .find({})
                 .then((data) => {
-                    //? return message to notify, 
-                    //? with status to set condition navigaion to different page 
-                    //? transmis data from Server to Client
+                    
+                    data.forEach(category => {
+                        category.category_image = baseURL + category.category_image;
+                    }); 
                     return res.status(200).json({message: "Fetch successfully list of categories",  
                                                  status: 1, 
                                                  data: data});

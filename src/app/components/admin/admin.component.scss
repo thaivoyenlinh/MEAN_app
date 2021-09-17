@@ -1,10 +1,12 @@
+@import '../../colorCustom.scss';
+
 .admin-container {
 	height: 100%;
 	width: 100%;
 	position: relative;
   
 	.navbar {
-		background-color: #6E00B3; 
+		background-color: $navbar-color; 
 		width: 100%;
 		height: 10%;
 
@@ -24,7 +26,7 @@
 			color: honeydew;
 
 			&:hover {
-				background:#6deeae;
+				background: $main-color;
 				transition: 0.5s;
 				color: white;
 			}
@@ -39,7 +41,7 @@
 		.sidebar {
 			height: 100%;
 			width: 17%;
-			background: #52de97;
+			background: $main-color;
 			float: left;
 	
 			button {
@@ -47,7 +49,7 @@
 				height: 8%;
 				display: flex;
 				align-items: center;
-				background: #52de97;
+				background: $main-color;
 				color: white;
 				font-size: 16px;
 	
@@ -58,7 +60,7 @@
 				&:hover {
 					background: honeydew;
 					transition: 0.7s;
-					color: #52de97;
+					color: $navbar-color;
 				}
 			}
 		}

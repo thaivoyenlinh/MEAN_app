@@ -14,9 +14,9 @@ import { Category } from '../../../interfaces/category/category';
 
 export class CreateCategoryComponent implements OnInit {
 
-  	CreateCategoryForm: FormGroup
-	category: Category
-	imageData: string
+  	CreateCategoryForm: FormGroup;
+	category: Category;
+	imageData: File;
 
   	constructor(protected router: Router, 
              	private categoryService: CategoryService) { 
@@ -24,29 +24,20 @@ export class CreateCategoryComponent implements OnInit {
 
 	ngOnInit() {
 		this.CreateCategoryForm = new FormGroup ({
-			category_name: new FormControl(''),
-			category_image: new FormControl(''),
+			category_name: new FormControl('')
 		});
 	}
 
-	onFileSelectd(event: Event){
-		const file = (event.target as HTMLInputElement).files[0];
-		this.CreateCategoryForm.patchValue({ category_image: file });
-		const allowTypeImage = ['category_image/png', 'category_image/jpeg', 'category_image/jpg'];
-		if(file && allowTypeImage.includes(file.type)){
-			const reader = new FileReader();
-			reader.onload = () => {
-				this.imageData = reader.result as string;
-			}
-			reader.readAsDataURL(file);
-		}
+	onChooseFile(event){
+		// console.log("event:", event.target.files[0]);
+		this.imageData = event.target.files[0];
 	}
 
 	onSubmit() {
-		
+		// console.log(this.imageData);
+		const categoryName = this.CreateCategoryForm.value.category_name;
 
-		const category = this.CreateCategoryForm.value;
-		this.categoryService.storeCategory(category).subscribe(
+		this.categoryService.storeCategory(categoryName, this.imageData).subscribe(
 			(res) => {
 				if(res['status'] == 1){
 					this.router.navigateByUrl('/admin/category');

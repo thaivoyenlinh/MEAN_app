@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 //* it is midleware to communicate between server and client
 import { Observable } from 'rxjs';
 //* map method to transform data
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
 //* import Category interface to storeCategory function
@@ -14,8 +14,8 @@ import { Category } from '../../interfaces/category/category';
 })
 export class CategoryService {
  
-  //* Full path for category route on server
-  	SERVER_URL = 'http://localhost:4100/categories' // base url
+	//* RESTful API standard
+  	SERVER_URL = 'http://localhost:4100' // base url
 
   	constructor(private http: HttpClient) { }
 
@@ -27,10 +27,13 @@ export class CategoryService {
 	 * @param category : category data (e.g: data get from the category form)
 	 * @returns an Observable of response
 	 */
-	storeCategory(category: Category) : Observable<void>{
-		//* Want to send data to localhost:4100/categories/store
-		//* String template ``
-		return this.http.post<void>(`${this.SERVER_URL}/store`, category);
+	storeCategory(name: string, image: File) : Observable<void>{
+		//save info send to server
+		let formData = new FormData();
+		formData.append('category_name', name);
+		formData.append('category_image', image);
+
+		return this.http.post<void>(`${this.SERVER_URL}/category`, formData);
 	}
 
 	//*basic function: is used to show the communication between Client and Server
@@ -43,7 +46,8 @@ export class CategoryService {
 		//* use side effect outside subcribe(), through pipe()
 		//* directly return response just have data, and client side can not call res['data'] to get only data
 		//! Transform data: map()
-		return this.http.get<any>(this.SERVER_URL).pipe(
+		return this.http.get<any>(`${this.SERVER_URL}/categories`).pipe(
+			tap((res) => console.log(res)),
 			map((res) => res['data'])
 		);
 
@@ -56,7 +60,7 @@ export class CategoryService {
 	 */
 	deleteCategory(categoryId: string) : Observable<void> {
 		//* use delete method
-		return this.http.delete<void>(`${this.SERVER_URL}/${categoryId}?_method=DELETE`);
+		return this.http.delete<void>(`${this.SERVER_URL}/category/${categoryId}?_method=DELETE`);
 	}
 
 	/**
@@ -66,7 +70,7 @@ export class CategoryService {
 	 */
 	getCategory(categoryId: string) : Observable<Category> {
 		//* use put or patch method to update data
-		return this.http.get<Category>(`${this.SERVER_URL}/${categoryId}`) ;
+		return this.http.get<Category>(`${this.SERVER_URL}/category/${categoryId}`) ;
 	}
 
 	/**
@@ -76,7 +80,7 @@ export class CategoryService {
 	 * @returns an Observable of response
 	 */
 	updateCategory(categoryId: string, newCategory: Category) : Observable<void> {
-		return this.http.put<void>(`${this.SERVER_URL}/${categoryId}?_method=PUT`, newCategory);
+		return this.http.put<void>(`${this.SERVER_URL}/category/${categoryId}?_method=PUT`, newCategory);
 	}
 
 }

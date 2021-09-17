@@ -1,3 +1,5 @@
+@import '../../colorCustom.scss';
+
 .category-container {
 	height: 100%;
 	width: 100%;
@@ -11,7 +13,7 @@
 
 			span {
 				font-size: 32px;
-				color: #32e28a;
+				color: $main-color;
 			}
 		}
 

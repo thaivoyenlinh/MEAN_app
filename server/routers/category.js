@@ -1,23 +1,15 @@
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
 const CategoryController = require('../controllers/CategoryController');
-// const upload = multer({ dest: '../uploads' })
+const {uploadCategoryImage} = require('../config/upload');
 
 //! First declare, client side use what method to send request to server side,
 //! declare this method again in here
 
-//* [POST] /store
-router.post('/store', CategoryController.storeCategory);
-
-//* [GET] /:slug
-router.get('/:id', CategoryController.getCategory);
-
-router.get('/', CategoryController.getListOfCategories);
-
-//* [PUT] /:slug
-router.put('/:id', CategoryController.updateCategory);
-
-//* [DELETE] /:slug
-router.delete('/:id', CategoryController.deleteCategory);
+router.post('/category', uploadCategoryImage.single('category_image'), CategoryController.storeCategory);
+router.get('/category/:id', CategoryController.getCategory);
+router.get('/categories', CategoryController.getListOfCategories);
+router.put('/category/:id', CategoryController.updateCategory);
+router.delete('/category/:id', CategoryController.deleteCategory);
 
 module.exports = router;

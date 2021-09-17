@@ -53,7 +53,7 @@ export class ItemComponent implements OnInit {
 		this.search$ = this.searchText.valueChanges.pipe(
 			startWith(''),
 			tap((data) => {console.log(data)}),
-			debounceTime(200),
+			// debounceTime(200),
 			distinctUntilChanged(),
 			switchMap((data) => data ? this.itemService.getItemByName(data) : of(null)),
 			map(res => res && res['data']),

@@ -1,5 +1,7 @@
+@import '../../../colorCustom.scss';
+
 .create-container {
-    border: 1.5px solid #6E00B3;
+    border: 1.5px solid $main-color;
     position: relative;
     width: 50%;
     margin: 6% auto; 
@@ -55,12 +57,13 @@
                     height: 38px;
                     width: max-content;
                     margin: 16px 5px 15px 5px;
-                    background: #6E00B3;
-                    color: white;
+                    background: rgb(234, 248, 234);
+                    color: #6E00B3;
 
                     &:hover {
-                        background: #6deeae;
+                        background: #6E00B3;
                         transition: 0.4s;
+                        color: white;
                     }
                 }
             }
