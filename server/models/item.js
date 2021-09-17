@@ -6,7 +6,7 @@ const Item = new Schema({
     item_price: { type: String},
     item_category: { type: String},
     item_discription: { type: String},
-    item_image: { type: String},
+    item_image: [],
 }, {
     timestamps: true,
 }

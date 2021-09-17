@@ -16,7 +16,7 @@ export class CreateItemComponent implements OnInit {
 
   	CreateItemForm: FormGroup;
 	listOfCategories$: Observable<Category[]>;
-	imageData: File;
+	imageData: File[];
 
 	constructor(protected router: Router,
 				private itemService: ItemService,
@@ -32,13 +32,16 @@ export class CreateItemComponent implements OnInit {
 		});
 	}
 
-	onChooseFile(event) {
-		// console.log("event: ", event.target.files[0]);
-		this.imageData = event.target.files[0];
+	onUploadFiles(event) {
+		const files = event.target.files;
+		// console.log(files);
+		this.imageData = files;
+		// console.log("imageData: ", this.imageData);
 	}
 
 	onSubmit() {
-		// console.log(this.imageData);
+		// console.log("Filelist",this.imageData);
+		// console.log("LENGTH: ", this.imageData.length)
 
 		this.itemService.storeItem(this.CreateItemForm.value, this.imageData).subscribe(
 			(res) => {

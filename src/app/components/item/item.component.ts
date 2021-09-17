@@ -21,7 +21,7 @@ interface FilterCritiria {
 })
 export class ItemComponent implements OnInit {
 
-	displayedColumns: string[] = ['item_name', 'item_price', 'item_category', 'item_discription', 'item_image', 'action'];
+	displayedColumns: string[] = ['item_name', 'item_price', 'item_category', 'item_discription', 'action'];
 	// dataSource: Item[] = [];
 	searchText: FormControl = new FormControl('');
 	category: FormControl = new FormControl('');

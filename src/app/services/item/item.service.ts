@@ -19,15 +19,18 @@ export class ItemService {
 	 * @param item : item data (e.g: data get from the item form)
 	 * @returns an Observable of response
 	 */
-	storeItem(itemFormValues: any ,image: File) : Observable<void>{
+	storeItem(itemFormValues: any , images: File[]) : Observable<void>{
+		// console.log(images);
 		let formData = new FormData();
 		formData.append('item_name', itemFormValues.item_name);  //!will be call on upload
 		formData.append('item_price', itemFormValues.item_price);
 		formData.append('item_category', itemFormValues.item_category);
 		formData.append('item_discription', itemFormValues.item_discription);
-		formData.append('item_image', image);
-		// formData.append('category', category);
-
+		// formData.append('item_image', image);
+		for(let index=0; index < images.length; index++){
+			const element = images[index];
+			formData.append('item_image', element);
+		}
 		return this.http.post<void>(`${this.SERVER_URL}/item`, formData);
 	}
 

@@ -4,20 +4,27 @@ const baseURL = 'http://localhost:4100';
 class ItemController{
 
     storeItem(req, res){
-        console.log("Controller");
-        const fileName = req.file;
-        // console.log(req.file);
+        console.log("Controller:");
+        // console.log(req.files);
+        // const files = req.files.length;
+        const files = req.files;
+        const pathToImages = [];
+        // console.log(files);
         try {
-            const pathToImage = `/images/items/${req.body.item_name}/${req.file.filename}`;
-            console.log(pathToImage);
+            files.forEach(file => {
+                // console.log(element);
+                const path = `/images/items/${req.body.item_name}/${file.filename}`;
+                pathToImages.push(path);
+            })
+            console.log("PathToImage:", pathToImages);
             const obj = JSON.parse(JSON.stringify(req.body));
-            console.log(obj);
+            // console.log(obj);
             const data = {
                 item_name: obj.item_name,
                 item_price:  obj.item_price,
                 item_category:  obj.item_category,
                 item_discription:  obj.item_discription,
-                item_image: pathToImage,
+                item_image: pathToImages,
             };
             const item = new Item(data);
             item
@@ -27,8 +34,9 @@ class ItemController{
                     //? with status to set condition navigaion to different page 
                     return res.status(200).json({message: "Insert data successful!!!",  status: 1});
                 }) 
-        } catch (error) {
-            return res.status(200).json({message: "ERROR: insert data successful!!!",  status: 0});
+        } 
+        catch (error) {
+            return res.status(200).json({message: "ERROR: Insert data is not successful!!!",  status: 0});
         }
     }
 
@@ -39,7 +47,9 @@ class ItemController{
                 .then((data) => {
 
                     data.forEach(item => {
-                        item.item_image = baseURL + item.item_image;
+                        item.item_image.forEach(path => {
+                            path = baseURL + path;
+                        }) 
                     }); 
                     return res.json({message: "Fetch list of items successful!!", 
                                     status: 1, 
