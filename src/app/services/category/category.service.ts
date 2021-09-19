@@ -79,8 +79,11 @@ export class CategoryService {
 	 * @param newCategory : new category data
 	 * @returns an Observable of response
 	 */
-	updateCategory(categoryId: string, newCategory: Category) : Observable<void> {
-		return this.http.put<void>(`${this.SERVER_URL}/category/${categoryId}?_method=PUT`, newCategory);
+	updateCategory(categoryId: string, name: string, image: File) : Observable<void> {
+		let formData = new FormData();
+		formData.append('category_name', name);
+		formData.append('category_image', image);
+		return this.http.put<void>(`${this.SERVER_URL}/category/${categoryId}?_method=PUT`, formData);
 	}
 
 }

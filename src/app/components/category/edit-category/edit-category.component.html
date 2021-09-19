@@ -1,25 +1,28 @@
+<div class="category-form-container">
+    <div class="name">
+        <span>Edit Category</span>
+    </div>
 
-<div class="container">
-    <form [formGroup]="EditCategoryForm" (ngSubmit)="onSubmit()">
-        <h3>Edit Category</h3>
-        <div class="form-group" >
-            <mat-form-field>
-                <mat-label>Name Replace</mat-label>
-                <input matInput formControlName="category_name_replace">
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Image Replace</mat-label>
-                <input matInput formControlName="category_image_replace">
-            </mat-form-field>
-        </div>
-            
-        <div class="form-group">
-            <div class="button">
-                <button mat-raised-button type="submit">Submit</button>
-                <button mat-raised-button (click)="router.navigateByUrl('/admin/category')">Back</button>
+    <div class="main-content">
+        <form [formGroup]="EditCategoryForm" (ngSubmit)="onSubmit()">
+            <div class="form-group" >
+                <mat-form-field>
+                    <mat-label>Name Replace</mat-label>
+                    <input matInput formControlName="category_name_replace">
+                </mat-form-field>
             </div>
-        </div> 
-    </form>
+            <div class="upload-file">
+                    <mat-label>Image</mat-label>
+                    <input type="file" (change)="onChooseFile($event)">
+                    <!-- (change)="onChooseFile($event)" -->  
+            </div>
+                
+            <div class="form-group">
+                <div class="button">
+                    <button mat-raised-button type="submit">Submit</button>
+                    <button mat-raised-button (click)="router.navigateByUrl('/admin/category')">Back</button>
+                </div>
+            </div> 
+        </form>     
+    </div>
 </div>

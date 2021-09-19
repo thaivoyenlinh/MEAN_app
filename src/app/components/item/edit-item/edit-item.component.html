@@ -1,47 +1,51 @@
+<div class="item-form-container">
+    <div class="name">
+        <span>Edit Item</span>
+    </div>
 
-<div class="container">
-    <form [formGroup]="EditItemForm" (ngSubmit)="onSubmit()">
-        <h3>Edit Item</h3>
-        <div class="form-group" >
-            <mat-form-field>
-                <mat-label>Name Replace</mat-label>
-                <input matInput formControlName="item_name_replace">
-            </mat-form-field>
-        </div>
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Price Replace</mat-label>
-                <input matInput formControlName="item_price_replace">
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <!-- <mat-form-field>
-                <mat-label>Category Replace</mat-label>
-                <input matInput formControlName="item_category_replace">
-            </mat-form-field> -->
-            <mat-form-field appearance="fill">
-                <mat-label>Category</mat-label>
-                <mat-select formControlName="item_category_replace">
-                    <mat-option *ngFor="let category of listOfCategories$ | async" [value]="category.category_name">
-                        {{category.category_name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Discription Replace</mat-label>
-                <input matInput formControlName="item_discription_replace">
-            </mat-form-field>
-        </div>
-            
-        <div class="form-group">
-            <div class="button">
-                <button mat-raised-button type="submit">Submit</button>
-                <button mat-raised-button (click)="router.navigateByUrl('/admin/item')">Back</button>
+    <div class="main-content">
+        <form [formGroup]="EditItemForm" (ngSubmit)="onSubmit()">
+            <div class="form-group" >
+                <mat-form-field>
+                    <mat-label>Name Replace</mat-label>
+                    <input matInput formControlName="item_name_replace">
+                </mat-form-field>
             </div>
-        </div> 
-    </form>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Price Replace</mat-label>
+                    <input matInput formControlName="item_price_replace">
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <!-- <mat-form-field>
+                    <mat-label>Category Replace</mat-label>
+                    <input matInput formControlName="item_category_replace">
+                </mat-form-field> -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Category</mat-label>
+                    <mat-select formControlName="item_category_replace">
+                        <mat-option *ngFor="let category of listOfCategories$ | async" [value]="category.category_name">
+                            {{category.category_name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Discription Replace</mat-label>
+                    <input matInput formControlName="item_discription_replace">
+                </mat-form-field>
+            </div>
+                
+            <div class="form-group">
+                <div class="button">
+                    <button mat-raised-button type="submit">Submit</button>
+                    <button mat-raised-button (click)="router.navigateByUrl('/admin/item')">Back</button>
+                </div>
+            </div> 
+        </form>
+    </div>
 </div>

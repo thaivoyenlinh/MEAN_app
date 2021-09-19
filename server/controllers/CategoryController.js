@@ -123,14 +123,19 @@ class CategoryController{
      * @returns response object
      */
     updateCategory(req, res){
+        
+        console.log("Controller");
+        // console.log(req.body);
         try {
-            const categoryId = req.params.id,
-                  data = req.body;
-            // console.log(newCategory);
+            const categoryId = req.params.id;
+            const pathToImage = `/images/categories/${req.file.filename}`;
+            // console.log(categoryId);
             let newCategory = {
-                category_name: data.category_name_replace,
-                category_image: data.category_image_replace
+                category_name: req.body.category_name,
+                category_image: pathToImage,
             };
+
+            console.log("newCategory: ",newCategory);
             Category
                 .updateOne({_id: categoryId}, newCategory)
                 .then(() => {

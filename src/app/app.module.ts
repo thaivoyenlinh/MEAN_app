@@ -8,10 +8,9 @@ import { AuthenticationComponent } from './components/authentication/authenticat
 import { SignUpComponent } from './components/authentication/sign-up/sign-up.component';
 import { SignInComponent } from './components/authentication/sign-in/sign-in.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CategoryComponent } from './components/category/category.component';
-import { UserComponent } from './components/user/user.component';
 import { ItemComponent } from './components/item/item.component';
+import { ComfirmationDialogComponent } from './components/comfirmation-dialog/comfirmation-dialog.component';
 
 //! Lazy-loading Component is import at that component
 // import { CreateCategoryComponent } from './components/category/create-category/create-category.component';
@@ -33,6 +32,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 // import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
 
 //? import for UI's admin
 //* use Sidenav
@@ -53,15 +53,9 @@ import { HttpClientModule } from '@angular/common/http';
     SignUpComponent,
     SignInComponent,
     AdminComponent,
-    DashboardComponent,
     CategoryComponent,
-    UserComponent,
     ItemComponent,
-    // EditItemComponent,
-    // CreateItemComponent,
-    // EditCategoryComponent,
-    // CreateCategoryComponent,
-  
+    ComfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,8 +78,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatTableModule,
     HttpClientModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

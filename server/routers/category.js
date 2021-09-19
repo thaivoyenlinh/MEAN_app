@@ -9,7 +9,7 @@ const {uploadCategoryImage} = require('../config/upload');
 router.post('/category', uploadCategoryImage.single('category_image'), CategoryController.storeCategory);
 router.get('/category/:id', CategoryController.getCategory);
 router.get('/categories', CategoryController.getListOfCategories);
-router.put('/category/:id', CategoryController.updateCategory);
+router.put('/category/:id', uploadCategoryImage.single('category_image'), CategoryController.updateCategory);
 router.delete('/category/:id', CategoryController.deleteCategory);
 
 module.exports = router;

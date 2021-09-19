@@ -13,6 +13,7 @@ import { NavigationExtras } from '@angular/router';
 
 //! call service from server
 import { CategoryService } from '../../services/category/category.service';
+import { DialogService} from '../../services/dialog/dialog.service';
 
 @Component({
 	selector: 'app-category',
@@ -26,7 +27,8 @@ export class CategoryComponent implements OnInit  {
 	categories$ : Observable<Category[]>;
 
 	constructor(private router: Router, 
-				private categoryService: CategoryService,) { }
+				private categoryService: CategoryService,
+				private dialogService: DialogService) { }
 
 	ngOnInit() {
 		this.init();
@@ -38,11 +40,12 @@ export class CategoryComponent implements OnInit  {
 
 	deleteCategory(categoryId: string) {
 		// console.log(row);
-		this.categoryService.deleteCategory(categoryId).pipe(
-			tap(() => {
-				this.init();
-			})
-		).subscribe();
+		// this.categoryService.deleteCategory(categoryId).pipe(
+		// 	tap(() => {
+		// 		this.init();
+		// 	})
+		// ).subscribe();
+		this.dialogService.openConfirmDialog();
 	}
 
 	editCategory(categoryId: string) {
