@@ -81,6 +81,6 @@ import { HttpClientModule } from '@angular/common/http';
     MatDialogModule,
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, ComfirmationDialogComponent],
 })
 export class AppModule { }

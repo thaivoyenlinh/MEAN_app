@@ -38,14 +38,22 @@ export class CategoryComponent implements OnInit  {
 		this.categories$ =  this.categoryService.getListOfCategories();
 	}
 
+	onDelete(categoryId: string){
+		this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
+			// console.log(res);
+			if(res){
+				this.deleteCategory(categoryId);
+			}
+		});
+	}
+
 	deleteCategory(categoryId: string) {
 		// console.log(row);
-		// this.categoryService.deleteCategory(categoryId).pipe(
-		// 	tap(() => {
-		// 		this.init();
-		// 	})
-		// ).subscribe();
-		this.dialogService.openConfirmDialog();
+		this.categoryService.deleteCategory(categoryId).pipe(
+			tap(() => {
+				this.init();
+			})
+		).subscribe();
 	}
 
 	editCategory(categoryId: string) {

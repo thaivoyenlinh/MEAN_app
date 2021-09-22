@@ -122,6 +122,34 @@ class CategoryController{
      * @param {*} res : response from server
      * @returns response object
      */
+    updateAllCategory(req, res){
+        
+        console.log("Controller");
+        // console.log(req.body);
+        try {
+            const categoryId = req.params.id;
+            const pathToImage = `/images/categories/${req.file.filename}`;
+            // console.log(categoryId);
+            let newCategory = {
+                category_name: req.body.category_name,
+                category_image: pathToImage,
+            };
+
+            console.log("newCategory: ",newCategory);
+            Category
+                .updateOne({_id: categoryId}, newCategory)
+                .then(() => {
+                    //? return message to notify, 
+                    //? with status to set condition navigaion to different page 
+                    return res.status(200).json({message: "Update new information is successful",  
+                                                 status: 1});
+                }) 
+        } catch (error) {
+            return res.status(200).json({message: "ERROR: Update a category is failure!!",  
+                                         status: 0});
+        }
+    }
+
     updateCategory(req, res){
         
         console.log("Controller");

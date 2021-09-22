@@ -1,34 +1,42 @@
 @import '../../colorCustom.scss';
 
-
-
 .confirm-dialog-container {
 
-    border: red 1px solid;
     .content {
-        border: #0000ff 1px solid;
-        color: $main-color;
-        display: flex;
+       
+        display: relative;
+        text-align: center;
 
-        #close-icon {
-            margin-left: auto;
-            order: 2;
-            font-weight: bold;
+        h2{
+            font-size: 25px;
+            margin-top: 0px;
+        }
 
-            &:hover {
-                cursor: pointer;
-            } 
+        h4{
+            font-size: 18px;
+            font-weight: normal;
+            margin-top: -10px;
+            color: rgb(153, 150, 150);
         }
     }
 
-    #no-button {
-        background-color: honeydew;
-        border: #0000ff 1px solid;
-    }
+    .button {
 
-    #yes-button {
-        background-color: red;
-        color: white;
-        border: #0000ff 1px solid;
+        button {
+            color: White;  
+        }
+
+        #no-button {
+            width: 90px;
+            margin-left: 50px;
+            margin-right: 13px;
+            color: red;
+        }
+        
+        #yes-button {
+            background-color: #f25e5e;
+            width: 90px;
+        }
     }
+    
 }
