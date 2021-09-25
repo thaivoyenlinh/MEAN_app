@@ -6,6 +6,7 @@ const categoryStorage = multer.diskStorage({
     filename: function (req, file, cb) {
         // console.log("Upload directly:")
         // console.log(file);
+        // console.log("req.body: ", req.body)
         cb(null, file.originalname)
     }
 })

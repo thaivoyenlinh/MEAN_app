@@ -8,6 +8,8 @@ import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map, fil
 import { FormControl } from '@angular/forms';
 import { Category } from '../../interfaces/category/category';
 import { CategoryService } from '../../services/category/category.service';
+import { DialogService } from '../../services/dialog/dialog.service';
+
 
 interface FilterCritiria {
 	category ?: string,
@@ -33,11 +35,20 @@ export class ItemComponent implements OnInit {
 
 	constructor(protected router: Router,
 				private itemService: ItemService,
-				private categoryService: CategoryService) { }
+				private categoryService: CategoryService,
+				private dialogService: DialogService) { }
 
 	ngOnInit() {
 		this.init();
-	}	
+	}
+	
+	onDelete(itemId: string){
+		this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
+			if(res){
+				this.deleteItem(itemId);
+			}
+		})
+	}
 
 	deleteItem(itemId: string) {
 		this.itemService.deleteItem(itemId).pipe(

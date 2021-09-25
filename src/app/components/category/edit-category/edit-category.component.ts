@@ -19,7 +19,7 @@ export class EditCategoryComponent implements OnInit {
 	
 	//? declare in both send and receive component
 	categoryId: string;
-	imageData: File;
+	imageData: File = null;
 	
 	//* Router to catch the data form Category Component
 	constructor(protected router: Router, 
@@ -41,6 +41,7 @@ export class EditCategoryComponent implements OnInit {
 	onChooseFile(event){
 		// console.log("EVENT:", event.target.files[0].name);
 		this.imageData = event.target.files[0];
+		// console.log(this.imageData);
 	}
 
 	ngOnInit() {
@@ -58,10 +59,11 @@ export class EditCategoryComponent implements OnInit {
 	onSubmit() {
 		//! submit form and update new data
 		const newCategoryName = this.EditCategoryForm.value.category_name_replace;
-		// console.log("newCategoryName: ",this.newCategoryName);
-		
-		//* call update API 
-		this.categoryService.updateCategory(this.categoryId, newCategoryName, this.imageData).subscribe(
+		// console.log("newCategoryName: ", newCategoryName);
+		// console.log("imageData: ",this.imageData);
+		// * call update API 
+		if(this.imageData !== null){
+			this.categoryService.updateAllFieldCategory(this.categoryId, newCategoryName, this.imageData).subscribe(
 			(res) => {
 				// console.log(res);
 				if(res['status'] == 1){
@@ -70,8 +72,20 @@ export class EditCategoryComponent implements OnInit {
 				else {
 					console.log(res['message']);
 				}
-			}
-		);
+			});
+		} else {
+			this.categoryService.updateOneFieldCategory(this.categoryId, newCategoryName).subscribe(
+				(res) => {
+					if(res['status'] == 1){
+						this.router.navigateByUrl('/admin/category');
+					}
+					else {
+						console.log(res['message']);
+					}
+				}
+			);
+		}
+		
 	}	
 
 }

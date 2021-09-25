@@ -122,10 +122,10 @@ class CategoryController{
      * @param {*} res : response from server
      * @returns response object
      */
-    updateAllCategory(req, res){
+    updateAllFieldCategory(req, res){
         
-        console.log("Controller");
-        // console.log(req.body);
+        console.log("Controller All Field");
+        // console.log(req);
         try {
             const categoryId = req.params.id;
             const pathToImage = `/images/categories/${req.file.filename}`;
@@ -152,15 +152,12 @@ class CategoryController{
 
     updateCategory(req, res){
         
-        console.log("Controller");
-        // console.log(req.body);
+        console.log("Controller One Field");
+        // console.log(req);
         try {
             const categoryId = req.params.id;
-            const pathToImage = `/images/categories/${req.file.filename}`;
-            // console.log(categoryId);
             let newCategory = {
                 category_name: req.body.category_name,
-                category_image: pathToImage,
             };
 
             console.log("newCategory: ",newCategory);
