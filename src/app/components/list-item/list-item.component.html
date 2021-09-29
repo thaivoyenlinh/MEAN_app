@@ -1,0 +1,17 @@
+<app-nav-home></app-nav-home>
+<div class="list-items">
+    <div class="name">
+        <span>Product</span>
+    </div>
+    <section class="items" >
+        <div class="item" *ngFor="let item of listItem$ | async" >
+            <div class="image">
+                <img src="{{item.item_image}}" width="100" height="100">
+                <!-- <span>{{[item.item_image]}}</span> -->
+            </div>
+            <div class="category-name">
+                <span>{{item.item_name}}</span>
+            </div>
+        </div>
+    </section>   
+</div>

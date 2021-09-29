@@ -21,7 +21,7 @@ import { DialogService} from '../../services/dialog/dialog.service';
 	styleUrls: ['./category.component.scss']
 })
 
-export class CategoryComponent implements OnInit  {
+export class CategoryComponent implements OnInit {
 
 	displayedColumns: string[] = ['category_name', 'category_image', 'action'];
 	categories$ : Observable<Category[]>;

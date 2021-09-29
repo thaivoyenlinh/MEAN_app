@@ -10,5 +10,6 @@ router.get('/items/:name', ItemController.getItemByName);
 router.get('/items', ItemController.getListOfItems);
 router.delete('/item/:id', ItemController.deleteItem);
 router.put('/item/:id', ItemController.updateItem);
+router.get('/items/list/:name', ItemController.getItemsByCategory);
 
 module.exports = router;

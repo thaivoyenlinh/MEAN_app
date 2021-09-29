@@ -77,4 +77,12 @@ export class ItemService {
 		return this.http.put<void>(`${this.SERVER_URL}/item/${itemId}?_method=PUT`, newItem);
 	}
 
+	getItemsByCategory(categoryName: string) : Observable<Item[]> {
+		// console.log(categoryName);
+		return this.http.get<Item[]>(`${this.SERVER_URL}/items/list/${categoryName}`).pipe(
+			tap((res) => console.log(res)),
+			map((res) => res['data']),
+		);
+	}
+
 }

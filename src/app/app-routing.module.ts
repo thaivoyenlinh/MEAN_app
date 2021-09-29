@@ -6,12 +6,15 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component'; 
 import { CategoryComponent } from './components/category/category.component';
 import { ItemComponent } from './components/item/item.component';
+import { ListItemComponent } from './components/list-item/list-item.component';
 
 //! Lazy-loading Component is import at that component  
 //import { CreateComponent } from './components/admin/create/create.component'; 
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
+  
+  { path: 'listitem', component: ListItemComponent},
 
   { path: 'admin', component: AdminComponent, children: [
     

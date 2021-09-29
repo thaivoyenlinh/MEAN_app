@@ -32,7 +32,7 @@ class CategoryController{
                     return res.status(200).json({message: "Insert data successful!!!",  status: 1});
                 }) 
         } catch (error) {
-            return res.status(200).json({message: "ERROR: insert data successful!!!",  status: 0});
+            return res.status(500).json({message: "ERROR: insert data successful!!!",  status: 0});
         }
     }
     

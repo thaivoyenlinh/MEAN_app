@@ -136,6 +136,27 @@ class ItemController{
         }
     }
 
+    getItemsByCategory(req, res){
+        // console.log(req.params.name);
+        try {
+            const categoryName = req.params.name;
+            Item
+                .find({item_category: categoryName})
+                .then((data) => {
+
+                    data.forEach(item => {
+                        item.item_image = baseURL + item.item_image;
+                    }); 
+                    return res.json({message: "Fetch item successful!!", 
+                                    status: 1,
+                                    data: data});
+                })
+        } catch (error) {
+            return res.json({message: "Fetch item failure!!", 
+                            status: 0});    
+        }
+    }
+
 }
 
 module.exports = new ItemController();

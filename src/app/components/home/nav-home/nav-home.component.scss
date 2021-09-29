@@ -1,0 +1,41 @@
+@import '../../../colorCustom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.nav-container{
+    width: 100%;
+    padding: 1% 0%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 8vh;
+    background-color: $main-color;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+
+    .logomall{    
+        letter-spacing: 5px;
+        font-size: 25px;
+        margin-left: 7%;
+    }
+
+    .authentication {
+
+        display: flex;
+        justify-content: space-around;
+        width: 28%;
+        margin-left: auto;
+
+        a {
+            color: white;
+            text-decoration: none;
+            letter-spacing: 3px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+}

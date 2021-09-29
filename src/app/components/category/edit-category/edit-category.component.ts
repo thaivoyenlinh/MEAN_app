@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
-import { Router, Route, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 //! FormBuilder có hàm group ( nhóm các FormControl ) có tác dụng tương tự new FormGroup (tạo object)
 //! Router dùng navigate... để điều hướng về một trang mong muốn (php: location)
 

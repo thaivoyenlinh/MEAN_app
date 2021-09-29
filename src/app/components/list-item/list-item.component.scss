@@ -1,7 +1,7 @@
 @import '../../colorCustom.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
-.list-categories{
+.list-items{
     margin-top: 1%;
 
     .name{
@@ -14,13 +14,13 @@
         }
     }
 
-    .categories{
+    .items{
         display: grid;
         padding: 15px;
         grid-template-columns: 15% 15% 15% 15% 15% 15%;
         grid-gap: 3% 2%;
 
-        .category{
+        .item{
             text-align: center;
             font-size: 18px;
             font-family: 'Poppins', sans-serif;

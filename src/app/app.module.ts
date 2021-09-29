@@ -22,7 +22,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // ?import to use Material Component for UI's user
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -44,6 +43,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
 
 import { HttpClientModule } from '@angular/common/http';
+import { NavHomeComponent } from './components/home/nav-home/nav-home.component';
+
+import {MatGridListModule} from '@angular/material/grid-list';
+import { ListItemComponent } from './components/list-item/list-item.component';
 
 @NgModule({
   declarations: [
@@ -56,12 +59,14 @@ import { HttpClientModule } from '@angular/common/http';
     CategoryComponent,
     ItemComponent,
     ComfirmationDialogComponent,
+    NavHomeComponent,
+    ListItemComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatGridListModule,
+
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
@@ -79,6 +84,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MatSelectModule,
     MatDialogModule,
+    MatGridListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
