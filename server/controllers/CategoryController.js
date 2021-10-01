@@ -52,6 +52,13 @@ class CategoryController{
                     data.forEach(category => {
                         category.category_image = baseURL + category.category_image;
                     }); 
+
+                    /* 
+                    data = [
+                        category_name: '',
+                        category_image: '',
+                    ]
+                    */
                     return res.status(200).json({message: "Fetch successfully list of categories",  
                                                  status: 1, 
                                                  data: data});

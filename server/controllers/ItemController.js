@@ -4,7 +4,7 @@ const baseURL = 'http://localhost:4100';
 class ItemController{
 
     storeItem(req, res){
-        console.log("Controller:");
+        // console.log("Controller:");
         // console.log(req.files);
         // const files = req.files.length;
         const files = req.files;
@@ -16,7 +16,7 @@ class ItemController{
                 const path = `/images/items/${req.body.item_name}/${file.filename}`;
                 pathToImages.push(path);
             })
-            console.log("PathToImage:", pathToImages);
+            // console.log("PathToImage:", pathToImages);
             const obj = JSON.parse(JSON.stringify(req.body));
             // console.log(obj);
             const data = {
@@ -45,12 +45,21 @@ class ItemController{
             Item
                 .find({})
                 .then((data) => {
-
                     data.forEach(item => {
-                        item.item_image.forEach(path => {
-                            path = baseURL + path;
-                        }) 
-                    }); 
+                        /*can not use forEach in for array item_image this case 
+                        because value of this variable cannot be get out of function in forEach. 
+                        Need to directively impact to value in this case and get out*/
+                        /*data.forEach(item => {
+                            item.item_image.forEach(path => {
+                                path = baseURL + path;
+                            }) 
+                        }); */
+
+                        for(let i=0; i<item.item_image.length; i++){
+                            item.item_image[i] = baseURL + item.item_image[i];
+                        }
+                    })
+                    // console.log(data);
                     return res.json({message: "Fetch list of items successful!!", 
                                     status: 1, 
                                     data: data});
@@ -143,10 +152,16 @@ class ItemController{
             Item
                 .find({item_category: categoryName})
                 .then((data) => {
-
                     data.forEach(item => {
-                        item.item_image = baseURL + item.item_image;
+                        // item.item_image.forEach(path => {
+                        //     path = baseURL + path;
+                        // });
+                        // console.log(item.item_image);
+                        for(let i = 0; i < item.item_image.length; i++){
+                            item.item_image[i] = baseURL + item.item_image[i];
+                        }
                     }); 
+                    // console.log(data);
                     return res.json({message: "Fetch item successful!!", 
                                     status: 1,
                                     data: data});
