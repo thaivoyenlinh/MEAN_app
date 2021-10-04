@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ItemService } from '../../services/item/item.service';
 import { Item } from '../../interfaces/item/item';
@@ -16,7 +16,8 @@ export class ListItemComponent implements OnInit {
 	listItem$: Observable<Item[]>
 
   	constructor(private route: ActivatedRoute,
-			  	private itemService: ItemService){
+			  	private itemService: ItemService,
+				protected router: Router){
 
 		route.queryParams.subscribe((params) => {
 			this.categoryName = params['name'];
@@ -25,11 +26,14 @@ export class ListItemComponent implements OnInit {
 
 	ngOnInit() {
 		this.listItem$ = this.itemService.getItemsByCategory(this.categoryName);
-		// .subscribe(
-		//   (res) => {
-		// 		const item = res['data'];
-		// 		console.log(item);
-		//   })
+	}
+
+	selectItem(itemId: string){
+		// console.log(itemId);
+		let navigationExtras: NavigationExtras = {
+			queryParams: { Id: itemId},
+		};
+		this.router.navigate(['/itemdetails'], navigationExtras);
 	}
 
 }

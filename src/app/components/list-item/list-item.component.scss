@@ -22,12 +22,22 @@
 
         .item{
             text-align: center;
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Poppins', sans-serif;
             padding: 15px;
             background-color: #fff;
             border: 2px solid orange;
 
+            span{
+                display: block;
+                text-align: left;
+                margin-left: 5px;
+            }
+
+            .price {
+                color: orangered;
+                font-size: 18px;
+            }
         }
     }
 }

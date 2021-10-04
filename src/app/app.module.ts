@@ -47,6 +47,8 @@ import { NavHomeComponent } from './components/home/nav-home/nav-home.component'
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ListItemComponent } from './components/list-item/list-item.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
+// import { GalleryModule } from 'ng-gallery';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     ComfirmationDialogComponent,
     NavHomeComponent,
     ListItemComponent,
+    ItemDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +88,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
     MatSelectModule,
     MatDialogModule,
     MatGridListModule,
+    // GalleryModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

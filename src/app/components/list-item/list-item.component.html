@@ -4,17 +4,17 @@
         <span>Product</span>
     </div>
     <section class="items" >
-        <div class="item" *ngFor="let item of listItem$ | async" >
+        <div class="item" *ngFor="let item of listItem$ | async" (click)="selectItem(item._id)">
             <div class="image">
                 <div *ngFor="let image of item.item_image; first as isFirst">
                     <div *ngIf="isFirst">
-                        <img src="{{image}}" width="100" height="100">
-                        <!-- <span>{{i}}</span> -->
+                        <img src="{{image}}" width="100" height="100" title="{{item.item_name}}">
                     </div>
                 </div>
             </div>
             <div class="category-name">
                 <span>{{item.item_name}}</span>
+                <span class="price">${{item.item_price}}</span>
             </div>
         </div>
     </section>   

@@ -1,3 +1,4 @@
+const { base } = require('../models/item');
 const Item = require('../models/item');
 const baseURL = 'http://localhost:4100';
 
@@ -88,23 +89,6 @@ class ItemController{
         }
     }
 
-    getItem(req, res){
-        try {
-            const itemId = req.params.id;
-            Item
-                .findOne({_id: itemId})
-                .then((data) => {
-                    return res.json({message: "Fetch item successful!!", 
-                                    status: 1,
-                                    data: data});
-                })
-        } catch (error) {
-            return res.json({message: "Fetch item failure!!", 
-                            status: 0});
-            
-        }
-    }
-
     getItemByName(req, res){
         try {
             const itemName = req.params.name;
@@ -169,6 +153,29 @@ class ItemController{
         } catch (error) {
             return res.json({message: "Fetch item failure!!", 
                             status: 0});    
+        }
+    }
+
+    getItemById(req, res){
+        try {
+            const itemId = req.params.id;
+            Item
+                .findOne({_id: itemId})
+                .then((data) => { 
+                    // console.log("GetItemById");
+                    // console.log(data.item_image);
+                    for(let i=0; i<data.item_image.length; i++){
+                        data.item_image[i] = baseURL + data.item_image[i];
+                    }   
+                                  
+                    return res.json({message: "Fetch item successful!!", 
+                                    status: 1,
+                                    data: data});
+                })
+        } catch (error) {
+            return res.json({message: "Fetch item failure!!", 
+                            status: 0});
+            
         }
     }
 

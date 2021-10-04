@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 	}
 
 	selectCategory(categoryName: string){
-		console.log	(categoryName);
+		// console.log	(categoryName);
 		let navigationExtras: NavigationExtras = {
 			queryParams: { name: categoryName},
 		};

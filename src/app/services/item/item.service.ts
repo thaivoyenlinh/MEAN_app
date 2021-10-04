@@ -54,15 +54,6 @@ export class ItemService {
 		return this.http.delete<void>(`${this.SERVER_URL}/item/${itemId}?_method=DELETE`);
 	}
 
-	/**
-	 * Function to fetch item by its item id
-	 * @param itemId : item id
-	 * @returns an Observable of response
-	 */
-	getItem(itemId: string) : Observable<Item>{
-		return this.http.get<Item>(`${this.SERVER_URL}/item/${itemId}`);
-	}
-
 	getItemByName(itemName: string) : Observable<Item[]>{
 		return this.http.get<Item[]>(`${this.SERVER_URL}/items/${itemName}`);
 	}
@@ -84,5 +75,19 @@ export class ItemService {
 			map((res) => res['data']),
 		);
 	}
+
+	/**
+	 * Function to fetch item by its item id
+	 * @param itemId : item id
+	 * @returns an Observable of response
+	 */
+	 getItemById(itemId: string) : Observable<Item>{
+		return this.http.get<Item>(`${this.SERVER_URL}/item/${itemId}`).pipe(
+			// tap((res) => console.log("RES: ",res)), //subcribe when call to see data
+			map((res) => res['data']),
+			tap((res) => console.log("res sub: ", res))
+		);
+	}
+
 
 }
