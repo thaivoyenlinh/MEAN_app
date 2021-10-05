@@ -1,48 +1,16 @@
 <app-nav-home></app-nav-home>
+
 <div class="item-details" *ngIf="itemDetails$ | async as itemDetails">
     <div class="image">
-        <div *ngFor="let image of itemDetails.item_image; first as isFirst">
-            <img *ngIf="isFirst" src="{{image}}" >
-       </div>
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
     </div>
     <div class="other">
         <span class="name">{{itemDetails.item_name}}</span>
         <span class="price">${{itemDetails.item_price}}</span>
         <span class="discription">{{itemDetails.item_discription}}</span>
         <div class="div">
-            <button mat-raised-button>Add to Cart</button>
+            <button mat-raised-button (click)="addToCart(itemDetails._id)">Add to Cart</button>
             <button mat-raised-button>Buy Now</button>
         </div>
     </div> 
 </div>
-
-<!-- <div class="item-details" *ngIf="itemDetails$ | async as itemDetails">
-    <div class="image">
-        <div *ngFor="let image of itemDetails.item_image; first as isFirst">
-            
-            <!-- <img id="featured" *ngIf="isFirst" src="{{image}}">
-            <img class="thumbnail" *ngIf="!isFirst" src="{{image}}"> -->
-            <!-- <gallery fluid [itemImage]="itemImage"></gallery>> -->
-        <!-- </div>
-    </div>
-    <div class="other">
-        <span class="name">{{itemDetails.item_name}}</span>
-        <span class="price">${{itemDetails.item_price}}</span>
-        <span class="discription">{{itemDetails.item_discription}}</span>
-        <div class="div">
-            <button mat-raised-button>Add to Cart</button>
-            <button>Orther</button>
-        </div>
-    </div>
-</div> -->
-
-<!-- <div class="item-details" *ngIf="itemDetails$ | async as itemDetails">
-    <div class="image">
-        <div *ngFor="let image of itemDetails.item_image; first as isFirst">
-            <gallery fluid [items]="items" thumbPosition="left" ></gallery>
-           <!-- <img id="featured" *ngIf="isFirst" src="{{image}}"> -->
-            <!-- <img class="thumbnail" *ngIf="!isFirst" src="{{image}}"> -->
-            <!-- <gallery fluid [itemImage]="itemImage"></gallery>> -->
-        <!-- </div> 
-    </div> -->
-<!-- <gallery [items]="items"></gallery> -->

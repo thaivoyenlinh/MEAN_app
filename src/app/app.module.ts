@@ -45,10 +45,16 @@ import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { NavHomeComponent } from './components/home/nav-home/nav-home.component';
 
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
-// import { GalleryModule } from 'ng-gallery';
+import { CartComponent } from './components/cart/cart.component';
+  // core.js:9110 ERROR Error: Uncaught (in promise): NullInjectorError: StaticInjectorError(AppModule)[GalleryComponent -> Gallery]: 
+  // StaticInjectorError(Platform: core)[GalleryComponent -> Gallery]: 
+  // NullInjectorError: No provider for Gallery!  
+  //! solve: import Gallery and declare into providers
+import { GalleryModule, Gallery } from 'ng-gallery';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 @NgModule({
   declarations: [
@@ -64,6 +70,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
     NavHomeComponent,
     ListItemComponent,
     ItemDetailsComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,9 +95,11 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
     MatSelectModule,
     MatDialogModule,
     MatGridListModule,
-    // GalleryModule,
+    GalleryModule,
+    NgxGalleryModule,
   ],
-  providers: [],
+
+  providers: [Gallery],
   bootstrap: [AppComponent],
   entryComponents: [ComfirmationDialogComponent],
 })
