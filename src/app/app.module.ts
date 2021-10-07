@@ -55,6 +55,7 @@ import { CartComponent } from './components/cart/cart.component';
   //! solve: import Gallery and declare into providers
 import { GalleryModule, Gallery } from 'ng-gallery';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     ListItemComponent,
     ItemDetailsComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

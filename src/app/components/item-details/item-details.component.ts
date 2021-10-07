@@ -42,7 +42,7 @@ export class ItemDetailsComponent implements OnInit {
 				// console.log("BEFORE:",res.item_image)
 				let imageData = [];
 				res.item_image.forEach(image => {
-					imageData.push({small: image, medium: image})
+					imageData.push({small: image, medium: image, big:image})
 				})
 				this.galleryImages = imageData;
 				// console.log("gelleryImages", this.galleryImages);

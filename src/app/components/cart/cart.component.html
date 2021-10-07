@@ -1,5 +1,36 @@
 <app-nav-home></app-nav-home>
 
-<div class="shopping-cart">
-    
+<div class="shopping-cart-page">
+    <div class="shopping-cart">
+        <div class="title">
+            <span>Shopping Cart</span>
+        </div>
+        <div class="column">
+            <span id="item">Item</span>
+            <span id="price">Price</span>
+        </div>
+        <div class="item" *ngIf="item | async as item">
+                <div class="image" *ngFor="let image of item.item_image; first as isFirst">
+                        <img *ngIf="isFirst" src="{{image}}" title="{{item.item_name}}">
+                </div>
+                <div class="other">
+                    <div class="infor">
+                        <span id="name">{{item.item_name}}</span>
+                        <span id="price">${{item.item_price}}</span>
+                    </div>
+                    <div class="feature">
+                        <span class="delete">Delete</span>
+                    </div>
+                </div>
+        
+        </div>
+    </div>
+    <div class="checkout">
+        <div class="sub" *ngIf="item | async as item">
+            <span>Subtotal: <span id="price">${{item.item_price}}</span></span>
+        </div> 
+        <i class="fa fa-check-circle-o" aria-hidden="true"></i> 
+        <span id="note"> Delivery cost is Free</span>
+        <button mat-stroked-button (click)="router.navigateByUrl('/checkout')">Proceed to checkout</button>
+    </div>
 </div>
