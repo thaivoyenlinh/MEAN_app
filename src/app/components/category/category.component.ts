@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/'
@@ -15,6 +15,9 @@ import { NavigationExtras } from '@angular/router';
 import { CategoryService } from '../../services/category/category.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { ViewChild } from '@angular/core';
+
 @Component({
 	selector: 'app-category',
 	templateUrl: './category.component.html',
@@ -24,7 +27,11 @@ import { DialogService } from '../../services/dialog/dialog.service';
 export class CategoryComponent implements OnInit {
 
 	displayedColumns: string[] = ['category_name', 'category_image', 'action'];
-	categories$ : Observable<Category[]>;
+	// categories$ : Observable<Category[]>;
+	categoryData = new MatTableDataSource();
+	categoryDataSource: Category[] = [];
+
+	@ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
 	constructor(private router: Router, 
 				private categoryService: CategoryService,
@@ -35,7 +42,16 @@ export class CategoryComponent implements OnInit {
 	}
 
 	init() {
-		this.categories$ =  this.categoryService.getListOfCategories();
+		// this.categories$ =  this.categoryService.getListOfCategories();
+		this.categoryService.getListOfCategories().pipe(
+			tap((res) => {
+				console.log(res);
+				this.categoryDataSource = res;
+				this.categoryData = new MatTableDataSource(this.categoryDataSource);
+				this.categoryData.paginator = this.paginator;
+			})
+		).subscribe();
+
 	}
 
 	onDelete(categoryId: string){

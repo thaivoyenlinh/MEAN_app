@@ -47,6 +47,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { GalleryModule, Gallery } from 'ng-gallery';
 import { NgxGalleryModule } from 'ngx-gallery';
 
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   declarations: [
@@ -89,6 +91,7 @@ import { NgxGalleryModule } from 'ngx-gallery';
     MatGridListModule,
     GalleryModule,
     NgxGalleryModule,
+    MatPaginatorModule,
   ],
 
   providers: [Gallery],
