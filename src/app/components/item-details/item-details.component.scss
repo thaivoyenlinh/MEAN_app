@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import '../../colorCustom.scss';
 
 .item-details{
 
     overflow: hidden;
-    width: 94%;
+    width: 90%;
     margin: 4% auto;
     background-color: rgb(245, 242, 242);
     display: flex;
@@ -15,7 +16,9 @@
     .other{
         background-color: white;
         width: 55%;
-        margin: 3% 0 3% 4%;
+        height: fit-content;
+        padding-bottom: 6%;
+        margin: 4% 0 3% 4%;
         font-family: 'Poppins', sans-serif;
 
         span {
@@ -24,11 +27,43 @@
 
         .name{
             font-size: 35px;
+            margin: 2% 0 0 3%;
         }
         
         .price{
-            font-size: 40px;
+            font-size: 36px;
             color: orangered;
+            margin: -1% 0 0 3.5%;
+            width: 93%;
+            border-bottom: 1px dashed rgb(201, 199, 199);
+        }
+
+        .discription{
+            margin: 2% 0 3% 3.8%;
+        }
+
+        .button{
+            
+            button{
+                font-size: 16px;
+                padding: 0.5% 0;
+            }
+            
+            #add{
+                width: 32%;
+                margin-left: 4%;
+                border: 1px solid $main-color;
+                color: $main-color;
+                background-color: #dff0ff;
+
+            }
+
+            #buy-now{
+                width: 30%;
+                margin-left: 2.5%;
+                background-color: $main-color;
+                color: white;
+            }
         }
     }
 }

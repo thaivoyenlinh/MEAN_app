@@ -25,12 +25,12 @@
         
         </div>
     </div>
-    <div class="checkout">
-        <div class="sub" *ngIf="item | async as item">
-            <span>Subtotal: <span id="price">${{item.item_price}}</span></span>
+    <div class="checkout" *ngIf="item | async as item">
+        <div class="sub">
+            <span>Subtotal: <span id="price">${{item.item_price}}</span></span> 
         </div> 
         <i class="fa fa-check-circle-o" aria-hidden="true"></i> 
         <span id="note"> Delivery cost is Free</span>
-        <button mat-stroked-button (click)="router.navigateByUrl('/checkout')">Proceed to checkout</button>
+        <button mat-stroked-button (click)="clickCheckout(item._id)">Proceed to checkout</button>
     </div>
 </div>

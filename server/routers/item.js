@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ItemController = require('../controllers/ItemController');
-const {uploadItemImage} = require('../config/upload');
+const { uploadItemImage } = require('../config/upload');
 
 //array have limit of file, any don't have limit
 router.post('/item', uploadItemImage.any('item_image'), ItemController.storeItem);

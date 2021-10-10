@@ -8,9 +8,12 @@
         <span class="name">{{itemDetails.item_name}}</span>
         <span class="price">${{itemDetails.item_price}}</span>
         <span class="discription">{{itemDetails.item_discription}}</span>
-        <div class="div">
-            <button mat-raised-button (click)="addToCart(itemDetails._id)">Add to Cart</button>
-            <button mat-raised-button>Buy Now</button>
+        <div class="button">
+            <button id="add" mat-raised-button (click)="addToCart(itemDetails._id)">
+                <mat-icon>add_shopping_cart</mat-icon>
+                Add to Cart
+            </button>
+            <button id="buy-now" mat-raised-button>Buy Now</button>
         </div>
     </div> 
 </div>

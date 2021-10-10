@@ -10,12 +10,14 @@ import { SignInComponent } from './components/authentication/sign-in/sign-in.com
 import { AdminComponent } from './components/admin/admin.component';
 import { CategoryComponent } from './components/category/category.component';
 import { ItemComponent } from './components/item/item.component';
-import { ComfirmationDialogComponent } from './components/comfirmation-dialog/comfirmation-dialog.component';
+import { NavHomeComponent } from './components/home/nav-home/nav-home.component';
+import { ListItemComponent } from './components/list-item/list-item.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
+import { CartComponent } from './components/cart/cart.component';
+import { DeleteConfirmationComponent } from './components/dialog/delete-confirmation/delete-confirmation.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 //! Lazy-loading Component is import at that component
-// import { CreateCategoryComponent } from './components/category/create-category/create-category.component';
-// import { CreateItemComponent } from './components/item/create-item/create-item.component';
-// import { EditItemComponent } from './components/item/edit-item/edit-item.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,33 +31,22 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-// import {MaterialFileInputModule} from 'ngx-material-file-input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
-
-//? import for UI's admin
-//* use Sidenav
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
-
-//* use table
 import {MatTableModule} from '@angular/material/table';
-
 import { HttpClientModule } from '@angular/common/http';
-import { NavHomeComponent } from './components/home/nav-home/nav-home.component';
-
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ListItemComponent } from './components/list-item/list-item.component';
-import { ItemDetailsComponent } from './components/item-details/item-details.component';
-import { CartComponent } from './components/cart/cart.component';
+
   // core.js:9110 ERROR Error: Uncaught (in promise): NullInjectorError: StaticInjectorError(AppModule)[GalleryComponent -> Gallery]: 
   // StaticInjectorError(Platform: core)[GalleryComponent -> Gallery]: 
   // NullInjectorError: No provider for Gallery!  
   //! solve: import Gallery and declare into providers
 import { GalleryModule, Gallery } from 'ng-gallery';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { CheckoutComponent } from './components/checkout/checkout.component';
+
 
 @NgModule({
   declarations: [
@@ -67,11 +58,11 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     AdminComponent,
     CategoryComponent,
     ItemComponent,
-    ComfirmationDialogComponent,
     NavHomeComponent,
     ListItemComponent,
     ItemDetailsComponent,
     CartComponent,
+    DeleteConfirmationComponent,
     CheckoutComponent,
   ],
   imports: [
@@ -87,7 +78,6 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    // MaterialFileInputModule,
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -103,6 +93,6 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 
   providers: [Gallery],
   bootstrap: [AppComponent],
-  entryComponents: [ComfirmationDialogComponent],
+  entryComponents: [DeleteConfirmationComponent],
 })
 export class AppModule { }

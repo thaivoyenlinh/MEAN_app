@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import '../../colorCustom.scss';
+
+.checkout{
+    width: 90%;
+    margin: 5% auto;
+    font-family: 'Poppins', sans-serif;
+    .info{
+        display: flex;
+        
+        .user-info{
+            width: 60%;
+            border-right: rgb(175, 174, 174) 1px solid;
+            
+            .container{
+                width: 93%;
+
+                .title{
+                    padding-bottom: 0.5%;
+                    border-bottom: rgb(175, 174, 174) 1px solid;
+                    color: rgb(41, 40, 40);
+
+                    span{
+                        font-size: 26px;
+                        font-weight: 600;
+
+                    }
+                }
+
+                .form{
+                    margin-top: 3.5%;
+
+                    mat-form-field{
+                        display: block;
+                        margin-bottom: -1%;
+
+                        mat-label{
+                            font-family: 'Poppins', sans-serif;
+                        }
+                    }
+                }
+
+                .button{
+                    text-align: center;
+                    margin-top: 2%;
+
+                    button{
+                        width: 32%;
+                        font-size: 16px;
+                        font-weight: 300;
+                        padding: 0.5% 0;
+                        background-color: $main-color;
+                        color: white;
+                    }
+                }
+            }
+            
+        }
+
+        .order-info{
+            width: 40%;   
+            
+            .container{
+                width: 92%;
+                margin-left: auto;
+
+                .title{
+                    padding-bottom: 0.5%;
+                    border-bottom: rgb(175, 174, 174) 1px solid;
+                    color: rgb(41, 40, 40);
+
+                    span{
+                        font-size: 26px;
+                        font-weight: 600;
+
+                    }
+                }
+
+                .main-container{
+
+                    .name{
+                        margin: 3% 0;
+                    }
+                    
+                    .value{
+                        float: right;
+                    }
+                    
+                    #item-price{
+                            font-weight: 600;
+                        }
+                }  
+                
+                .button{
+                    text-align: center;
+                    margin-top: 4%;
+                    // border: black 1px solid;
+                    border-top: rgb(175, 174, 174) 1px solid;
+
+                    button{
+                        margin-top: 5%;
+                        width: 60%;
+                        font-size: 16px;
+                        font-weight: 300;
+                        padding: 0.2% 0;
+                        background-color: $main-color;
+                        color: white;
+                        
+
+                        &:hover{
+                            background-color: rgb(255, 100, 44);
+                            transition: 0.4s;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
+    
+    
+}

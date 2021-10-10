@@ -1,1 +1,53 @@
-<p>checkout works!</p>
+<app-nav-home></app-nav-home>
+
+<div class="checkout">
+    <div class="info">
+        <div class="user-info">
+            <div class="container">
+                <div class="title">
+                    <span>Your information</span>
+                </div>
+                <div class="form">
+                    <form [formGroup]="UserInformationForm" (ngSubmit)="onSubmit()">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Full name</mat-label>
+                            <input matInput formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Phone number</mat-label>
+                            <input matInput formControlName="phoneNumber">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Delivery address</mat-label>
+                            <input matInput formControlName="address">
+                        </mat-form-field>
+                        <div class="button">
+                            <button mat-stroked-button type="submit"> Save </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="order-info">
+            <div class="container">
+                <div class="title">
+                    <span>Your order</span>
+                </div>
+                <div class="main-container" *ngIf="item | async as item">
+                    <div class="name">
+                        <span>Your item: </span>
+                        <span class="value">{{item.item_name}}</span>
+                    </div>
+                    <div class="price">
+                        <span>Sub: </span>
+                        <span class="value" id="item-price">${{item.item_price}}</span>
+                    </div>
+                </div>
+                <div class="button">
+                    <button mat-stroked-button>Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

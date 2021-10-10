@@ -11,6 +11,7 @@ class ItemController{
         const files = req.files;
         const pathToImages = [];
         // console.log(files);
+        // console.log(req.body); => obj
         try {
             files.forEach(file => {
                 // console.log(element);
@@ -18,6 +19,7 @@ class ItemController{
                 pathToImages.push(path);
             })
             // console.log("PathToImage:", pathToImages);
+            // [Object: null prototype] => user parse to transfer to object {}
             const obj = JSON.parse(JSON.stringify(req.body));
             // console.log(obj);
             const data = {

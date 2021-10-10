@@ -52,7 +52,7 @@ export class ItemDetailsComponent implements OnInit {
 		this.galleryOptions = [
             {
                 width: '400px',
-                height: '400px',
+                height: '450px',
                 thumbnailsColumns: 4,
                 imageAnimation: NgxGalleryAnimation.Slide
             },

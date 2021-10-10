@@ -13,7 +13,7 @@ import { NavigationExtras } from '@angular/router';
 
 //! call service from server
 import { CategoryService } from '../../services/category/category.service';
-import { DialogService} from '../../services/dialog/dialog.service';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @Component({
 	selector: 'app-category',
