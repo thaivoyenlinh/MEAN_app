@@ -9,7 +9,8 @@ import { FormControl } from '@angular/forms';
 import { Category } from '../../interfaces/category/category';
 import { CategoryService } from '../../services/category/category.service';
 import { DialogService } from '../../services/dialog/dialog.service';
-
+import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { ViewChild } from '@angular/core';
 
 interface FilterCritiria {
 	category ?: string,
@@ -32,6 +33,10 @@ export class ItemComponent implements OnInit {
 	item$: Observable<Item[]>;
 	search$: Observable<Item[]>;	
 	filterSubject: BehaviorSubject<FilterCritiria> = new BehaviorSubject<FilterCritiria>({});
+
+	itemData = new MatTableDataSource();
+	// itemDataSource: Item[] = [];
+	@ViewChild(MatPaginator, {static: false}) itemPaginator: MatPaginator;
 
 	constructor(protected router: Router,
 				private itemService: ItemService,
@@ -70,19 +75,26 @@ export class ItemComponent implements OnInit {
 			map(res => res && res['data']),
 			tap((data) => console.log(data)),
 		);
-		this.item$ = combineLatest([this.itemService.getListOfItems(), this.search$, this.filterSubject]).pipe(
+		// this.item$ = 
+		combineLatest([this.itemService.getListOfItems(), this.search$, this.filterSubject]).pipe(
 			map(([items, searchResult, {category, priceRange}]) => {
 				const sourceData = searchResult ? searchResult : items;
 				return sourceData.filter((item) => {
 					return (category ? category === item.item_category : true);
 				}); 
-			}) 
-		);
+			}),
+			tap((data)=> {
+				this.itemData = new MatTableDataSource(data);
+				this.itemData.paginator = this.itemPaginator;
+			})
+		).subscribe();
 	}
 
 	reset(){
-		this.init;
 		this.filterSubject.next({});
+		this.searchText = new FormControl('');
+		this.category = new FormControl('');
+		this.init();	
 	}
 
 	selectFilter(filterValue: string) {
