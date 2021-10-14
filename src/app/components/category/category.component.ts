@@ -29,9 +29,8 @@ export class CategoryComponent implements OnInit {
 	displayedColumns: string[] = ['category_name', 'category_image', 'action'];
 	// categories$ : Observable<Category[]>;
 	categoryData = new MatTableDataSource();
-	categoryDataSource: Category[] = [];
 
-	@ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+	@ViewChild(MatPaginator, {static: false}) categoryPaginator: MatPaginator;
 
 	constructor(private router: Router, 
 				private categoryService: CategoryService,
@@ -44,14 +43,11 @@ export class CategoryComponent implements OnInit {
 	init() {
 		// this.categories$ =  this.categoryService.getListOfCategories();
 		this.categoryService.getListOfCategories().pipe(
-			tap((res) => {
-				console.log(res);
-				this.categoryDataSource = res;
-				this.categoryData = new MatTableDataSource(this.categoryDataSource);
-				this.categoryData.paginator = this.paginator;
+			tap((data) => {
+				this.categoryData = new MatTableDataSource(data);
+				this.categoryData.paginator = this.categoryPaginator;
 			})
 		).subscribe();
-
 	}
 
 	onDelete(categoryId: string){
