@@ -1,32 +1,28 @@
 @import '../../colorCustom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 .admin-container {
 	height: 100%;
 	width: 100%;
 	position: relative;
+	font-family: 'Poppins', sans-serif;
   
 	.navbar {
 		background-color: $navbar-color; 
 		width: 100%;
 		height: 10%;
 
-		.logo {
-			display: inline;
-			margin-left: 30px;
-			font-size: 30px;
-			line-height: 60px;
-			color: honeydew;
-		}
-
 		.authentication {
 			display: inline;
 			float: right;
-			font-size: 17px;
 			padding: 18.5px;
-			color: honeydew;
+			color: white;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-size: 14px;
 
 			&:hover {
-				background: $main-color;
+				background: #5757e6;
 				transition: 0.5s;
 				color: white;
 			}
@@ -37,21 +33,39 @@
 		height: 100%;
 		width: 100%;
 		position: absolute;
+		
 
 		.sidebar {
 			height: 100%;
 			width: 17%;
-			background: $main-color;
-			float: left;
+			background: #5757e6;
+			position: fixed; 
+			z-index: 1; /* Stay on top */
+			top: 0; /* Say at the top */
+			left: 0;
+			overflow-x: hidden; /* Disable horizontal scroll */
+
+			.logo {
+				background-color: $main-color; 
+				width: 100%;
+				height: 10%;
+				display: block;
+				line-height: 60px;
+				color: honeydew;
+				letter-spacing: 4px;
+				font-size: 24px;
+				padding-left: 12%;
+			}
 	
 			button {
 				width: 100%;
 				height: 8%;
 				display: flex;
 				align-items: center;
-				background: $main-color;
+				background: #5757e6;
 				color: white;
 				font-size: 16px;
+				letter-spacing: 1.2px;
 	
 				mat-icon {
 					margin: 0px 10px;
@@ -67,9 +81,7 @@
 	
 		.main-content {
 			margin-left: 17%;
-			width: 83%;
-			height: 100%;
-			position: absolute;
+			padding-bottom: 1%;
 
 			.display-content {
 				margin: 2% 3%;
