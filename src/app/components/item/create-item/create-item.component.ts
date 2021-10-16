@@ -18,6 +18,17 @@ export class CreateItemComponent implements OnInit {
 	listOfCategories$: Observable<Category[]>;
 	imageData: File[];
 
+	config = {
+		toolbar: [
+			['bold', 'italic', 'underline'],
+			[{ 'header': 1 }, { 'header': 2 }],
+			[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+			[{ 'align': [] }],
+			[{ 'size': ['small', false, 'large', 'huge'] }],  
+			['link', 'image']   
+		]
+	}
+
 	constructor(protected router: Router,
 				private itemService: ItemService,
 				private categoryService: CategoryService) { }
@@ -42,6 +53,7 @@ export class CreateItemComponent implements OnInit {
 	onSubmit() {
 		// console.log("Filelist",this.imageData);
 		// console.log("LENGTH: ", this.imageData.length)
+		// console.log(this.CreateItemForm.value);
 
 		this.itemService.storeItem(this.CreateItemForm.value, this.imageData).subscribe(
 			(res) => {

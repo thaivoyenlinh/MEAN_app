@@ -10,6 +10,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 
+//! ERROR Error: Uncaught (in promise): NullInjectorError: 
+//! StaticInjectorError(AppModule)[QuillEditorComponent -> QuillService]
+import { QuillModule, QuillService } from 'ngx-quill';
 
 @NgModule({
     declarations: [
@@ -25,7 +28,11 @@ import {MatSelectModule} from '@angular/material/select';
         MatSelectModule,
         MatFormFieldModule,
         FormsModule,
+        QuillModule,
     ],
+    providers: [
+        QuillService,
+    ]
 })
 
 export class CreateItemModule { }

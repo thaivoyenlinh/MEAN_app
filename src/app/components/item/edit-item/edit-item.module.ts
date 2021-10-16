@@ -5,10 +5,11 @@ import { EditItemRountingModule } from './edit-item-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 //? form
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { QuillModule, QuillService } from 'ngx-quill';
 
 
 @NgModule({
@@ -22,8 +23,12 @@ import {MatSelectModule} from '@angular/material/select';
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        QuillModule,
     ],
+    providers: [
+        QuillService
+    ]
 })
 
 export class EditItemModule { }

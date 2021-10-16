@@ -3,7 +3,7 @@
 .create-container {
     border: 1.5px solid $main-color;
     position: relative;
-    width: 50%;
+    width: 71%;
     margin: 6% auto; 
     text-align: center;
     border-radius: 20px;
@@ -34,17 +34,21 @@
                 }
             }
 
-            .upload-file {
+            .mat-label{
+                display: block;
+                text-align: left;   
+                padding-left: 15%;
+                font-size: 18px;
+                font-weight: 500;
+                margin: 1% 0;
+            }
 
-                mat-label {
-                    display: block;
-                    text-align: left;   
-                    width: 70%;
-                    margin-left: 14.5%;
-                    font-size: 17px;
-                    font-weight: 500;
-                    
-                }
+            quill-editor{
+                display: inline-block;
+                width: 70%;
+            }
+
+            .upload-file {
 
                 input {
                     display: block;
@@ -66,7 +70,7 @@
 
                     &:hover {
                         background: #6E00B3;
-                        transition: 0.4s;
+                        transition: 0.9s;
                         color: white;
                     }
                 }

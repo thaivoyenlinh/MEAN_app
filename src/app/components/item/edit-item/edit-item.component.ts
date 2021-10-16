@@ -18,13 +18,23 @@ export class EditItemComponent implements OnInit {
 	itemId: string
 	listOfCategories$: Observable<Category[]>
 
+	config = {
+		toolbar: [
+			['bold', 'italic', 'underline'],
+			[{ 'header': 1 }, { 'header': 2 }],
+			[{ 'list': 'ordered'}, { 'list': 'bullet' }],
+			[{ 'align': [] }],
+			[{ 'size': ['small', false, 'large', 'huge'] }],  
+			[{ 'font': [] }],
+			['link', 'image']   
+		]
+	}
+
 	constructor(protected router: Router, 
 				private fb: FormBuilder, 
 				private route: ActivatedRoute,
 				private itemService: ItemService,
 				private categoryService: CategoryService) {
-		
-		this.listOfCategories$ = this.categoryService.getListOfCategories()
 		
 		this.EditItemForm = this.fb.group({
 			item_name_replace: new FormControl(''),
@@ -40,16 +50,16 @@ export class EditItemComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		this.listOfCategories$ = this.categoryService.getListOfCategories();
 		this.itemService.getItemById(this.itemId).subscribe(
 			(res) => {
-				// console.log(res);
-				const item = res['data'];
+				const item = res;
 				this.EditItemForm.setValue({
-				item_name_replace: item.item_name,
-				item_price_replace: item.item_price, 
-				item_category_replace: item.item_category, 
-				item_discription_replace: item.item_discription, 
-		});
+					item_name_replace: item.item_name,
+					item_price_replace: item.item_price, 
+					item_category_replace: item.item_category, 
+					item_discription_replace: item.item_discription, 
+				});
 			} 
 		)
 		

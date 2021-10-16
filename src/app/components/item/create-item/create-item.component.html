@@ -29,14 +29,12 @@
             </div>
     
             <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Discription</mat-label>
-                    <input matInput formControlName="item_discription">
-                </mat-form-field>
+                <mat-label class="mat-label">Discription</mat-label>
+                <quill-editor formControlName="item_discription" [modules]="config"></quill-editor>
             </div>
 
             <div class="upload-file">
-                <mat-label>Image</mat-label>
+                <mat-label class="mat-label">Image</mat-label>
                 <input type="file" (change)="onUploadFiles($event)" multiple>
             </div>
                 

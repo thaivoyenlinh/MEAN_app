@@ -7,22 +7,18 @@
         <form [formGroup]="EditItemForm" (ngSubmit)="onSubmit()">
             <div class="form-group" >
                 <mat-form-field>
-                    <mat-label>Name Replace</mat-label>
+                    <mat-label>Name</mat-label>
                     <input matInput formControlName="item_name_replace">
                 </mat-form-field>
             </div>
             <div class="form-group">
                 <mat-form-field>
-                    <mat-label>Price Replace</mat-label>
+                    <mat-label>Price</mat-label>
                     <input matInput formControlName="item_price_replace">
                 </mat-form-field>
             </div>
 
             <div class="form-group">
-                <!-- <mat-form-field>
-                    <mat-label>Category Replace</mat-label>
-                    <input matInput formControlName="item_category_replace">
-                </mat-form-field> -->
                 <mat-form-field appearance="fill">
                     <mat-label>Category</mat-label>
                     <mat-select formControlName="item_category_replace">
@@ -34,10 +30,8 @@
             </div>
 
             <div class="form-group">
-                <mat-form-field>
-                    <mat-label>Discription Replace</mat-label>
-                    <input matInput formControlName="item_discription_replace">
-                </mat-form-field>
+                <mat-label class="mat-label">Discription</mat-label>
+                <quill-editor formControlName="item_discription_replace" [modules]="config"></quill-editor>
             </div>
                 
             <div class="form-group">
