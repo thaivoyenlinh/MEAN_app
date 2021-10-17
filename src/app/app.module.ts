@@ -16,6 +16,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { CartComponent } from './components/cart/cart.component';
 import { DeleteConfirmationComponent } from './components/dialog/delete-confirmation/delete-confirmation.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ItemDetailsDialogComponent } from './components/dialog/item-details-dialog/item-details-dialog.component';
 
 //! Lazy-loading Component is import at that component
 
@@ -49,7 +50,6 @@ import { NgxGalleryModule } from 'ngx-gallery';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +66,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CartComponent,
     DeleteConfirmationComponent,
     CheckoutComponent,
+    ItemDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +97,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 
   providers: [Gallery],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteConfirmationComponent],
+  entryComponents: [DeleteConfirmationComponent, ItemDetailsDialogComponent],
 })
 export class AppModule { }

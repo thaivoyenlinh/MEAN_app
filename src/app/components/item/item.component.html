@@ -69,7 +69,7 @@
 
 			<!-- !content of columns  -->
 			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-			<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openItemDetailsDialog(row)"></tr> 
 		</table>
 		<table>
 			<tr *ngIf="!itemData.data.length">
@@ -78,7 +78,7 @@
 				</td>
 			</tr>
 		</table>
-		<mat-paginator [hidden]="!itemData.data.length" [pageSizeOptions]="[3,6]" showFirstLastButtons></mat-paginator>
+		<mat-paginator [hidden]="!itemData.data.length" [pageSizeOptions]="[5,10]" showFirstLastButtons></mat-paginator>
 	</div>
 </div>
 

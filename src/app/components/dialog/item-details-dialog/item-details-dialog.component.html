@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="header">
+        <span>Item Details</span>
+        <mat-icon (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="main-content">
+        <div class="wrap">
+            <span class="field-name">Name: </span>
+            <span>{{itemDetails.item_name}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Price: </span>
+            <span>${{itemDetails.item_price}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Category of item: </span>
+            <span>{{itemDetails.item_category}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Discription: </span>
+            <span [innerHTML]="itemDetails.item_discription"></span>
+        </div>
+        <div class="wrap">
+            <span class="field-name-image">Image: </span>
+            <div class="image" *ngFor="let image of itemDetails.item_image">
+                <img src="{{image}}" height="70" width="70">
+            </div>
+        </div>
+        
+    </div>
+</div>
+<!-- directively get data from @inject -->
+<!-- <span>Name: {{data?.item_name}}</span> -->

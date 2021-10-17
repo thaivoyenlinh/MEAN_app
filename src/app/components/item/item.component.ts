@@ -114,4 +114,9 @@ export class ItemComponent implements OnInit {
 		this.router.navigate(['/admin/item/edit'], navigationExtras);
 	}
 
+	openItemDetailsDialog(row){
+		// console.log(row);
+		this.dialogService.openItemDetailsDialog(row);
+	}
+
 }
