@@ -1,19 +1,27 @@
 <app-nav-home></app-nav-home>
 
-<div class="item-details" *ngIf="itemDetails$ | async as itemDetails">
-    <div class="image">
-        <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
-    </div>
-    <div class="other">
-        <span class="name">{{itemDetails.item_name}}</span>
-        <span class="price">${{itemDetails.item_price}}</span>
-        <span class="discription">{{itemDetails.item_discription}}</span>
-        <div class="button">
-            <button id="add" mat-raised-button (click)="addToCart(itemDetails._id)">
-                <mat-icon>add_shopping_cart</mat-icon>
-                Add to Cart
-            </button>
-            <button id="buy-now" mat-raised-button>Buy Now</button>
+<div class="item" *ngIf="itemDetails$ | async as itemDetails">
+    <div class="item-details" >
+        <div class="image">
+            <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
         </div>
-    </div> 
+        <div class="other">
+            <span class="name">{{itemDetails.item_name}}</span>
+            <span class="price">${{itemDetails.item_price}}</span>
+            <span class="type">Type: {{itemDetails.item_type}}</span>
+            <div class="button">
+                <button id="add" mat-raised-button (click)="addToCart(itemDetails._id)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                    Add to Cart
+                </button>
+                <button id="buy-now" mat-raised-button>Buy Now</button>
+            </div>
+        </div> 
+    </div>
+    <div class="item-discription">
+        <span id="title">ITEM DESCRIPTION</span>
+        <div class="discription">
+            <span [innerHTML]="itemDetails.item_discription"></span>
+        </div>
+    </div>
 </div>

@@ -105,7 +105,7 @@
 				width: 17%;
 			}
 
-			.mat-column-item_discription {
+			.mat-column-item_type {
 				width: 17%;
 				max-width: 100px;
 				overflow: hidden;
@@ -114,11 +114,15 @@
 			}
 
 			.mat-column-action {
-				padding: 0 41px;
 
 				button {
-					margin: 0 8px;
+					margin: 0 5px;
 				}
+			}
+
+			#details-button{
+				margin-left: 15%;
+				color: #057905;
 			}
 		}
 

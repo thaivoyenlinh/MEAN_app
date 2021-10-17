@@ -59,6 +59,7 @@ export class EditItemComponent implements OnInit {
 					item_name_replace: item.item_name,
 					item_price_replace: item.item_price, 
 					item_category_replace: item.item_category, 
+					item_type_replace: item.item_type,
 					item_discription_replace: item.item_discription, 
 				});
 			} 

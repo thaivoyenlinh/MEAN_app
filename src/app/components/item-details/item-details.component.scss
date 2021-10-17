@@ -1,69 +1,99 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 @import '../../colorCustom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
-.item-details{
+.item{
+    
+    .item-details{
 
-    overflow: hidden;
-    width: 90%;
-    margin: 4% auto;
-    background-color: rgb(245, 242, 242);
-    display: flex;
-
-    .image{
-        margin: 2% 0 1% 3%;
+        overflow: hidden;
+        width: 90%;
+        margin: 4% auto 2% auto;
+        background-color: rgb(245, 242, 242);
+        display: flex;
+    
+        .image{
+            margin: 2% 0 1% 3%;
+            z-index: 1;
+        }
+    
+        .other{
+            background-color: white;
+            width: 55%;
+            height: fit-content;
+            padding-bottom: 6%;
+            margin: 4% 0 3% 4%;
+            font-family: 'Poppins', sans-serif;
+    
+            span {
+                display: block;
+            }
+    
+            .name{
+                font-size: 35px;
+                margin: 2% 0 0 3%;
+            }
+            
+            .price{
+                font-size: 36px;
+                color: orangered;
+                margin: -1% 0 0 3.5%;
+                width: 93%;
+                border-bottom: 1px dashed rgb(201, 199, 199);
+            }
+    
+            .type{
+                margin: 2% 0 3% 3.8%;
+            }
+    
+            .button{
+                
+                button{
+                    font-size: 16px;
+                    padding: 0.5% 0;
+                }
+                
+                #add{
+                    width: 32%;
+                    margin-left: 4%;
+                    border: 1px solid $main-color;
+                    color: $main-color;
+                    background-color: #dff0ff;
+    
+                }
+    
+                #buy-now{
+                    width: 30%;
+                    margin-left: 2.5%;
+                    background-color: $main-color;
+                    color: white;
+                }
+            }
+        }
     }
 
-    .other{
-        background-color: white;
-        width: 55%;
-        height: fit-content;
-        padding-bottom: 6%;
-        margin: 4% 0 3% 4%;
-        font-family: 'Poppins', sans-serif;
+    .item-discription{
+        width: 90%;
+        margin: auto;
+        background-color: rgb(245, 242, 242);
+        overflow: hidden;
 
-        span {
+        #title{
+            width: 92%;
+            margin: 2% 0 3% 3%;
+            font-family: 'Poppins', sans-serif;
+            font-size: 25px;
             display: block;
-        }
-
-        .name{
-            font-size: 35px;
-            margin: 2% 0 0 3%;
-        }
-        
-        .price{
-            font-size: 36px;
-            color: orangered;
-            margin: -1% 0 0 3.5%;
-            width: 93%;
-            border-bottom: 1px dashed rgb(201, 199, 199);
+            letter-spacing: 1px;
+            border-bottom: rgb(155, 154, 154) 1px solid;
         }
 
         .discription{
-            margin: 2% 0 3% 3.8%;
-        }
-
-        .button{
-            
-            button{
-                font-size: 16px;
-                padding: 0.5% 0;
-            }
-            
-            #add{
-                width: 32%;
-                margin-left: 4%;
-                border: 1px solid $main-color;
-                color: $main-color;
-                background-color: #dff0ff;
-
-            }
-
-            #buy-now{
-                width: 30%;
-                margin-left: 2.5%;
-                background-color: $main-color;
-                color: white;
-            }
+            margin-left: 5%;
+            width: 90%;
+            font-size: 15px;
+            font-family: 'Noto Sans', sans-serif;
+            color: rgb(54, 54, 54);
         }
     }
 }
