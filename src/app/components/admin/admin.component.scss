@@ -9,8 +9,13 @@
   
 	.navbar {
 		background-color: $navbar-color; 
-		width: 100%;
+		width: 83%;
 		height: 10%;
+		position: sticky;
+		top: 0;
+		left: 17%;
+		z-index: 1;
+		
 
 		.authentication {
 			display: inline;
@@ -46,7 +51,7 @@
 			overflow-x: hidden; /* Disable horizontal scroll */
 
 			.logo {
-				background-color: $main-color; 
+				background-color: #4518af; 
 				width: 100%;
 				height: 10%;
 				display: block;
