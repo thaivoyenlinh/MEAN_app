@@ -30,6 +30,13 @@
             </div>
 
             <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Type</mat-label>
+                    <input matInput formControlName="item_type_replace">
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
                 <mat-label class="mat-label">Discription</mat-label>
                 <quill-editor formControlName="item_discription_replace" [modules]="config"></quill-editor>
             </div>

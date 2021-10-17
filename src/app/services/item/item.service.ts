@@ -25,6 +25,7 @@ export class ItemService {
 		formData.append('item_name', itemFormValues.item_name);  //!will be call on upload
 		formData.append('item_price', itemFormValues.item_price);
 		formData.append('item_category', itemFormValues.item_category);
+		formData.append('item_type', itemFormValues.item_type);
 		formData.append('item_discription', itemFormValues.item_discription);
 		// formData.append('item_image', image);
 		for(let index=0; index < images.length; index++){

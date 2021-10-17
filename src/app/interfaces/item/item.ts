@@ -4,5 +4,6 @@ export interface Item {
     item_price: string,
     item_category: string,
     item_image: [],
+    item_type: string,
     item_discription: string,
 }

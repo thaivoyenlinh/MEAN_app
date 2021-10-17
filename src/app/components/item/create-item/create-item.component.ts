@@ -39,6 +39,7 @@ export class CreateItemComponent implements OnInit {
 			item_name: new FormControl(''),
 			item_price: new FormControl(''),
 			item_category: new FormControl(''),
+			item_type: new FormControl(''),
 			item_discription: new FormControl(''),
 		});
 	}

@@ -40,6 +40,7 @@ export class EditItemComponent implements OnInit {
 			item_name_replace: new FormControl(''),
 			item_price_replace: new FormControl(''),
 			item_category_replace: new FormControl(''),
+			item_type_replace: new FormControl(''),
 			item_discription_replace: new FormControl(''),
 		});
 
