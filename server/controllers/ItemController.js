@@ -26,6 +26,7 @@ class ItemController{
                 item_name: obj.item_name,
                 item_price:  obj.item_price,
                 item_category:  obj.item_category,
+                item_type: obj.item_type,
                 item_discription:  obj.item_discription,
                 item_image: pathToImages,
             };
