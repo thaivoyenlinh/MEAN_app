@@ -49,6 +49,8 @@ import { GalleryModule, Gallery } from 'ng-gallery';
 import { NgxGalleryModule } from 'ngx-gallery';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ToastMessageComponent } from './components/snackbar/toast-message/toast-message.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     DeleteConfirmationComponent,
     CheckoutComponent,
     ItemDetailsDialogComponent,
+    ToastMessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,10 +96,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     GalleryModule,
     NgxGalleryModule,
     MatPaginatorModule,
+    MatSnackBarModule,
   ],
 
   providers: [Gallery],
   bootstrap: [AppComponent],
-  entryComponents: [DeleteConfirmationComponent, ItemDetailsDialogComponent],
+  entryComponents: [
+    DeleteConfirmationComponent, 
+    ItemDetailsDialogComponent,
+    ToastMessageComponent,
+  ],
 })
 export class AppModule { }

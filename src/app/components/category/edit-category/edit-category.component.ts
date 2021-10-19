@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-//! FormBuilder có hàm group ( nhóm các FormControl ) có tác dụng tương tự new FormGroup (tạo object)
-//! Router dùng navigate... để điều hướng về một trang mong muốn (php: location)
-
-//! ActivatedRoute to catch a URL parameter
-
 import { CategoryService } from '../../../services/category/category.service';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -25,7 +21,8 @@ export class EditCategoryComponent implements OnInit {
 	constructor(protected router: Router, 
 				private fb: FormBuilder, 
 				private route: ActivatedRoute,
-				private categoryService: CategoryService) {
+				private categoryService: CategoryService,
+				private snackBarService: SnackbarService) {
 
 			this.EditCategoryForm = this.fb.group({
 				category_name_replace: new FormControl(''),
@@ -67,25 +64,24 @@ export class EditCategoryComponent implements OnInit {
 			(res) => {
 				// console.log(res);
 				if(res['status'] == 1){
-					this.router.navigateByUrl('/admin/category');
+					this.snackBarService.showSuccessMessage(res['message']);
 				}
 				else {
-					console.log(res['message']);
+					this.snackBarService.showErrorMessage(res['message']);
 				}
 			});
 		} else {
 			this.categoryService.updateOneFieldCategory(this.categoryId, newCategoryName).subscribe(
 				(res) => {
 					if(res['status'] == 1){
-						this.router.navigateByUrl('/admin/category');
+						this.snackBarService.showSuccessMessage(res['message']);
 					}
 					else {
-						console.log(res['message']);
+						this.snackBarService.showErrorMessage(res['message'])
 					}
 				}
 			);
 		}
-		
 	}	
-
+	
 }

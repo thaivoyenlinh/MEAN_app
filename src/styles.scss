@@ -8,3 +8,15 @@ $color: #7048ec;
 html, body { height: 100%;font-family: Calibri; }
 body { margin: 0;}
 
+
+//style for snackBar
+.success.mat-snack-bar-container{
+    background-color: #d1f5e1;
+    border-left: 10px solid #0dcf6e;
+}
+
+.error.mat-snack-bar-container{
+    background-color: #fad0d1;
+    border-left: 10px solid #f33741;
+}
+//

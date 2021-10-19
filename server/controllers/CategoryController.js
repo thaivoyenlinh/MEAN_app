@@ -3,19 +3,7 @@ const baseURL = 'http://localhost:4100';
 
 class CategoryController{
 
-    /**
-     * Function to insert a category to the database
-     * @param {*} req : request from client
-     * @param {*} res : response from server
-     * @returns : response object
-     */
-    //! handle to save data receive from client
     storeCategory(req, res){
-        console.log(req);
-        const fileName = req.file;
-        console.log("Controller");
-        console.log(req.file);
-
         try {
             const pathToImage = `/images/categories/${req.file.filename}`;
             console.log(pathToImage);
@@ -27,12 +15,14 @@ class CategoryController{
             category
                 .save()
                 .then(() => {
-                    //? return message to notify, 
-                    //? with status to set condition navigaion to different page 
-                    return res.status(200).json({message: "Insert data successful!!!",  status: 1});
+                    return res.status(200).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
+                    //* test ERROR Message
+                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
                 }) 
         } catch (error) {
-            return res.status(500).json({message: "ERROR: insert data successful!!!",  status: 0});
+            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
+            //* test ERROR Message
+            // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
         }
     }
     
@@ -52,19 +42,12 @@ class CategoryController{
                     data.forEach(category => {
                         category.category_image = baseURL + category.category_image;
                     }); 
-
-                    /* 
-                    data = [
-                        category_name: '',
-                        category_image: '',
-                    ]
-                    */
                     return res.status(200).json({message: "Fetch successfully list of categories",  
                                                  status: 1, 
                                                  data: data});
                 }) 
         } catch (error) {
-            return res.status(200).json({message: "ERROR: Fetch list of categories is failure!!",  
+            return res.status(500).json({message: "ERROR: Fetch list of categories is failure!!",  
                                          status: 0});
         }
     }
@@ -77,23 +60,21 @@ class CategoryController{
      * @param {*} res 
      * @returns 
      */
-    deleteCategory(req, res) {
-        // console.log("RES: ",req); //? id in params
-        //* router.delete('/:id', CategoryController.deleteCategory) => id in terminal
-        
+    deleteCategory(req, res) {    
         try {
             const categoryId = req.params.id;
             Category
                 .remove({_id: categoryId})
                 .then(() => {
-                    //? return message to notify, 
-                    //? with status to set condition navigaion to different page 
-                    return res.status(200).json({message: "Delete is successful",  
-                                                 status: 1});
+                    return res.status(200).json({ message: {title: "SUCCESS", content: "You have successfully deleted the category"},  status: 1});
+                    //* test ERROR message
+                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to delete the category"},  status: 0});
                 }) 
         } catch (error) {
-            return res.status(200).json({message: "ERROR: Delete is failure!!",  
-                                         status: 0});
+            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to delete the category"},  status: 0});
+            //* test ERROR message
+            // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully deleted the category"},  status: 1});
+            
         }
     }
 
@@ -118,7 +99,7 @@ class CategoryController{
                                                  data: data});
                 }) 
         } catch (error) {
-            return res.status(200).json({message: "ERROR: Fetch a category is failure!!",  
+            return res.status(500).json({message: "ERROR: Fetch a category is failure!!",  
                                          status: 0});
         }
     }
@@ -146,14 +127,12 @@ class CategoryController{
             Category
                 .updateOne({_id: categoryId}, newCategory)
                 .then(() => {
-                    //? return message to notify, 
-                    //? with status to set condition navigaion to different page 
-                    return res.status(200).json({message: "Update new information is successful",  
-                                                 status: 1});
+                    return res.status(200).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
+                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
                 }) 
         } catch (error) {
-            return res.status(200).json({message: "ERROR: Update a category is failure!!",  
-                                         status: 0});
+            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
+            // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
         }
     }
 
@@ -171,14 +150,12 @@ class CategoryController{
             Category
                 .updateOne({_id: categoryId}, newCategory)
                 .then(() => {
-                    //? return message to notify, 
-                    //? with status to set condition navigaion to different page 
-                    return res.status(200).json({message: "Update new information is successful",  
-                                                 status: 1});
+                    return res.status(200).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
+                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
                 }) 
         } catch (error) {
-            return res.status(200).json({message: "ERROR: Update a category is failure!!",  
-                                         status: 0});
+            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
+            // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
         }
     }
 

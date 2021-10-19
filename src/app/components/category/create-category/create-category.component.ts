@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { CategoryService } from '../../../services/category/category.service';
 import { Category } from '../../../interfaces/category/category';
 
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
+
 @Component({
 	selector: 'app-create-category',
 	templateUrl: './create-category.component.html',
@@ -19,7 +21,8 @@ export class CreateCategoryComponent implements OnInit {
 	imageData: File;
 
   	constructor(protected router: Router, 
-             	private categoryService: CategoryService) { 
+             	private categoryService: CategoryService,
+				private snackBarService: SnackbarService) { 
   	}
 
 	ngOnInit() {
@@ -39,11 +42,12 @@ export class CreateCategoryComponent implements OnInit {
 
 		this.categoryService.storeCategory(categoryName, this.imageData).subscribe(
 			(res) => {
-				if(res['status'] == 1){
-					this.router.navigateByUrl('/admin/category');
+				// console.log(res['status']);
+				if(res['status'] === 1){
+					this.snackBarService.showSuccessMessage(res['message']);
 				}
 				else{
-					console.log("Response from server: ", res['message']);
+					this.snackBarService.showErrorMessage(res['message']);
 				}
 			}
 		)
