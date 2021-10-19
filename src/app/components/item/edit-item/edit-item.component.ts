@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import { Router, Route, ActivatedRoute } from '@angular/router';
+import { Category } from '../../../interfaces/category/category';
+import { Observable } from 'rxjs';
 
 import { ItemService } from '../../../services/item/item.service';
 import { CategoryService } from '../../../services/category/category.service';
-import { Category } from '../../../interfaces/category/category';
-import { Observable } from 'rxjs';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 
 @Component({
 	selector: 'app-edit-item',
@@ -34,7 +35,8 @@ export class EditItemComponent implements OnInit {
 				private fb: FormBuilder, 
 				private route: ActivatedRoute,
 				private itemService: ItemService,
-				private categoryService: CategoryService) {
+				private categoryService: CategoryService,
+				private snackBarService: SnackbarService) {
 		
 		this.EditItemForm = this.fb.group({
 			item_name_replace: new FormControl(''),
@@ -68,18 +70,14 @@ export class EditItemComponent implements OnInit {
 	}
 
 	onSubmit() {
-		// console.log(this.EditItemForm.value);
-		// console.log("item id:", this.itemId);
-
 		const item = this.EditItemForm.value;
-
 		this.itemService.updateItem(this.itemId, item).subscribe(
 			(res) => {
 				if(res['status'] == 1){
-					this.router.navigateByUrl('admin/item');
+					this.snackBarService.showSuccessMessage(res['message']);
 				}
 				else {
-					console.log(res['message']);
+					this.snackBarService.showErrorMessage(res['message']);
 				}
 			}
 		)

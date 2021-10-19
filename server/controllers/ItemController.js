@@ -5,23 +5,15 @@ const baseURL = 'http://localhost:4100';
 class ItemController{
 
     storeItem(req, res){
-        // console.log("Controller:");
-        // console.log(req.files);
-        // const files = req.files.length;
         const files = req.files;
         const pathToImages = [];
-        // console.log(files);
-        // console.log(req.body); => obj
         try {
             files.forEach(file => {
-                // console.log(element);
                 const path = `/images/items/${req.body.item_name}/${file.filename}`;
                 pathToImages.push(path);
             })
-            // console.log("PathToImage:", pathToImages);
-            // [Object: null prototype] => user parse to transfer to object {}
+            //! [Object: null prototype] => user parse to transfer to object {}
             const obj = JSON.parse(JSON.stringify(req.body));
-            // console.log(obj);
             const data = {
                 item_name: obj.item_name,
                 item_price:  obj.item_price,
@@ -34,13 +26,25 @@ class ItemController{
             item
                 .save()
                 .then(() => {
-                    //? return message to notify, 
-                    //? with status to set condition navigaion to different page 
-                    return res.status(200).json({message: "Insert data successful!!!",  status: 1});
+                    return res.status(200).json({ 
+                        message: {title: "SUCCESS", content: "You have successfully inserted the item"},
+                        status: 1
+                    });
+                    // return res.status(200).json({ 
+                    //     message: {title: "ERROR", content: "You have failed to insert the item"},
+                    //     status: 0
+                    // });
                 }) 
         } 
         catch (error) {
-            return res.status(200).json({message: "ERROR: Insert data is not successful!!!",  status: 0});
+            return res.status(500).json({ 
+                message: {title: "ERROR", content: "You have failed to insert the item"},
+                status: 0
+            });
+            // return res.status(500).json({ 
+            //     message: {title: "SUCCESS", content: "You have successfully inserted the item"},
+            //     status: 1
+            // });
         }
     }
 
@@ -76,19 +80,29 @@ class ItemController{
     }
 
     deleteItem(req, res){
-        // console.log("REQ: ", req);
         try {
             const itemId = req.params.id;
             Item
                 .remove({_id: itemId})
                 .then(() => {
-                    return res.json({message: "Delete item successful!!", 
-                                    status: 1});
+                    return res.status(200).json({ 
+                        message: {title: "SUCCESS", content: "You have successfully deleted the item"},  
+                        status: 1
+                    });
+                    // return res.status(200).json({ 
+                    //     message: {title: "ERROR", content: "You have failed to delete the item"},  
+                    //     status: 0
+                    // });
                 })
         } catch (error) {
-            return res.json({message: "Delete item failure!!", 
-                            status: 0});
-            
+            return res.status(500).json({ 
+                message: {title: "ERROR", content: "You have failed to delete the item"},  
+                status: 0
+            });
+            // return res.status(500).json({ 
+            //     message: {title: "SUCCESS", content: "You have successfully deleted the item"},  
+            //     status: 1
+            // });
         }
     }
 
@@ -113,7 +127,6 @@ class ItemController{
         try {
             const itemId = req.params.id,
                     data = req.body;
-            // console.log(data);
             let newItem = {
                 item_name: data.item_name_replace,
                 item_price: data.item_price_replace,
@@ -123,12 +136,24 @@ class ItemController{
             Item    
                 .updateOne({_id: itemId}, newItem)
                 .then(() => {
-                    return res.status(200).json({message: "Update new information of item is successful",  
-                                                 status: 1});
+                    return res.status(200).json({ 
+                        message: {title: "SUCCESS", content: "You have successfully updated the item"},
+                        status: 1
+                    });
+                    // return res.status(200).json({ 
+                    //     message: {title: "ERROR", content: "You have failed to update the item"},
+                    //     status: 0
+                    // });
                 })
         } catch (error) {
-            return res.status(200).json({message: "ERROR: Update a item is failure!!",  
-                                         status: 0});
+            return res.status(500).json({ 
+                message: {title: "ERROR", content: "You have failed to update the item"},
+                status: 0
+            });
+            // return res.status(500).json({
+            //     message: {title: "SUCCESS", content: "You have successfully updated the item"},
+            //     status: 1
+            // });
         }
     }
 

@@ -12,7 +12,7 @@ export class SnackbarService {
 	showSuccessMessage(message){
 		this.snackBar.openFromComponent(ToastMessageComponent, {
 			data: message,
-			duration: 10000,
+			duration: 2000,
 			horizontalPosition: 'right',
 			verticalPosition: 'bottom',
 			panelClass: 'success'
@@ -22,7 +22,7 @@ export class SnackbarService {
 	showErrorMessage(message){
 		this.snackBar.openFromComponent(ToastMessageComponent, {
 			data: message,
-			duration: 10000,
+			duration: 2000,
 			horizontalPosition: 'right',
 			verticalPosition: 'bottom',
 			panelClass: 'error'

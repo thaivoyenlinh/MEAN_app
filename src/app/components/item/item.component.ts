@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
-import { Item } from '../../interfaces/item/item';
-import { ItemService } from 'src/app/services/item/item.service';
 import { combineLatest, Observable, of, BehaviorSubject } from 'rxjs';
 import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
-import { Category } from '../../interfaces/category/category';
-import { CategoryService } from '../../services/category/category.service';
-import { DialogService } from '../../services/dialog/dialog.service';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ViewChild } from '@angular/core';
+
+import { Item } from '../../interfaces/item/item';
+import { Category } from '../../interfaces/category/category';
+import { ItemService } from 'src/app/services/item/item.service';
+import { CategoryService } from '../../services/category/category.service';
+import { DialogService } from '../../services/dialog/dialog.service';
+import { SnackbarService } from '../../services/snackbar/snackbar.service';
 
 interface FilterCritiria {
 	category ?: string,
@@ -41,7 +43,8 @@ export class ItemComponent implements OnInit {
 	constructor(protected router: Router,
 				private itemService: ItemService,
 				private categoryService: CategoryService,
-				private dialogService: DialogService) { }
+				private dialogService: DialogService,
+				private snackBarService: SnackbarService) { }
 
 	ngOnInit() {
 		this.init();
@@ -57,8 +60,13 @@ export class ItemComponent implements OnInit {
 
 	deleteItem(itemId: string) {
 		this.itemService.deleteItem(itemId).pipe(
-			tap(()=> {
-				this.init();
+			tap((res)=> {
+				if(res['status'] == 1){
+					this.init();
+					this.snackBarService.showSuccessMessage(res['message']);
+				}else{
+					this.snackBarService.showErrorMessage(res['message']);
+				}
 			})
 		).subscribe();
 	}
@@ -115,7 +123,6 @@ export class ItemComponent implements OnInit {
 	}
 
 	openItemDetailsDialog(row){
-		// console.log(row);
 		this.dialogService.openItemDetailsDialog(row);
 	}
 

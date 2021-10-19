@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { ItemService } from '../../../services/item/item.service';
 import { CategoryService } from '../../../services/category/category.service';
+import { SnackbarService } from '../../../services/snackbar/snackbar.service';
 import { Category } from 'src/app/interfaces/category/category';
 import { Observable } from 'rxjs';
 
@@ -31,7 +32,8 @@ export class CreateItemComponent implements OnInit {
 
 	constructor(protected router: Router,
 				private itemService: ItemService,
-				private categoryService: CategoryService) { }
+				private categoryService: CategoryService,
+				private snackBarService: SnackbarService) { }
 
 	ngOnInit() {
 		this.listOfCategories$ = this.categoryService.getListOfCategories();
@@ -46,24 +48,19 @@ export class CreateItemComponent implements OnInit {
 
 	onUploadFiles(event) {
 		const files = event.target.files;
-		// console.log(files);
 		this.imageData = files;
-		// console.log("imageData: ", this.imageData);
 	}
 
 	onSubmit() {
-		// console.log("Filelist",this.imageData);
-		// console.log("LENGTH: ", this.imageData.length)
-		// console.log(this.CreateItemForm.value);
-
 		this.itemService.storeItem(this.CreateItemForm.value, this.imageData).subscribe(
 			(res) => {
 				console.log(res);
 				if(res['status'] == 1){
-					this.router.navigateByUrl('/admin/item');
+					this.snackBarService.showSuccessMessage(res['message']);
+					// console.log(res['message']);
 				}
 				else{
-					console.log("Response from server: ", res['message']);	
+					this.snackBarService.showErrorMessage(res['message']);
 				}
 			}
 		)
