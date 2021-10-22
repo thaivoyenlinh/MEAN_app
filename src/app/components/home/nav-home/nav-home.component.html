@@ -8,3 +8,7 @@
         <a routerLink="/sign_in">Sign-in</a>
     </div>
 </div>
+
+<div *ngIf="loadingScreenService.isLoading | async" class="loader-container">
+    <mat-spinner style="top: 30%; left: 50%;" [diameter]="75"></mat-spinner>
+</div>

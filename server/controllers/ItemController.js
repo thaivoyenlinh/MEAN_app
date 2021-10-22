@@ -49,34 +49,36 @@ class ItemController{
     }
 
     getListOfItems(req, res){
-        try {
-            Item
-                .find({})
-                .then((data) => {
-                    data.forEach(item => {
-                        /*can not use forEach in for array item_image this case 
-                        because value of this variable cannot be get out of function in forEach. 
-                        Need to directively impact to value in this case and get out*/
-                        /*data.forEach(item => {
-                            item.item_image.forEach(path => {
-                                path = baseURL + path;
-                            }) 
-                        }); */
-
-                        for(let i=0; i<item.item_image.length; i++){
-                            item.item_image[i] = baseURL + item.item_image[i];
-                        }
+        setTimeout(() => {
+            try {
+                Item
+                    .find({})
+                    .then((data) => {
+                        data.forEach(item => {
+                            /*can not use forEach in for array item_image this case 
+                            because value of this variable cannot be get out of function in forEach. 
+                            Need to directively impact to value in this case and get out*/
+                            /*data.forEach(item => {
+                                item.item_image.forEach(path => {
+                                    path = baseURL + path;
+                                }) 
+                            }); */
+    
+                            for(let i=0; i<item.item_image.length; i++){
+                                item.item_image[i] = baseURL + item.item_image[i];
+                            }
+                        })
+                        // console.log(data);
+                        return res.json({message: "Fetch list of items successful!!", 
+                                        status: 1, 
+                                        data: data});
                     })
-                    // console.log(data);
-                    return res.json({message: "Fetch list of items successful!!", 
-                                    status: 1, 
-                                    data: data});
-                })
-        } catch (error) {
-            return res.json({message: "Fetch list of items failure!!", 
-                            status: 0});
-            
-        }
+            } catch (error) {
+                return res.json({message: "Fetch list of items failure!!", 
+                                status: 0});
+                
+            }
+        }, 500)
     }
 
     deleteItem(req, res){

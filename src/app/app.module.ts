@@ -17,6 +17,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { DeleteConfirmationComponent } from './components/dialog/delete-confirmation/delete-confirmation.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ItemDetailsDialogComponent } from './components/dialog/item-details-dialog/item-details-dialog.component';
+import { ToastMessageComponent } from './components/snackbar/toast-message/toast-message.component';
 
 //! Lazy-loading Component is import at that component
 
@@ -38,7 +39,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 
   // core.js:9110 ERROR Error: Uncaught (in promise): NullInjectorError: StaticInjectorError(AppModule)[GalleryComponent -> Gallery]: 
@@ -50,7 +51,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
 
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { ToastMessageComponent } from './components/snackbar/toast-message/toast-message.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { InterceptorService } from './services/loading-screen/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -97,9 +99,16 @@ import { ToastMessageComponent } from './components/snackbar/toast-message/toast
     NgxGalleryModule,
     MatPaginatorModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
 
-  providers: [Gallery],
+  providers: [Gallery, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     DeleteConfirmationComponent, 

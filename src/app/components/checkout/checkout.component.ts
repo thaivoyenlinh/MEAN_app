@@ -15,7 +15,7 @@ export class CheckoutComponent implements OnInit {
 
 	itemId: string;
 	item: Observable<Item>;
-	UserInformationForm: FormGroup
+	UserInformationForm: FormGroup;
 
 	constructor(private route: ActivatedRoute,
 				private itemService: ItemService,

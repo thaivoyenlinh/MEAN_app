@@ -34,22 +34,24 @@ class CategoryController{
      * @returns response object
      */
     getListOfCategories(req, res){
-        try {
-            Category
-                .find({})
-                .then((data) => {
-                    
-                    data.forEach(category => {
-                        category.category_image = baseURL + category.category_image;
-                    }); 
-                    return res.status(200).json({message: "Fetch successfully list of categories",  
-                                                 status: 1, 
-                                                 data: data});
-                }) 
-        } catch (error) {
-            return res.status(500).json({message: "ERROR: Fetch list of categories is failure!!",  
-                                         status: 0});
-        }
+        setTimeout(() => {
+            try {
+                Category
+                    .find({})
+                    .then((data) => {
+                        
+                        data.forEach(category => {
+                            category.category_image = baseURL + category.category_image;
+                        }); 
+                        return res.status(200).json({message: "Fetch successfully list of categories",  
+                                                    status: 1, 
+                                                    data: data});
+                    }) 
+            } catch (error) {
+                return res.status(500).json({message: "ERROR: Fetch list of categories is failure!!",  
+                                            status: 0});
+            }
+        }, 500)
     }
 
     /**

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingScreenService } from '../../../services/loading-screen/loading-screen.service';
 
 @Component({
   selector: 'app-nav-home',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavHomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loadingScreenService: LoadingScreenService) { }
 
   ngOnInit() {
   }

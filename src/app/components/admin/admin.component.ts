@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { LoadingScreenService } from '../../services/loading-screen/loading-screen.service';
 
 @Component({
   selector: 'app-admin',
@@ -8,7 +9,9 @@ import { Router } from "@angular/router";
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              public loadingScreenService: LoadingScreenService,
+              ) { }
 
   ngOnInit() {
   }
