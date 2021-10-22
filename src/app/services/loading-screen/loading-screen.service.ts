@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoadingScreenService {
 
-  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor() { }
 }
