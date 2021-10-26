@@ -52,7 +52,6 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { InterceptorService } from './services/loading-screen/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -102,13 +101,7 @@ import { InterceptorService } from './services/loading-screen/interceptor.servic
     MatProgressSpinnerModule,
   ],
 
-  providers: [Gallery, 
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    },
-  ],
+  providers: [Gallery],
   bootstrap: [AppComponent],
   entryComponents: [
     DeleteConfirmationComponent, 

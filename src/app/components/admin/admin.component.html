@@ -6,9 +6,6 @@
     </div>
 
     <div class="sidenav-container">
-        <div *ngIf="loadingScreenService.isLoading | async" class="loader-container">
-            <mat-spinner style="top: 30%; left: 50%;" [diameter]="75" strokeWidth="6.5"></mat-spinner>
-        </div>
         <div class="sidebar">
             <div class="logo">
                 <a (click)="reload_page()">LILI's MALL</a>

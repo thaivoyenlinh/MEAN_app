@@ -11,18 +11,34 @@
                     <form [formGroup]="UserInformationForm" (ngSubmit)="onSubmit()">
                         <mat-form-field appearance="outline">
                             <mat-label>Full name</mat-label>
-                            <input matInput formControlName="name">
+                            <input matInput formControlName="name" id="name">
                         </mat-form-field>
+                        <div *ngIf="name.invalid && (name.touched && name.dirty)" class="error-message">
+                            <small *ngIf="name.errors?.required">*Name is required</small>
+                            <small *ngIf="name.errors?.pattern">
+                                *Names contain only letters, at least 2 and no more than 30 characters 
+                            </small>
+                        </div>
+
                         <mat-form-field appearance="outline">
                             <mat-label>Phone number</mat-label>
-                            <input matInput formControlName="phoneNumber">
+                            <input matInput formControlName="phoneNumber" id="phoneNumber">
                         </mat-form-field>
+                        <div *ngIf="phoneNumber.invalid && (phoneNumber.touched && phoneNumber.dirty)" class="error-message">
+                            <small *ngIf="phoneNumber.errors?.required">*Phone is required</small>
+                            <small *ngIf="phoneNumber.errors?.pattern">*Phone must have 10 numbers</small>
+                        </div>
+
                         <mat-form-field appearance="outline">
                             <mat-label>Delivery address</mat-label>
                             <input matInput formControlName="address">
                         </mat-form-field>
+                        <small *ngIf="UserInformationForm.get('address').invalid && UserInformationForm.get('address').touched" class="error-message">
+                            *Address is required
+                        </small>
+
                         <div class="button">
-                            <button mat-stroked-button type="submit"> Save </button>
+                            <button [disabled]="UserInformationForm.invalid || saveBtnDisable" mat-stroked-button type="submit"> Save </button>
                         </div>
                     </form>
                 </div>
@@ -44,7 +60,7 @@
                     </div>
                 </div>
                 <div class="button">
-                    <button mat-stroked-button>Order</button>
+                    <button [disabled]="orderBtnDisable" mat-button mat-stroked-button>Order</button>
                 </div>
             </div>
         </div>

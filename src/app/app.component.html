@@ -1,1 +1,4 @@
+<div *ngIf="loadingScreenService.isVisible() | async" class="loader-container">
+    <mat-spinner style="top: 30%; left: 50%;" [diameter]="75"></mat-spinner>
+</div>
 <router-outlet></router-outlet>

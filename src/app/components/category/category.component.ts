@@ -15,10 +15,10 @@ import { NavigationExtras } from '@angular/router';
 import { CategoryService } from '../../services/category/category.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
+import { LoadingScreenService } from '../../services/loading-screen/loading-screen.service';
 
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ViewChild } from '@angular/core';
-
 
 @Component({
 	selector: 'app-category',
@@ -37,7 +37,8 @@ export class CategoryComponent implements OnInit {
 	constructor(private router: Router, 
 				private categoryService: CategoryService,
 				private dialogService: DialogService,
-				private snackBarService: SnackbarService) { }
+				private snackBarService: SnackbarService,
+				private loadingScreenService: LoadingScreenService,) { }
 
 	ngOnInit() {
 		this.init();
@@ -45,11 +46,20 @@ export class CategoryComponent implements OnInit {
 
 	init() {
 		// this.categories$ =  this.categoryService.getListOfCategories();
+		this.loadingScreenService.show();
 		this.categoryService.getListOfCategories().pipe(
-			tap((data) => {
-				this.categoryData = new MatTableDataSource(data);
-				this.categoryData.paginator = this.categoryPaginator;
-			})
+			tap(
+				(data) => {
+					this.categoryData = new MatTableDataSource(data);
+					this.categoryData.paginator = this.categoryPaginator;
+				},
+				(error) => {
+					this.snackBarService.showErrorMessage(error.message);
+				},
+				() => {
+					this.loadingScreenService.hide();
+				}
+			)
 		).subscribe();
 	}
 

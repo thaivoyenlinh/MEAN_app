@@ -67,7 +67,7 @@
 			<ng-container matColumnDef="action">
 				<th mat-header-cell *matHeaderCellDef></th>
 				<td id="action" mat-cell *matCellDef="let row">
-					<button mat-icon-button id="details-button" title="Item Details" (click)="openItemDetailsDialog(row)"><mat-icon>search</mat-icon></button>
+					<button mat-icon-button id="details-button" title="Item Details" (click)="openItemDetailsDialog(row)"><mat-icon>info</mat-icon></button>
 					<button mat-icon-button color="accent" title="Edit Item" (click)="editItem(row._id)"><mat-icon>edit</mat-icon></button>
 					<button mat-icon-button color="primary" title="Delete Item" (click)="onDelete(row._id)"><mat-icon>delete</mat-icon></button>
 				</td>

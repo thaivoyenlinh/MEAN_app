@@ -13,6 +13,7 @@ import { ItemService } from 'src/app/services/item/item.service';
 import { CategoryService } from '../../services/category/category.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { SnackbarService } from '../../services/snackbar/snackbar.service';
+import { LoadingScreenService } from '../../services/loading-screen/loading-screen.service';
 
 interface FilterCritiria {
 	category ?: string,
@@ -44,7 +45,8 @@ export class ItemComponent implements OnInit {
 				private itemService: ItemService,
 				private categoryService: CategoryService,
 				private dialogService: DialogService,
-				private snackBarService: SnackbarService) { }
+				private snackBarService: SnackbarService,
+				private loadingScreenService: LoadingScreenService) { }
 
 	ngOnInit() {
 		this.init();
@@ -73,7 +75,6 @@ export class ItemComponent implements OnInit {
 
 	init() {
 		this.listOfCategories$ = this.categoryService.getListOfCategories();
-
 		this.search$ = this.searchText.valueChanges.pipe(
 			startWith(''),
 			tap((data) => {console.log(data)}),
@@ -83,7 +84,7 @@ export class ItemComponent implements OnInit {
 			map(res => res && res['data']),
 			tap((data) => console.log(data)),
 		);
-		// this.item$ = 
+		this.loadingScreenService.show();
 		combineLatest([this.itemService.getListOfItems(), this.search$, this.filterSubject]).pipe(
 			map(([items, searchResult, {category, priceRange}]) => {
 				const sourceData = searchResult ? searchResult : items;
@@ -91,10 +92,13 @@ export class ItemComponent implements OnInit {
 					return (category ? category === item.item_category : true);
 				}); 
 			}),
-			tap((data)=> {
-				this.itemData = new MatTableDataSource(data);
-				this.itemData.paginator = this.itemPaginator;
-			})
+			tap(
+				(data)=> {
+					this.itemData = new MatTableDataSource(data);
+					this.itemData.paginator = this.itemPaginator;
+					this.loadingScreenService.hide();
+				},
+			)
 		).subscribe();
 	}
 

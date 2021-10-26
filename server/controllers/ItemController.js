@@ -160,22 +160,16 @@ class ItemController{
     }
 
     getItemsByCategory(req, res){
-        // console.log(req.params.name);
         try {
             const categoryName = req.params.name;
             Item
                 .find({item_category: categoryName})
                 .then((data) => {
                     data.forEach(item => {
-                        // item.item_image.forEach(path => {
-                        //     path = baseURL + path;
-                        // });
-                        // console.log(item.item_image);
                         for(let i = 0; i < item.item_image.length; i++){
                             item.item_image[i] = baseURL + item.item_image[i];
                         }
                     }); 
-                    // console.log(data);
                     return res.json({message: "Fetch item successful!!", 
                                     status: 1,
                                     data: data});
@@ -192,8 +186,6 @@ class ItemController{
             Item
                 .findOne({_id: itemId})
                 .then((data) => { 
-                    // console.log("GetItemById");
-                    // console.log(data.item_image);
                     for(let i=0; i<data.item_image.length; i++){
                         data.item_image[i] = baseURL + data.item_image[i];
                     }   
