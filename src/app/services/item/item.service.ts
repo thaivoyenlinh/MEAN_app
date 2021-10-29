@@ -90,5 +90,13 @@ export class ItemService {
 		);
 	}
 
+	getItemsBySearch(text: string) : Observable<Item[]>{
+		return this.http.get<Item[]>(`${this.SERVER_URL}/items/${text}`);
+	}
+
+	// getItemByName(itemName: string) : Observable<Item[]>{
+	// 	return this.http.get<Item[]>(`${this.SERVER_URL}/items/${itemName}`);
+	// }
+
 
 }

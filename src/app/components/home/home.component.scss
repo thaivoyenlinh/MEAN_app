@@ -1,5 +1,41 @@
 @import '../../colorCustom.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: green !important;
+  } 
+  
+  ::ng-deep.mat-form-field-ripple {
+   /*change color of underline when focused*/
+   background-color: green !important;;
+  }
+
+.search{
+    overflow: hidden;
+    position: relative;
+    justify-content: center;
+    
+    form{
+        display: inline-block;
+        margin-left: 25%;
+        width: 50%;
+        
+        
+        mat-form-field{
+            width: 89.5%;
+            font-size: 13px;
+            padding-top: 20px;
+            
+        }
+        
+        button{
+            padding: 4.5px 0;
+            top: -3.3px;
+            background-color: #652ff8fa;
+            color: whitesmoke;
+        }
+    }
+}
 
 .list-categories{
     margin-top: 1%;

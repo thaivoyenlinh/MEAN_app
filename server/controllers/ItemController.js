@@ -201,6 +201,37 @@ class ItemController{
         }
     }
 
+    getItemsBySearch(req, res){
+        console.log("SEARCH ITEM CONTROLLER: ");
+        // console.log(req.params);
+        const text = req.params.search;
+        console.log("text",text);
+        try {
+            Item
+                .find(
+                    {
+                        item_name: {
+                            // i: To match both lower case and upper case pattern in the string.
+                            $regex: text, $options: "i"
+                    }}, 
+                )
+                .then((data) => {
+                    data.forEach(item => {
+                        for(let i=0; i<item.item_image.length; i++){
+                            item.item_image[i] = baseURL + item.item_image[i];
+                        }
+                    })
+                    console.log("DATA",data);
+                    return res.json({message: "get items by search successful!!", 
+                                    status: 1, 
+                                    data: data});
+                })
+        } catch (error) {
+            return res.json({message: "Fetch list of items failure!!", 
+                            status: 0});
+        }
+    }
+
 }
 
 module.exports = new ItemController();

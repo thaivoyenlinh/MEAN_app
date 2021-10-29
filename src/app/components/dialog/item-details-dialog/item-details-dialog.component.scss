@@ -5,6 +5,7 @@
 
 	font-family: 'Poppins', sans-serif;
     position: relative;	
+    cursor: context-menu;
 
     .header{
         width: 105.65%;
@@ -23,6 +24,12 @@
 
         mat-icon {
             margin-left: 79.5%;
+            transition: transform .25s, opacity .25s;
+
+            &:hover{
+                cursor: pointer;
+                transform: rotate(90deg);
+            }
         }
     }
 
