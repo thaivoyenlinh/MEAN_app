@@ -22,7 +22,7 @@ export class SnackbarService {
 	showErrorMessage(message){
 		this.snackBar.openFromComponent(ToastMessageComponent, {
 			data: message,
-			duration: 2000,
+			duration: 3000,
 			horizontalPosition: 'right',
 			verticalPosition: 'bottom',
 			panelClass: 'error'

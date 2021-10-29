@@ -11,9 +11,10 @@
                     <form [formGroup]="UserInformationForm" (ngSubmit)="onSubmit()">
                         <mat-form-field appearance="outline">
                             <mat-label>Full name</mat-label>
-                            <input matInput formControlName="name" id="name">
+                            <!-- ? use [readOnly] to disable input tag -->
+                            <input matInput formControlName="name" id="name" [readOnly]="saveBtnDisable">
                         </mat-form-field>
-                        <div *ngIf="name.invalid && (name.touched && name.dirty)" class="error-message">
+                        <div *ngIf="name.invalid && (name.touched || name.dirty)" class="error-message">
                             <small *ngIf="name.errors?.required">*Name is required</small>
                             <small *ngIf="name.errors?.pattern">
                                 *Names contain only letters, at least 2 and no more than 30 characters 
@@ -22,16 +23,16 @@
 
                         <mat-form-field appearance="outline">
                             <mat-label>Phone number</mat-label>
-                            <input matInput formControlName="phoneNumber" id="phoneNumber">
+                            <input matInput formControlName="phoneNumber" id="phoneNumber" [readOnly]="saveBtnDisable">
                         </mat-form-field>
-                        <div *ngIf="phoneNumber.invalid && (phoneNumber.touched && phoneNumber.dirty)" class="error-message">
+                        <div *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)" class="error-message">
                             <small *ngIf="phoneNumber.errors?.required">*Phone is required</small>
                             <small *ngIf="phoneNumber.errors?.pattern">*Phone must have 10 numbers</small>
                         </div>
 
                         <mat-form-field appearance="outline">
                             <mat-label>Delivery address</mat-label>
-                            <input matInput formControlName="address">
+                            <input matInput formControlName="address" [readOnly]="saveBtnDisable">
                         </mat-form-field>
                         <small *ngIf="UserInformationForm.get('address').invalid && UserInformationForm.get('address').touched" class="error-message">
                             *Address is required

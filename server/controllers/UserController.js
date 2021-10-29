@@ -19,13 +19,13 @@ class UserController{
                     .save()
                     .then(() => {
                         return res.status(200).json({ 
-                            message: {title: "SUCCESS", content: "You have successfully inserted the user"},  
+                            message: {title: "SUCCESS", content: "You have entered the information successfully"},  
                             status: 1
                         });
                     })
             } catch (error) {
                 return res.status(500).json({ 
-                    message: {title: "ERROR", content: "You have failed to insert the user"},  
+                    message: {title: "ERROR", content: "You have entered the information failure"},  
                     status: 0
                 });
             }
