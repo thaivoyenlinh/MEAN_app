@@ -82,7 +82,7 @@ export class ItemService {
 	 * @param itemId : item id
 	 * @returns an Observable of response
 	 */
-	 getItemById(itemId: string) : Observable<Item>{
+	getItemById(itemId: string) : Observable<Item>{
 		return this.http.get<Item>(`${this.SERVER_URL}/item/${itemId}`).pipe(
 			// tap((res) => console.log("RES: ",res)), //subcribe when call to see data
 			map((res) => res['data']),
@@ -90,13 +90,16 @@ export class ItemService {
 		);
 	}
 
+	
 	getItemsBySearch(text: string) : Observable<Item[]>{
 		return this.http.get<Item[]>(`${this.SERVER_URL}/items/${text}`);
 	}
 
-	// getItemByName(itemName: string) : Observable<Item[]>{
-	// 	return this.http.get<Item[]>(`${this.SERVER_URL}/items/${itemName}`);
-	// }
+	getItemsBy(filter: string, filterValue: string) : Observable<Item[]>{
+		return this.http.post<Item[]>(`${this.SERVER_URL}/items`, {filter, filterValue}).pipe(
+			map(res => res['data'])
+		);
+	}
 
 
 }

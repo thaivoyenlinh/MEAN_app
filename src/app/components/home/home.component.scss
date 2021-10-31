@@ -54,15 +54,16 @@
         display: grid;
         padding: 15px;
         grid-template-columns: 15% 15% 15% 15% 15% 15%;
-        grid-gap: 3% 2%;
+        grid-gap: 3% 0.5%;
+        margin-left: 5%;
 
         .category{
             text-align: center;
             font-size: 18px;
             font-family: 'Poppins', sans-serif;
             padding: 15px;
-            background-color: #fff;
-            border: 2px solid orange;
+            background-color: rgb(245, 242, 242);
+            // border: 2px solid orange;
 
         }
     }

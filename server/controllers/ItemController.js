@@ -49,7 +49,7 @@ class ItemController{
     }
 
     getListOfItems(req, res){
-        setTimeout(() => {
+        // setTimeout(() => {
             try {
                 Item
                     .find({})
@@ -78,7 +78,7 @@ class ItemController{
                                 status: 0});
                 
             }
-        }, 500)
+        // }, 500)
     }
 
     deleteItem(req, res){
@@ -108,20 +108,34 @@ class ItemController{
         }
     }
 
-    getItemByName(req, res){
+    getItemBySearch(req, res){
+        console.log("SEARCH ITEM CONTROLLER: ");
+        // console.log(req.params);
+        const text = req.params.search;
+        console.log("text",text);
         try {
-            const itemName = req.params.name;
             Item
-                .find({item_name: itemName})
+                .find(
+                    {
+                        item_name: {
+                            // i: To match both lower case and upper case pattern in the string.
+                            $regex: text, $options: "i"
+                    }}, 
+                )
                 .then((data) => {
-                    return res.json({message: "Fetch item successful!!", 
-                                    status: 1,
+                    data.forEach(item => {
+                        for(let i=0; i<item.item_image.length; i++){
+                            item.item_image[i] = baseURL + item.item_image[i];
+                        }
+                    })
+                    console.log("DATA",data);
+                    return res.json({message: "get items by search successful!!", 
+                                    status: 1, 
                                     data: data});
                 })
         } catch (error) {
-            return res.json({message: "Fetch item failure!!", 
+            return res.json({message: "Fetch list of items failure!!", 
                             status: 0});
-            
         }
     }
 
@@ -201,20 +215,13 @@ class ItemController{
         }
     }
 
-    getItemsBySearch(req, res){
-        console.log("SEARCH ITEM CONTROLLER: ");
-        // console.log(req.params);
-        const text = req.params.search;
-        console.log("text",text);
-        try {
+    getItemBy(req, res){
+        console.log(req.body);
+        const filterKey = req.body.filter;
+        const filterValue = req.body.filterValue;
+        try{
             Item
-                .find(
-                    {
-                        item_name: {
-                            // i: To match both lower case and upper case pattern in the string.
-                            $regex: text, $options: "i"
-                    }}, 
-                )
+                .find({ [filterKey] : {$regex: filterValue, $options: "i"}})
                 .then((data) => {
                     data.forEach(item => {
                         for(let i=0; i<item.item_image.length; i++){
@@ -226,10 +233,10 @@ class ItemController{
                                     status: 1, 
                                     data: data});
                 })
-        } catch (error) {
+        }catch(error){
             return res.json({message: "Fetch list of items failure!!", 
                             status: 0});
-        }
+        }   
     }
 
 }
