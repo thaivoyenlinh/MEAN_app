@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Category } from '../../interfaces/category/category';
 import { Item } from '../../interfaces/item/item';
 import { CategoryService } from '../../services/category/category.service';
 
 import { Observable } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-home',

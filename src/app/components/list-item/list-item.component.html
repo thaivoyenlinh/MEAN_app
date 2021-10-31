@@ -1,44 +1,46 @@
 <app-nav-home></app-nav-home>
-
-<div class="filter">
-    <mat-form-field appearance="fill">  
-        <mat-label>Filter Price</mat-label>
-        <mat-select [formControl]="price" (selectionChange)="filterItems($event.value)">
-            <mat-option value="0-500">0-500</mat-option>
-            <mat-option value="500-1000">500-1000</mat-option>
-            <mat-option value="1000-2000">1000-2000</mat-option>
-            <mat-option (click)="init()">All</mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
-
-<div class="sort">
-    <mat-form-field appearance="fill">  
-        <mat-label>Sort Price</mat-label>
-        <mat-select (selectionChange)="sortItems($event.value)">
-            <mat-option value="low">Low to High</mat-option>
-            <mat-option value="high">High To Low</mat-option>
-        </mat-select>
-    </mat-form-field>
-</div>
-
-<div class="list-items">
+<div class="container">
     <div class="name">
         <span>Product</span>
     </div>
-    <section class="items" >
-        <div class="item" *ngFor="let item of listItem$ | async" (click)="selectItem(item._id)">
-            <div class="image">
-                <div *ngFor="let image of item.item_image; first as isFirst">
-                    <div *ngIf="isFirst">
-                        <img src="{{image}}" width="100" height="100" title="{{item.item_name}}">
+    <div class="header">
+        <div class="sort">
+            <mat-form-field appearance="outline">  
+                <mat-label>Sort Price</mat-label>
+                <mat-select (selectionChange)="sortItems($event.value)" >
+                    <mat-option value="low">Low to High</mat-option>
+                    <mat-option value="high">High To Low</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="filter">
+            <mat-form-field appearance="outline">  
+                <mat-label>Filter Price</mat-label>
+                <mat-select [formControl]="price" (selectionChange)="filterItems($event.value)">
+                    <mat-option (click)="init()">None</mat-option>
+                    <mat-option value="0-500">0-500</mat-option>
+                    <mat-option value="500-1000">500-1000</mat-option>
+                    <mat-option value="1000-2000">1000-2000</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="list-items">
+        <section class="items" >
+            <div class="item" *ngFor="let item of listItem$ | async" (click)="selectItem(item._id)">
+                <div class="image">
+                    <div *ngFor="let image of item.item_image; first as isFirst">
+                        <div *ngIf="isFirst">
+                            <img src="{{image}}" width="100" height="100" title="{{item.item_name}}">
+                        </div>
                     </div>
                 </div>
+                <div class="category-name">
+                    <span>{{item.item_name}}</span>
+                    <span class="price" >${{item.item_price}}</span>
+                </div>
             </div>
-            <div class="category-name">
-                <span>{{item.item_name}}</span>
-                <span class="price" >${{item.item_price}}</span>
-            </div>
-        </div>
-    </section>   
+        </section>   
+    </div>
 </div>

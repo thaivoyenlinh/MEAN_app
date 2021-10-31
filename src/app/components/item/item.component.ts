@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
 import { combineLatest, Observable, of, BehaviorSubject } from 'rxjs';
-import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map, filter } from 'rxjs/operators';
+import { tap, startWith, debounceTime, distinctUntilChanged, switchMap, map, delay } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { ViewChild } from '@angular/core';
 
 import { Item } from '../../interfaces/item/item';
 import { Category } from '../../interfaces/category/category';
@@ -46,7 +45,8 @@ export class ItemComponent implements OnInit {
 				private categoryService: CategoryService,
 				private dialogService: DialogService,
 				private snackBarService: SnackbarService,
-				private loadingScreenService: LoadingScreenService) { }
+				private loadingScreenService: LoadingScreenService,
+				) { }
 
 	ngOnInit() {
 		this.init();
@@ -80,7 +80,7 @@ export class ItemComponent implements OnInit {
 			tap((data) => {console.log(data)}),
 			// debounceTime(200),
 			distinctUntilChanged(),
-			switchMap((data) => data ? this.itemService.getItemByName(data) : of(null)),
+			switchMap((data) => data ? this.itemService.getItemsBySearch(data) : of(null)),
 			map(res => res && res['data']),
 			tap((data) => console.log(data)),
 		);
@@ -92,6 +92,7 @@ export class ItemComponent implements OnInit {
 					return (category ? category === item.item_category : true);
 				}); 
 			}),
+			delay(500),
 			tap(
 				(data)=> {
 					this.itemData = new MatTableDataSource(data);
@@ -112,7 +113,7 @@ export class ItemComponent implements OnInit {
 	selectFilter(filterValue: string) {
 		// console.log(filterValue);
 		let currentObj = this.filterSubject.getValue();
-		console.log(currentObj);
+		console.log("curObj: ",currentObj);
 		this.filterSubject.next({		
 			...currentObj,
 			category: filterValue,

@@ -1,71 +1,65 @@
 @import '../../colorCustom.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-::ng-deep.mat-form-field-underline {
-    /*change color of underline*/
-    background-color: green !important;
-  } 
-  
-  ::ng-deep.mat-form-field-ripple {
-   /*change color of underline when focused*/
-   background-color: green !important;;
-  }
 
-.search{
-    overflow: hidden;
-    position: relative;
-    justify-content: center;
-    
-    form{
-        display: inline-block;
-        margin-left: 25%;
-        width: 50%;
+.container{
+    margin: 3% auto;
+    width: 91%;
+
+    .search{
+        display: relative;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        justify-content: center;
         
-        
-        mat-form-field{
-            width: 89.5%;
-            font-size: 13px;
-            padding-top: 20px;
+        form{
+            display: inline-block;
+            margin-left: 21%;
+            width: 60%;
             
+            
+            mat-form-field{
+                width: 88%;
+                font-size: 13px;
+                padding-top: 20px;
+            }
+            
+            button{
+                padding: 4.5px 0;
+                top: -3.3px;
+                background-color: #652ff8fa;
+                color: whitesmoke;
+            }
         }
-        
-        button{
-            padding: 4.5px 0;
-            top: -3.3px;
-            background-color: #652ff8fa;
-            color: whitesmoke;
+    }
+
+    .list-categories{
+        margin-top: 0.5%;
+        padding-bottom: 5%;
+
+        .name{
+            span{
+                font-size: 23px;
+                font-family: 'Poppins', sans-serif;
+                letter-spacing: 1px;
+            }
+        }
+
+        .categories{
+            display: grid;
+            grid-template-columns: 13.9% 13.9% 13.9% 13.9% 13.9% 13.9% 13.9%;
+            grid-gap: 3.5% 0.4%;
+            padding: 1.5% 0 3% 0;
+
+            .category{
+                text-align: center;
+                font-size: 18px;
+                font-family: 'Poppins', sans-serif;
+                padding: 15px;
+                background-color: rgb(245, 242, 242);
+            }
         }
     }
 }
 
-.list-categories{
-    margin-top: 1%;
-
-    .name{
-        span{
-            // border: orange 1px solid;
-            margin-left: 15px;
-            font-size: 23px;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 1px;
-        }
-    }
-
-    .categories{
-        display: grid;
-        padding: 15px;
-        grid-template-columns: 15% 15% 15% 15% 15% 15%;
-        grid-gap: 3% 0.5%;
-        margin-left: 5%;
-
-        .category{
-            text-align: center;
-            font-size: 18px;
-            font-family: 'Poppins', sans-serif;
-            padding: 15px;
-            background-color: rgb(245, 242, 242);
-            // border: 2px solid orange;
-
-        }
-    }
-}
 

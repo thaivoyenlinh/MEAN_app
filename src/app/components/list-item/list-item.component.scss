@@ -1,44 +1,66 @@
 @import '../../colorCustom.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
-.list-items{
-    margin-top: 1%;
+.container{
+    width: 90%;
+    margin: 3% auto;
+    padding-bottom: 5%;
 
     .name{
         span{
-            // border: orange 1px solid;
-            margin-left: 15px;
             font-size: 23px;
             font-family: 'Poppins', sans-serif;
             letter-spacing: 1px;
         }
     }
 
-    .items{
-        display: grid;
-        padding: 15px;
-        grid-template-columns: 15% 15% 15% 15% 15% 15%;
-        grid-gap: 3% 2%;
+    .header{
+        margin-top: 2%;
+        border-top: 1px grey solid;
+        display: flex;
+        justify-content: right;
 
-        .item{
-            text-align: center;
-            font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-            padding: 15px;
-            background-color: #fff;
-            border: 2px solid orange;
+        mat-form-field{
+            font-size: 13px;
+            padding-top: 15%;
+            
+        }
 
-            span{
-                display: block;
-                text-align: left;
-                margin-left: 5px;
-            }
+        .sort{
+            margin-right: 1%;
+        }
+    }
 
-            .price {
-                color: orangered;
-                font-size: 18px;
+    .list-items{
+        margin-top: 1%;
+
+        .items{
+            display: grid;
+            grid-template-columns: 15% 15% 15% 15% 15% 15%;
+            grid-gap: 3% 2%;
+    
+            .item{
+                text-align: center;
+                font-size: 16px;
+                font-family: 'Poppins', sans-serif;
+                padding: 15px;
+                background-color: #fff;
+                background-color: rgb(247, 244, 244);
+    
+                span{
+                    display: block;
+                    text-align: left;
+                    margin-left: 5px;
+                }
+    
+                .price {
+                    color: orangered;
+                    font-size: 18px;
+                }
             }
         }
     }
 }
+
+
 
