@@ -84,9 +84,7 @@ export class ItemService {
 	 */
 	getItemById(itemId: string) : Observable<Item>{
 		return this.http.get<Item>(`${this.SERVER_URL}/item/${itemId}`).pipe(
-			// tap((res) => console.log("RES: ",res)), //subcribe when call to see data
 			map((res) => res['data']),
-			// tap((res) => console.log("res sub: ", res))
 		);
 	}
 

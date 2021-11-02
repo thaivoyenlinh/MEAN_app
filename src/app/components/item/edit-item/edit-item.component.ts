@@ -3,10 +3,12 @@ import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { Category } from '../../../interfaces/category/category';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { ItemService } from '../../../services/item/item.service';
 import { CategoryService } from '../../../services/category/category.service';
 import { SnackbarService } from '../../../services/snackbar/snackbar.service';
+import { LoadingScreenService } from '../../../services/loading-screen/loading-screen.service';
 
 @Component({
 	selector: 'app-edit-item',
@@ -36,7 +38,8 @@ export class EditItemComponent implements OnInit {
 				private route: ActivatedRoute,
 				private itemService: ItemService,
 				private categoryService: CategoryService,
-				private snackBarService: SnackbarService) {
+				private snackBarService: SnackbarService,
+				private loadingService: LoadingScreenService) {
 		
 		this.EditItemForm = this.fb.group({
 			item_name_replace: new FormControl(''),
@@ -53,10 +56,11 @@ export class EditItemComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.listOfCategories$ = this.categoryService.getListOfCategories();
+		// this.listOfCategories$ = this.categoryService.getListOfCategories();
 		this.itemService.getItemById(this.itemId).subscribe(
 			(res) => {
 				const item = res;
+				console.log("ITEM:",item.item_type);
 				this.EditItemForm.setValue({
 					item_name_replace: item.item_name,
 					item_price_replace: item.item_price, 
@@ -71,16 +75,25 @@ export class EditItemComponent implements OnInit {
 
 	onSubmit() {
 		const item = this.EditItemForm.value;
-		this.itemService.updateItem(this.itemId, item).subscribe(
-			(res) => {
-				if(res['status'] == 1){
-					this.snackBarService.showSuccessMessage(res['message']);
-				}
-				else {
-					this.snackBarService.showErrorMessage(res['message']);
-				}
-			}
-		)
+		this.loadingService.show();
+		this.itemService.updateItem(this.itemId, item).pipe(
+			tap(
+				(data) => {
+					this.loadingService.hide();
+					data['status'] == 1 ? this.snackBarService.showSuccessMessage(data['message']) :
+					this.snackBarService.showErrorMessage(data['message']); 
+			})
+		).subscribe();
+		// subscribe(
+		// 	(res) => {
+		// 		if(res['status'] == 1){
+		// 			this.snackBarService.showSuccessMessage(res['message']);
+		// 		}
+		// 		else {
+		// 			this.snackBarService.showErrorMessage(res['message']);
+		// 		}
+		// 	}
+		// )
 	}
 
 }

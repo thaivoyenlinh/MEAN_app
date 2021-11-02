@@ -4,26 +4,28 @@ const baseURL = 'http://localhost:4100';
 class CategoryController{
 
     storeCategory(req, res){
-        try {
-            const pathToImage = `/images/categories/${req.file.filename}`;
-            console.log(pathToImage);
-            const data = {
-                category_name: req.body.category_name,
-                category_image: pathToImage
-            };
-            const category = new Category(data);
-            category
-                .save()
-                .then(() => {
-                    return res.status(200).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
-                    //* test ERROR Message
-                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
-                }) 
-        } catch (error) {
-            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
-            //* test ERROR Message
-            // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
-        }
+        setTimeout(() => {
+            try {
+                const pathToImage = `/images/categories/${req.file.filename}`;
+                console.log(pathToImage);
+                const data = {
+                    category_name: req.body.category_name,
+                    category_image: pathToImage
+                };
+                const category = new Category(data);
+                category
+                    .save()
+                    .then(() => {
+                        return res.status(200).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
+                        //* test ERROR Message
+                        // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
+                    }) 
+            } catch (error) {
+                return res.status(500).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
+                //* test ERROR Message
+                // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
+            }
+        }, 500);   
     }
     
     //! get all categories
@@ -113,52 +115,52 @@ class CategoryController{
      * @returns response object
      */
     updateAllFieldCategory(req, res){
-        
-        console.log("Controller All Field");
-        // console.log(req);
-        try {
-            const categoryId = req.params.id;
-            const pathToImage = `/images/categories/${req.file.filename}`;
-            // console.log(categoryId);
-            let newCategory = {
-                category_name: req.body.category_name,
-                category_image: pathToImage,
-            };
+        setTimeout(() => {
+            try {
+                const categoryId = req.params.id;
+                const pathToImage = `/images/categories/${req.file.filename}`;
+                // console.log(categoryId);
+                let newCategory = {
+                    category_name: req.body.category_name,
+                    category_image: pathToImage,
+                };
 
-            console.log("newCategory: ",newCategory);
-            Category
-                .updateOne({_id: categoryId}, newCategory)
-                .then(() => {
-                    return res.status(200).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
-                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
-                }) 
-        } catch (error) {
-            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
-            // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
-        }
+                console.log("newCategory: ",newCategory);
+                Category
+                    .updateOne({_id: categoryId}, newCategory)
+                    .then(() => {
+                        return res.status(200).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
+                        // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
+                    }) 
+            } catch (error) {
+                return res.status(500).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
+                // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
+            }
+        }, 500);
+        
     }
 
     updateCategory(req, res){
-        
-        console.log("Controller One Field");
-        // console.log(req);
-        try {
-            const categoryId = req.params.id;
-            let newCategory = {
-                category_name: req.body.category_name,
-            };
+        setTimeout(() => {
+            try {
+                const categoryId = req.params.id;
+                let newCategory = {
+                    category_name: req.body.category_name,
+                };
 
-            console.log("newCategory: ",newCategory);
-            Category
-                .updateOne({_id: categoryId}, newCategory)
-                .then(() => {
-                    return res.status(200).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
-                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
-                }) 
-        } catch (error) {
-            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
-            // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
-        }
+                console.log("newCategory: ",newCategory);
+                Category
+                    .updateOne({_id: categoryId}, newCategory)
+                    .then(() => {
+                        return res.status(200).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
+                        // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
+                    }) 
+            } catch (error) {
+                return res.status(500).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
+                // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
+            }
+        }, 500);
+        
     }
 
 }

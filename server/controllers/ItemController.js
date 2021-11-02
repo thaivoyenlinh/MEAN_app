@@ -5,47 +5,49 @@ const baseURL = 'http://localhost:4100';
 class ItemController{
 
     storeItem(req, res){
-        const files = req.files;
-        const pathToImages = [];
-        try {
-            files.forEach(file => {
-                const path = `/images/items/${req.body.item_name}/${file.filename}`;
-                pathToImages.push(path);
-            })
-            //! [Object: null prototype] => user parse to transfer to object {}
-            const obj = JSON.parse(JSON.stringify(req.body));
-            const data = {
-                item_name: obj.item_name,
-                item_price:  obj.item_price,
-                item_category:  obj.item_category,
-                item_type: obj.item_type,
-                item_discription:  obj.item_discription,
-                item_image: pathToImages,
-            };
-            const item = new Item(data);
-            item
-                .save()
-                .then(() => {
-                    return res.status(200).json({ 
-                        message: {title: "SUCCESS", content: "You have successfully inserted the item"},
-                        status: 1
-                    });
-                    // return res.status(200).json({ 
-                    //     message: {title: "ERROR", content: "You have failed to insert the item"},
-                    //     status: 0
-                    // });
-                }) 
-        } 
-        catch (error) {
-            return res.status(500).json({ 
-                message: {title: "ERROR", content: "You have failed to insert the item"},
-                status: 0
-            });
-            // return res.status(500).json({ 
-            //     message: {title: "SUCCESS", content: "You have successfully inserted the item"},
-            //     status: 1
-            // });
-        }
+        setTimeout(() => {
+            const files = req.files;
+            const pathToImages = [];
+            try {
+                files.forEach(file => {
+                    const path = `/images/items/${req.body.item_name}/${file.filename}`;
+                    pathToImages.push(path);
+                })
+                //! [Object: null prototype] => user parse to transfer to object {}
+                const obj = JSON.parse(JSON.stringify(req.body));
+                const data = {
+                    item_name: obj.item_name,
+                    item_price:  obj.item_price,
+                    item_category:  obj.item_category,
+                    item_type: obj.item_type,
+                    item_discription:  obj.item_discription,
+                    item_image: pathToImages,
+                };
+                const item = new Item(data);
+                item
+                    .save()
+                    .then(() => {
+                        return res.status(200).json({ 
+                            message: {title: "SUCCESS", content: "You have successfully inserted the item"},
+                            status: 1
+                        });
+                        // return res.status(200).json({ 
+                        //     message: {title: "ERROR", content: "You have failed to insert the item"},
+                        //     status: 0
+                        // });
+                    }) 
+            } 
+            catch (error) {
+                return res.status(500).json({ 
+                    message: {title: "ERROR", content: "You have failed to insert the item"},
+                    status: 0
+                });
+                // return res.status(500).json({ 
+                //     message: {title: "SUCCESS", content: "You have successfully inserted the item"},
+                //     status: 1
+                // });
+            }
+        }, 500);
     }
 
     getListOfItems(req, res){
@@ -140,37 +142,40 @@ class ItemController{
     }
 
     updateItem(req, res){
-        try {
-            const itemId = req.params.id,
-                    data = req.body;
-            let newItem = {
-                item_name: data.item_name_replace,
-                item_price: data.item_price_replace,
-                item_category: data.item_category_replace,
-                item_discription: data.item_discription_replace,
+        setTimeout(() => {
+            try {
+                const itemId = req.params.id,
+                        data = req.body;
+                let newItem = {
+                    item_name: data.item_name_replace,
+                    item_price: data.item_price_replace,
+                    item_category: data.item_category_replace,
+                    item_type: data.item_type_replace,
+                    item_discription: data.item_discription_replace,
+                }
+                Item    
+                    .updateOne({_id: itemId}, newItem)
+                    .then(() => {
+                        return res.status(200).json({ 
+                            message: {title: "SUCCESS", content: "You have successfully updated the item"},
+                            status: 1
+                        });
+                        // return res.status(200).json({ 
+                        //     message: {title: "ERROR", content: "You have failed to update the item"},
+                        //     status: 0
+                        // });
+                    })
+            } catch (error) {
+                return res.status(500).json({ 
+                    message: {title: "ERROR", content: "You have failed to update the item"},
+                    status: 0
+                });
+                // return res.status(500).json({
+                //     message: {title: "SUCCESS", content: "You have successfully updated the item"},
+                //     status: 1
+                // });
             }
-            Item    
-                .updateOne({_id: itemId}, newItem)
-                .then(() => {
-                    return res.status(200).json({ 
-                        message: {title: "SUCCESS", content: "You have successfully updated the item"},
-                        status: 1
-                    });
-                    // return res.status(200).json({ 
-                    //     message: {title: "ERROR", content: "You have failed to update the item"},
-                    //     status: 0
-                    // });
-                })
-        } catch (error) {
-            return res.status(500).json({ 
-                message: {title: "ERROR", content: "You have failed to update the item"},
-                status: 0
-            });
-            // return res.status(500).json({
-            //     message: {title: "SUCCESS", content: "You have successfully updated the item"},
-            //     status: 1
-            // });
-        }
+        }, 500);
     }
 
     getItemsByCategory(req, res){
