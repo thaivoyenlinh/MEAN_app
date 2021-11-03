@@ -10,16 +10,20 @@
                     <mat-label>Name Replace</mat-label>
                     <input matInput formControlName="category_name_replace">
                 </mat-form-field>
+                <div *ngIf="name.invalid && (name.touched || name.dirty)" class="error-message">
+                    <small *ngIf="name.errors?.required">*Name is required</small>
+                    <small *ngIf="name.errors?.pattern">
+                        *Category name contain only letters, at least 2 and no more than 16 characters 
+                    </small>
+                </div>
             </div>
             <div class="upload-file">
-                    <mat-label>Image</mat-label>
-                    <input type="file" (change)="onChooseFile($event)">
-                    <!-- (change)="onChooseFile($event)" -->  
+                <mat-label>Image</mat-label>
+                <input type="file" (change)="onChooseFile($event)" formControlName="category_image">
             </div>
-                
             <div class="form-group">
                 <div class="button">
-                    <button mat-raised-button type="submit">Submit</button>
+                    <button mat-raised-button type="submit" [disabled]="EditCategoryForm.invalid">Submit</button>
                     <button mat-raised-button (click)="router.navigateByUrl('/admin/category')">Back</button>
                 </div>
             </div> 

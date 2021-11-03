@@ -1,4 +1,5 @@
 @import '../../../colorCustom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 .item-form-container {
     border: 1.5px solid $main-color;
@@ -8,16 +9,14 @@
     text-align: center;
     border-radius: 20px;
     background: #f7fcfa;
-    color: #6E00B3;
 
     .name {
         margin-top: 10px;
         height: 40px;
-       
+        color: $main-color;
 
         span {
             font-size: 32px;
-            color: #6E00B3;
         }
     }
 
@@ -27,11 +26,21 @@
 
             mat-form-field {
                 width: 70%;
+                font-size: 17px;
 
                 mat-label {
-                    color: #6E00B3;
-                    
+                    font-family: 'Poppins', sans-serif;
+                    color: grey;
                 }
+            }
+
+            .error-message{
+                width: 70%;
+                margin: -2% 0 1% 17%;
+                color: red;
+                font-size: 13px; 
+                text-align: left;
+                font-style: italic;
             }
 
             .mat-label{
@@ -46,31 +55,45 @@
             quill-editor{
                 display: inline-block;
                 width: 70%;
+                margin-top: 1%;
             }
 
-            .upload-file {
+            .custom-mat {
+                display: block;
+                text-align: left;   
+                width: 70%;
+                margin-left: 15%;
+                font-size: 17px;
+                font-weight: 500;
+                color: grey;    
+            }
 
-                input {
-                    display: block;
-                    text-align: left;
-                    margin-left: 18%;
-                    margin-top: 7px;
-                }
+            .error-message-outform{
+                width: 70%;
+                font-size: 14px; 
+                text-align: left;
+                color: red;
+                margin-left: 17%;
+                font-style: italic;
             }
 
             .button {
-                // margin-bottom: 12px;
 
                 button {
                     height: 38px;
                     width: max-content;
                     margin: 16px 5px 15px 5px;
                     background: rgb(234, 248, 234);
-                    color: #6E00B3;
+                    color: $main-color;
 
                     &:hover {
-                        background: #6E00B3;
-                        transition: 0.9s;
+                        background: $main-color;
+                        transition: 0.4s;
+                        color: white;
+                    }
+
+                    &:disabled{
+                        background-color: rgb(172, 172, 172);
                         color: white;
                     }
                 }

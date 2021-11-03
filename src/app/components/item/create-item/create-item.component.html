@@ -9,14 +9,25 @@
                     <mat-label>Name</mat-label>
                     <input matInput formControlName="item_name">
                 </mat-form-field>
+                <div *ngIf="CreateItemForm.get('item_name').invalid && (CreateItemForm.get('item_name').touched || CreateItemForm.get('item_name').dirty)" class="error-message">
+                    <small *ngIf="CreateItemForm.get('item_name').errors?.required">*Name is required</small>
+                    <small *ngIf="CreateItemForm.get('item_name').errors?.pattern">
+                        *Name contain only letter, at least 2 and no more than 30 characters 
+                    </small>
+                </div>
             </div>
             <div class="form-group">
                 <mat-form-field>
                     <mat-label>Price</mat-label>
                     <input matInput formControlName="item_price">
                 </mat-form-field>
+                <div *ngIf="CreateItemForm.get('item_price').invalid && (CreateItemForm.get('item_price').touched || CreateItemForm.get('item_price').dirty)" class="error-message">
+                    <small *ngIf="CreateItemForm.get('item_price').errors?.required">*Price is required</small>
+                    <small *ngIf="CreateItemForm.get('item_price').errors?.pattern">
+                        *Price contain only number, at least 1 and no more than 7 characters
+                    </small>
+                </div>
             </div>
-    
             <div class="form-group">
                 <mat-form-field appearance="fill">
                     <mat-label>Category</mat-label>
@@ -26,32 +37,41 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                <div *ngIf="CreateItemForm.get('item_category').invalid && (CreateItemForm.get('item_category').touched || CreateItemForm.get('item_category').dirty)" class="error-message">
+                    <small *ngIf="CreateItemForm.get('item_category').errors?.required">*Category is required</small>
+                </div>
             </div>
-
             <div class="form-group">
                 <mat-form-field>
                     <mat-label>Type</mat-label>
                     <input matInput formControlName="item_type">
                 </mat-form-field>
+                <div *ngIf="CreateItemForm.get('item_type').invalid && (CreateItemForm.get('item_type').touched || CreateItemForm.get('item_type').dirty)" class="error-message">
+                    <small *ngIf="CreateItemForm.get('item_type').errors?.required">*Type is required</small>
+                </div>
             </div>
-    
             <div class="form-group">
-                <mat-label class="mat-label">Discription</mat-label>
+                <mat-label class="custom-mat">Discription</mat-label>
                 <quill-editor formControlName="item_discription" [modules]="config"></quill-editor>
+                <div *ngIf="CreateItemForm.get('item_discription').invalid && (CreateItemForm.get('item_discription').touched || CreateItemForm.get('item_discription').dirty)" class="error-message-outform">
+                    <small *ngIf="CreateItemForm.get('item_discription').errors?.required">*Discription is required</small>
+                </div>
             </div>
-
             <div class="upload-file">
-                <mat-label class="mat-label">Image</mat-label>
-                <input type="file" (change)="onUploadFiles($event)" multiple>
+                <mat-label class="custom-mat">Image</mat-label>
+                <input type="file" (change)="onUploadFiles($event)" multiple formControlName="item_image">
+                <div class="error-message-outform">
+                    <small *ngIf="CreateItemForm.get('item_image').invalid && CreateItemForm.get('item_image').touched">
+                        *Image is required. Please be careful, you can only add images once and cannot edit!
+                    </small>
+                </div>
             </div>
-                
             <div class="form-group">
                 <div class="button">
-                    <button mat-raised-button type="submit">Create</button>
+                    <button mat-raised-button type="submit" [disabled]="CreateItemForm.invalid">Create</button>
                     <button mat-raised-button (click)="router.navigateByUrl('/admin/item')">Back</button>
                 </div>
             </div> 
         </form>
     </div>
-
 </div>

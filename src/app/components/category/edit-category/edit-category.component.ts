@@ -1,10 +1,16 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
+import {
+  FormControl,
+  FormGroup,
+  FormBuilder,
+  Validators,
+} from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { tap } from "rxjs/operators";
+
 import { CategoryService } from "../../../services/category/category.service";
 import { SnackbarService } from "../../../services/snackbar/snackbar.service";
 import { LoadingScreenService } from "../../../services/loading-screen/loading-screen.service";
-import { tap } from "rxjs/operators";
 
 @Component({
   selector: "app-edit-category",
@@ -28,7 +34,11 @@ export class EditCategoryComponent implements OnInit {
     private loadingService: LoadingScreenService
   ) {
     this.EditCategoryForm = this.fb.group({
-      category_name_replace: new FormControl(""),
+      category_name_replace: new FormControl('', [
+        Validators.required,
+        Validators.pattern("^[a-z A-Z]{2,16}$"),
+      ]),
+      // category_image_replace: new FormControl(null, Validators.required),
     });
 
     //! catch the data
@@ -51,32 +61,52 @@ export class EditCategoryComponent implements OnInit {
     });
   }
 
+  get name() {
+    return this.EditCategoryForm.get("category_name_replace");
+  }
+
   onSubmit() {
     //! submit form and update new data
     const newCategoryName = this.EditCategoryForm.value.category_name_replace;
     this.loadingService.show();
     if (this.imageData !== null) {
       this.categoryService
-        .updateAllFieldCategory(this.categoryId, newCategoryName,this.imageData)
+        .updateAllFieldCategory(
+          this.categoryId,
+          newCategoryName,
+          this.imageData
+        )
         .pipe(
-          tap((data) => {
-            this.loadingService.hide();
-            data["status"] == 1
-              ? this.snackBarService.showSuccessMessage(data["message"])
-              : this.snackBarService.showErrorMessage(data["message"]);
-          })
+          tap(
+            (data) => {
+              this.loadingService.hide();
+              data["status"] == 1
+                ? this.snackBarService.showSuccessMessage(data["message"])
+                : this.snackBarService.showErrorMessage(data["message"]);
+            },
+            (error) => {},
+            () => {
+              this.router.navigateByUrl("/admin/category");
+            }
+          )
         )
         .subscribe();
     } else {
       this.categoryService
         .updateOneFieldCategory(this.categoryId, newCategoryName)
         .pipe(
-          tap((data) => {
-            this.loadingService.hide();
-            data["status"] == 1
-              ? this.snackBarService.showSuccessMessage(data["message"])
-              : this.snackBarService.showErrorMessage(data["message"]);
-          })
+          tap(
+            (data) => {
+              this.loadingService.hide();
+              data["status"] == 1
+                ? this.snackBarService.showSuccessMessage(data["message"])
+                : this.snackBarService.showErrorMessage(data["message"]);
+            },
+            (error) => {},
+            () => {
+              this.router.navigateByUrl("/admin/category");
+            }
+          )
         )
         .subscribe();
     }

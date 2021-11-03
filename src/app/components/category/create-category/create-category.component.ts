@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 
 //* import Category service to perform the communication bewteen Client and Server
@@ -19,6 +19,7 @@ export class CreateCategoryComponent implements OnInit {
   CreateCategoryForm: FormGroup;
   category: Category;
   imageData: File;
+  isSubmitted: boolean = false;
 
   constructor(
     protected router: Router,
@@ -31,13 +32,19 @@ export class CreateCategoryComponent implements OnInit {
     this.init();
   }
 
-  init(){
+  init() {
     this.CreateCategoryForm = new FormGroup({
-      category_name: new FormControl(""),
+      category_name: new FormControl('',[
+        Validators.required,
+        Validators.pattern("^[a-z A-Z]{2,16}$"),
+      ]),
       // set category_image to clear form after submit
-      category_image:  new FormControl("")
+      category_image: new FormControl(null, Validators.required),
     });
+  }
 
+  get name() {
+    return this.CreateCategoryForm.get("category_name");
   }
 
   onChooseFile(event) {
@@ -47,18 +54,24 @@ export class CreateCategoryComponent implements OnInit {
 
   onSubmit() {
     const categoryName = this.CreateCategoryForm.value.category_name;
+    this.isSubmitted = true;
     this.loadingService.show();
     this.categoryService
       .storeCategory(categoryName, this.imageData)
       .pipe(
-        tap((data) => {
-          this.loadingService.hide();
-          data["status"] == 1
-            ? this.snackBarService.showSuccessMessage(data["message"])
-            : this.snackBarService.showErrorMessage(data["message"]);
-          this.CreateCategoryForm.reset();
-          
-        })
+        tap(
+          (data) => {
+            this.loadingService.hide();
+            data["status"] == 1
+              ? this.snackBarService.showSuccessMessage(data["message"])
+              : this.snackBarService.showErrorMessage(data["message"]);
+          },
+          (error) => {},
+          () => {
+            // this.CreateCategoryForm.reset();
+            this.init();
+          }
+        )
       )
       .subscribe();
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { Router, Route, ActivatedRoute } from '@angular/router';
 import { Category } from '../../../interfaces/category/category';
 import { Observable } from 'rxjs';
@@ -20,6 +20,7 @@ export class EditItemComponent implements OnInit {
 	EditItemForm: FormGroup
 	itemId: string
 	listOfCategories$: Observable<Category[]>
+	// isSubmit: boolean = false;
 
 	config = {
 		toolbar: [
@@ -42,11 +43,11 @@ export class EditItemComponent implements OnInit {
 				private loadingService: LoadingScreenService) {
 		
 		this.EditItemForm = this.fb.group({
-			item_name_replace: new FormControl(''),
-			item_price_replace: new FormControl(''),
+			item_name_replace: new FormControl('', [Validators.required, Validators.pattern("^[A-z0-9 ]{2,30}$")]),
+			item_price_replace: new FormControl('', [Validators.required, Validators.pattern("^[0-9,.]{4,10}$")]),
 			item_category_replace: new FormControl(''),
-			item_type_replace: new FormControl(''),
-			item_discription_replace: new FormControl(''),
+			item_type_replace: new FormControl('', Validators.required),
+			item_discription_replace: new FormControl('', Validators.required),
 		});
 
 		this.route.queryParams.subscribe((params) => {
@@ -56,7 +57,7 @@ export class EditItemComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		// this.listOfCategories$ = this.categoryService.getListOfCategories();
+		this.listOfCategories$ = this.categoryService.getListOfCategories();
 		this.itemService.getItemById(this.itemId).subscribe(
 			(res) => {
 				const item = res;
@@ -69,8 +70,7 @@ export class EditItemComponent implements OnInit {
 					item_discription_replace: item.item_discription, 
 				});
 			} 
-		)
-		
+		)	
 	}
 
 	onSubmit() {
@@ -82,18 +82,13 @@ export class EditItemComponent implements OnInit {
 					this.loadingService.hide();
 					data['status'] == 1 ? this.snackBarService.showSuccessMessage(data['message']) :
 					this.snackBarService.showErrorMessage(data['message']); 
-			})
+				},
+				(error)=>{
+				},
+				() => {
+					this.router.navigateByUrl('/admin/item');
+				}
+			)
 		).subscribe();
-		// subscribe(
-		// 	(res) => {
-		// 		if(res['status'] == 1){
-		// 			this.snackBarService.showSuccessMessage(res['message']);
-		// 		}
-		// 		else {
-		// 			this.snackBarService.showErrorMessage(res['message']);
-		// 		}
-		// 	}
-		// )
 	}
-
 }
