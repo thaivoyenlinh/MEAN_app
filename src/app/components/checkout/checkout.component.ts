@@ -45,7 +45,7 @@ export class CheckoutComponent implements OnInit {
 		this.UserInformationForm = new FormGroup({
 			name: new FormControl(null, [Validators.required, Validators.pattern('^[a-z A-Z]{2,30}$')]),
 			phoneNumber: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]{10,11}$')]),
-			address: new FormControl(null, Validators.required)
+			address: new FormControl(null, [Validators.required, Validators.pattern('^[a-z A-Z 0-9,/]{10,100}$')])
 		})
 	}
 

@@ -14,7 +14,7 @@
                             <!-- ? use [readOnly] to disable input tag -->
                             <input matInput formControlName="name" id="name" [readOnly]="saveBtnDisable">
                         </mat-form-field>
-                        <div *ngIf="name.touched" class="error-message">
+                        <div *ngIf="name.invalid && (name.touched || name.dirty)" class="error-message">
                             <small *ngIf="name.errors?.required">*Name is required</small>
                             <small *ngIf="name.errors?.pattern">
                                 *Names contain only letters, at least 2 and no more than 30 characters 
@@ -25,7 +25,7 @@
                             <mat-label>Phone number</mat-label>
                             <input matInput formControlName="phoneNumber" id="phoneNumber" [readOnly]="saveBtnDisable">
                         </mat-form-field>
-                        <div *ngIf="phoneNumber.touched" class="error-message">
+                        <div *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)" class="error-message">
                             <small *ngIf="phoneNumber.errors?.required">*Phone is required</small>
                             <small *ngIf="phoneNumber.errors?.pattern">*Phone must have 10 numbers</small>
                         </div>
@@ -34,9 +34,10 @@
                             <mat-label>Delivery address</mat-label>
                             <input matInput formControlName="address" [readOnly]="saveBtnDisable">
                         </mat-form-field>
-                        <small *ngIf="UserInformationForm.get('address').touched" class="error-message">
-                            *Address is required
-                        </small>
+                        <div *ngIf="UserInformationForm.get('address').invalid && (UserInformationForm.get('address').touched || UserInformationForm.get('address').dirty)" class="error-message">
+                            <small *ngIf="UserInformationForm.get('address').errors?.required">*Address is required</small>
+                            <small *ngIf="UserInformationForm.get('address').errors?.pattern">*Address must have at least 10 and no more than 100 characters</small>
+                        </div>
 
                         <div class="button">
                             <button [disabled]="UserInformationForm.invalid || saveBtnDisable" mat-stroked-button type="submit"> Save </button>
