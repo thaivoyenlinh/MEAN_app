@@ -50,7 +50,6 @@ export class CategoryService {
 			tap((res) => console.log(res)),
 			map((res) => res['data'])
 		);
-
 	} 
 
 	/**

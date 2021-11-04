@@ -10,6 +10,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { UserComponent } from './components/user/user.component';
 
 //! Lazy-loading Component is import at that component  
 //import { CreateComponent } from './components/admin/create/create.component'; 
@@ -46,6 +47,8 @@ const routes: Routes = [
     { path: 'item/edit',
       loadChildren: () => import('./components/item/edit-item/edit-item.module').then(m => m.EditItemModule)
     },
+
+    { path: 'user', component: UserComponent},
 
   ]},
 

@@ -1,12 +1,9 @@
 import { Component, OnInit,  } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { Observable } from 'rxjs/'
 import { map, tap } from 'rxjs/operators';
 
 //! Interface tương tự cấu trúc tư định nghĩa. Import từ file interfaces/category (file định nghĩa)
 import { Category } from '../../interfaces/category/category';
-//!
 
 //! send data without showing in URL
 import { NavigationExtras } from '@angular/router';

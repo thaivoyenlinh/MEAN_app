@@ -52,6 +52,40 @@ class UserController{
         }
     }
 
+    getListOfUsers(req, res){
+        console.log("THIS IS USER CONTROLLER");
+        setTimeout(() => {
+            try {
+                User
+                    .find({})
+                    .then((data) => {
+                        return res.status(200).json({message: "Fetch successfully list of users",  
+                                                    status: 1, 
+                                                    data: data});
+                    }) 
+            } catch (error) {
+                return res.status(500).json({message: "ERROR: Fetch list of users is failure!!",  
+                                            status: 0});
+            }
+        }, 500)
+    }
+
+    deleteUser(req, res){
+        try {
+            const userId = req.params.id;
+            User
+                .remove({_id: userId})
+                .then(() => {
+                    return res.status(200).json({ message: {title: "SUCCESS", content: "You have successfully deleted the user"},  status: 1});
+                    // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to delete the user"},  status: 0});
+                }) 
+        } catch (error) {
+            return res.status(500).json({ message: {title: "ERROR", content: "You have failed to delete the user"},  status: 0});e
+            // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully deleted the user"},  status: 1});
+            
+        }
+    }
+
 }
 
 module.exports = new UserController();

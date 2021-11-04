@@ -53,6 +53,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CheckoutComponent,
     ItemDetailsDialogComponent,
     ToastMessageComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
