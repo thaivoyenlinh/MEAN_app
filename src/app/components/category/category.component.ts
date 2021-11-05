@@ -61,7 +61,7 @@ export class CategoryComponent implements OnInit {
 	}
 
 	onDelete(categoryId: string){
-		this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
+		this.dialogService.openConfirmDialog('category').afterClosed().subscribe(res => {
 			// console.log(res);
 			if(res){
 				this.deleteCategory(categoryId);

@@ -53,7 +53,7 @@ export class ItemComponent implements OnInit {
 	}
 	
 	onDelete(itemId: string){
-		this.dialogService.openConfirmDialog().afterClosed().subscribe(res => {
+		this.dialogService.openConfirmDialog('item').afterClosed().subscribe(res => {
 			if(res){
 				this.deleteItem(itemId);
 			}

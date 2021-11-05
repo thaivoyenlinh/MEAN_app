@@ -57,7 +57,7 @@ export class UserComponent implements OnInit {
   onDelete(userId: string) {
     console.log("ID user", userId);
     this.dialogService
-      .openConfirmDialog()
+      .openConfirmDialog('user')
       .afterClosed()
       .subscribe((res) => {
         if (res) {

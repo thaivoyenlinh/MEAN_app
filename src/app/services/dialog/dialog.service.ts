@@ -10,10 +10,11 @@ export class DialogService {
 
 	constructor(private dialog: MatDialog) {}
 
-	openConfirmDialog(){
+	openConfirmDialog(name){
 		return this.dialog.open(DeleteConfirmationComponent, {
 			width: '350px',
 			height: '200px',
+			data: name,
 			panelClass: 'confirm-dialog-container', 
 			disableClose: true,
 		});
