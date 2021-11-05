@@ -54,6 +54,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { UserComponent } from './components/user/user.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { UserComponent } from './components/user/user.component';
     ItemDetailsDialogComponent,
     ToastMessageComponent,
     UserComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

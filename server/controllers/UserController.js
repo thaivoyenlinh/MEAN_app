@@ -40,14 +40,16 @@ class UserController{
                 .sort({_id:-1})
                 .then((data) => {             
                     return res.status(200).json({ 
-                        message: {title: "SUCCESS", content: "You have successfully fetched the user"},  
-                        status: 1
+                        message: {title: "SUCCESS", content: "You have successfully fetched the latest user"},  
+                        status: 1,
+                        data: data
                     });
                 })
         } catch (error) {
             return res.status(500).json({ 
-                message: {title: "ERROR", content: "You have failed to fetch the user"},  
-                status: 0
+                message: {title: "ERROR", content: "You have failed to fetch the latest user"},  
+                status: 0,
+                data: data
             });
         }
     }

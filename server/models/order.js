@@ -3,9 +3,10 @@ const Schema = mongoose.Schema;
 
 const Order = new Schema(
     {
-        user_id: {type: ObjectId},
-        item_id: {type: ObjectId},
-        order_price: {type: Number}
+        user_id: {type: String},
+        item_id: [],
+        quatity_item: [],
+        total_price: {type: String}
     },
     {
         timestamps: true,

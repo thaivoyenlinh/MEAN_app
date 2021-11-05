@@ -20,7 +20,9 @@ export class UserService {
 
 	getLatestUser() : Observable<User>{
 		return this.http.get<User>(`${this.SERVER_URL}/user`).pipe(
-			tap((res) => {console.log("THIS IS SERVICE: ",res)})
+			// tap((res) => {console.log("Get Latest user: ",res)}),
+			map((res) => res['data']),
+			// tap((res) => {console.log("Get Latest user: ",res)}),
 		);
 	}
 

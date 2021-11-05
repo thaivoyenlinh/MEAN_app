@@ -11,6 +11,7 @@ import { ItemDetailsComponent } from './components/item-details/item-details.com
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { UserComponent } from './components/user/user.component';
+import { OrderComponent } from './components/order/order.component';
 
 //! Lazy-loading Component is import at that component  
 //import { CreateComponent } from './components/admin/create/create.component'; 
@@ -49,6 +50,8 @@ const routes: Routes = [
     },
 
     { path: 'user', component: UserComponent},
+
+    { path: 'order', component: OrderComponent},
 
   ]},
 

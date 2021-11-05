@@ -34,7 +34,7 @@ export class CreateCategoryComponent implements OnInit {
 
   init() {
     this.CreateCategoryForm = new FormGroup({
-      category_name: new FormControl('',[
+      category_name: new FormControl("", [
         Validators.required,
         Validators.pattern("^[a-z A-Z]{2,16}$"),
       ]),
@@ -61,14 +61,13 @@ export class CreateCategoryComponent implements OnInit {
       .pipe(
         tap(
           (data) => {
-            this.loadingService.hide();
             data["status"] == 1
               ? this.snackBarService.showSuccessMessage(data["message"])
               : this.snackBarService.showErrorMessage(data["message"]);
           },
           (error) => {},
           () => {
-            // this.CreateCategoryForm.reset();
+            this.loadingService.hide();
             this.init();
           }
         )
