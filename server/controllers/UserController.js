@@ -13,7 +13,6 @@ class UserController{
                     user_phoneNumber: value.phoneNumber,
                     user_address: value.address,
                 }
-                console.log("data",data);
                 const user = new User(data);
                 user
                     .save()
@@ -29,7 +28,7 @@ class UserController{
                     status: 0
                 });
             }
-        }, 2000)    
+        }, 100)    
     }
 
     getLatestUser(req, res){
@@ -70,6 +69,23 @@ class UserController{
                                             status: 0});
             }
         }, 500)
+    }
+
+    getUserById(req, res){
+        console.log("get user by id:");
+        console.log(req.params);
+        try{
+            User
+                .findOne({_id : req.params.id})
+                .then((data) => {
+                    return res.json({message: "Fetch user by id successful!!", 
+                                    status: 1,
+                                    data: data});
+                })
+        }catch(error){
+            return res.json({message: "Fetch user by id failure!!", 
+                            status: 0});
+        }
     }
 
     deleteUser(req, res){

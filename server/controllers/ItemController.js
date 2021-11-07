@@ -216,7 +216,6 @@ class ItemController{
         } catch (error) {
             return res.json({message: "Fetch item failure!!", 
                             status: 0});
-            
         }
     }
 

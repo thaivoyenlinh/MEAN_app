@@ -14,15 +14,12 @@ export class UserService {
 	constructor(private http: HttpClient) { }
 
 	storeUser(userFormValue: any) : Observable<void>{
-		// console.log("User service: ", userFormValue);
 		return this.http.post<void>(`${this.SERVER_URL}/user`, userFormValue);
 	} 
 
 	getLatestUser() : Observable<User>{
 		return this.http.get<User>(`${this.SERVER_URL}/user`).pipe(
-			// tap((res) => {console.log("Get Latest user: ",res)}),
 			map((res) => res['data']),
-			// tap((res) => {console.log("Get Latest user: ",res)}),
 		);
 	}
 
@@ -31,6 +28,12 @@ export class UserService {
 			tap((res) => {console.log("List of users - service: ", res)}),
 			map((res) => res['data'])
 		)
+	}
+
+	getUserById(userId: string) : Observable<User>{
+		return this.http.get<User>(`${this.SERVER_URL}/user/${userId}`).pipe(
+			map(res => res['data'])
+		);
 	}
 
 	deleteUser(userId: string) : Observable<void>{

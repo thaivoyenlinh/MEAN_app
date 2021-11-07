@@ -55,6 +55,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { UserComponent } from './components/user/user.component';
 import { OrderComponent } from './components/order/order.component';
+import { ConfirmOrderComponent } from './components/dialog/confirm-order/confirm-order.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { OrderComponent } from './components/order/order.component';
     ToastMessageComponent,
     UserComponent,
     OrderComponent,
+    ConfirmOrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +115,7 @@ import { OrderComponent } from './components/order/order.component';
     DeleteConfirmationComponent, 
     ItemDetailsDialogComponent,
     ToastMessageComponent,
+    ConfirmOrderComponent,
   ],
 })
 export class AppModule { }

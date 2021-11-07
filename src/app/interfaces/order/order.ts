@@ -1,7 +1,7 @@
 export interface Order {
     _id: string,
-    userId: string,
-    itemId: string[],
-    quantityItem: number[],
-    totalPrice: string
+    user_id: string,
+    item_id: string[],
+    quantity_item: number[],
+    total_price: string
 }

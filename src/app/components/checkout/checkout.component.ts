@@ -11,6 +11,7 @@ import { UserService } from "../../services/user/user.service";
 import { LoadingScreenService } from "../../services/loading-screen/loading-screen.service";
 import { SnackbarService } from "../../services/snackbar/snackbar.service";
 import { OrderService } from "../../services/order/order.service";
+import { DialogService } from "../../services/dialog/dialog.service";
 
 @Component({
   selector: "app-checkout",
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit {
     private userService: UserService,
     private loadingSreenService: LoadingScreenService,
     private snackBarService: SnackbarService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private dialogService: DialogService,
   ) {
     route.queryParams.subscribe((params) => {
       this.itemId = params["Id"];
@@ -41,7 +43,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("item ID:", this.itemId);
+    // console.log("item ID:", this.itemId);
     this.item = this.itemService.getItemById(this.itemId).pipe(
       tap((res) => {
         this.totalPrice = res.item_price;
@@ -94,9 +96,9 @@ export class CheckoutComponent implements OnInit {
         switchMap(() => this.userService.getLatestUser()),
         tap(
           (res) => {
-            console.log("RES: ", res);
+            // console.log("RES: ", res);
             this.userId = res._id;
-            console.log("User Id: ", this.userId);
+            // console.log("User Id: ", this.userId);
             this.orderBtnDisable = false;
           },
           (error) => {
@@ -112,7 +114,14 @@ export class CheckoutComponent implements OnInit {
 
   onOrder() {
     this.orderService
-      .storeOrder(this.userId, this.itemId, this.totalPrice)
+      .storeOrder(this.userId, this.itemId, this.totalPrice).pipe(
+        switchMap(() => this.orderService.getLatestOrder()),
+        tap(
+          (res) => { 
+            this.dialogService.openConfirmOrderDialog(res).afterClosed()
+          }
+        )
+      )
       .subscribe();
   }
 }

@@ -30,7 +30,46 @@ class OrderController{
             });
         }
     }
+    
+    getLatestOrder(req, res){
+        console.log("get Latest Order Controller: ");
+        try {
+            Order
+                .findOne({})
+                .sort({_id:-1})
+                .then((data) => {     
+                    return res.status(200).json({ 
+                        message: {title: "SUCCESS", content: "You have successfully fetched the latest order"},  
+                        status: 1,
+                        data: data
+                    });
+                })
+        } catch (error) {
+            return res.status(500).json({ 
+                message: {title: "ERROR", content: "You have failed to fetch the latest order"},  
+                status: 0,
+                data: data
+            });
+        }
+    }
 
+    deleteOrder(req, res){
+        // console.log("delete order controller: ");
+        // console.log(req.params.id);
+        setTimeout(() => {
+            try{
+                Order
+                    .remove({_id: req.params.id})
+                    .then(() => {
+                        return res.status(200).json({ message: {title: "SUCCESS", content: "You have successfully deleted the order"},  status: 1});
+                    })
+                
+            }catch(error){
+                return res.status(500).json({ message: {title: "ERROR", content: "You have failed to delete the order"},  status: 0});
+            }
+        }, 500);
+        
+    }
 }
 
 module.exports = new OrderController();
