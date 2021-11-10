@@ -25,7 +25,7 @@ export class UserService {
 
 	getListOfUsers() : Observable<User[]>{
 		return this.http.get<any>(`${this.SERVER_URL}/users`).pipe(
-			tap((res) => {console.log("List of users - service: ", res)}),
+			// tap((res) => {console.log("List of users - service: ", res)}),
 			map((res) => res['data'])
 		)
 	}

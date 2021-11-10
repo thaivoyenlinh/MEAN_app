@@ -24,6 +24,13 @@ export class OrderService {
     );
   }
 
+  getListOfOrders() : Observable<Order[]>{
+    return this.http.get<Order[]>(`${this.SERVER_URL}/orders`).pipe(
+      map(res => res['data']),
+      // tap(res => {console.log("ListOrders service: " ,res)})
+    );
+  }
+
   deleteOrder(orderId) : Observable<void>{
     return this.http.delete<void>(`${this.SERVER_URL}/order/${orderId}?_method=DELETE`);
   }

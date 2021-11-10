@@ -1,0 +1,68 @@
+@import '../../colorCustom.scss';
+
+.order-container {
+	height: 100%;
+	width: 100%;
+	position: relative;
+
+	.header {
+		width: 100%;
+		
+		.name{
+			height: 40px;
+            
+            
+			span {
+				font-size: 32px;
+				color: $main-color;
+			}
+		}
+	}
+
+	.main-content {
+		width: 100%;
+        margin-top: 2.5%;
+
+		table {
+			width: 100%;
+			position: relative;
+            table-layout: fixed;
+
+            td {
+                overflow: hidden;
+                width:auto;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+			.mat-column-order_id {
+				width: 25%;
+			}
+
+            .mat-column-user_id {
+				width: 25%;
+			}
+
+            .mat-column-item_id {
+				width: 25%;
+			}
+
+            .mat-column-quantity {
+				width: 7%;
+			}
+
+            .mat-column-price {
+				width: 8%;
+			}
+
+			.mat-column-action {
+				width: 10%;
+				padding: 0 20px;
+
+				button {
+                    margin-left: 25%;
+				}
+			}
+		}
+	}
+}

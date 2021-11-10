@@ -5,7 +5,7 @@ const Order = new Schema(
     {
         user_id: {type: String},
         item_id: [],
-        quatity_item: [],
+        quantity_item: [],
         total_price: {type: String}
     },
     {

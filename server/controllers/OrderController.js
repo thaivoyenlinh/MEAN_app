@@ -11,7 +11,7 @@ class OrderController{
             const data = {
                 user_id: value.userId,
                 item_id: [value.itemId],
-                quatity_item: [1],
+                quantity_item: ['1'],
                 total_price: value.totalPrice
             }
             const order = new Order(data);
@@ -53,9 +53,24 @@ class OrderController{
         }
     }
 
+    getListOfOrders(req, res){
+        setTimeout(() => {
+            try{
+                Order
+                    .find({})
+                    .then((data) => {
+                        return res.status(200).json({message: "Fetch successfully list of orders",  
+                                                        status: 1, 
+                                                        data: data});
+                    })
+            }catch(error){
+                return res.status(500).json({message: "ERROR: Fetch list of orders is failure!!",  
+                status: 0});
+            }
+        }, 500);
+    }
+
     deleteOrder(req, res){
-        // console.log("delete order controller: ");
-        // console.log(req.params.id);
         setTimeout(() => {
             try{
                 Order
@@ -68,7 +83,6 @@ class OrderController{
                 return res.status(500).json({ message: {title: "ERROR", content: "You have failed to delete the order"},  status: 0});
             }
         }, 500);
-        
     }
 }
 
