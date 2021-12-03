@@ -112,7 +112,6 @@ class ItemController{
 
     getItemBySearch(req, res){
         console.log("SEARCH ITEM CONTROLLER: ");
-        // console.log(req.params);
         const text = req.params.search;
         console.log("text",text);
         try {

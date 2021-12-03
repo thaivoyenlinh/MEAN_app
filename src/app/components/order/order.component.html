@@ -27,6 +27,7 @@
 			<ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let row">
+					<button mat-icon-button id="details-button" title="Order Details" (click)="openOrderDetailsDialog(row)"><mat-icon>info</mat-icon></button>
                     <button mat-icon-button color="primary" title="Delete Order" (click)="onDelete(row._id)"><mat-icon>delete</mat-icon></button>
                 </td>
             </ng-container>

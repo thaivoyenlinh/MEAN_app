@@ -36,7 +36,7 @@ export class CreateCategoryComponent implements OnInit {
     this.CreateCategoryForm = new FormGroup({
       category_name: new FormControl("", [
         Validators.required,
-        Validators.pattern("^[a-z A-Z]{2,16}$"),
+        Validators.pattern("^[a-z A-Z]{2,20}$"),
       ]),
       // set category_image to clear form after submit
       category_image: new FormControl(null, Validators.required),

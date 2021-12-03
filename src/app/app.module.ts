@@ -56,6 +56,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { UserComponent } from './components/user/user.component';
 import { OrderComponent } from './components/order/order.component';
 import { ConfirmOrderComponent } from './components/dialog/confirm-order/confirm-order.component';
+import { OrderDetailsComponent } from './components/dialog/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { ConfirmOrderComponent } from './components/dialog/confirm-order/confirm
     UserComponent,
     OrderComponent,
     ConfirmOrderComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,6 +118,7 @@ import { ConfirmOrderComponent } from './components/dialog/confirm-order/confirm
     ItemDetailsDialogComponent,
     ToastMessageComponent,
     ConfirmOrderComponent,
+    OrderDetailsComponent,
   ],
 })
 export class AppModule { }

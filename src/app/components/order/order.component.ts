@@ -80,4 +80,8 @@ export class OrderComponent implements OnInit {
         }
       });
   }
+
+  openOrderDetailsDialog(row: string){
+    this.dialogService.openOrderDetailsDialog(row);
+  }
 }

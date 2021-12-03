@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="header">
+        <span>Item Details</span>
+        <mat-icon (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div class="main-content">
+        <div class="wrap">
+            <span class="field-name">Customer name: </span>
+            <span>{{userDetails.user_name}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Phone number: </span>
+            <span>{{userDetails.user_phoneNumber}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Address: </span>
+            <span>{{userDetails.user_address}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Item name: </span>
+            <span>{{itemDetails.item_name}}</span>
+        </div>
+        <div class="wrap">
+            <span class="field-name">Total price: </span>
+            <span>{{itemDetails.item_price}}</span>
+        </div>
+    </div>
+</div>

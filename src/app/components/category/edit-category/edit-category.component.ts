@@ -36,7 +36,7 @@ export class EditCategoryComponent implements OnInit {
     this.EditCategoryForm = this.fb.group({
       category_name_replace: new FormControl('', [
         Validators.required,
-        Validators.pattern("^[a-z A-Z]{2,16}$"),
+        Validators.pattern("^[a-z A-Z]{2,20}$"),
       ]),
       // category_image_replace: new FormControl(null, Validators.required),
     });

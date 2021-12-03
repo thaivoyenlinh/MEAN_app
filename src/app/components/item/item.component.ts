@@ -77,8 +77,8 @@ export class ItemComponent implements OnInit {
 		this.listOfCategories$ = this.categoryService.getListOfCategories();
 		this.search$ = this.searchText.valueChanges.pipe(
 			startWith(''),
-			tap((data) => {console.log(data)}),
-			// debounceTime(200),
+			tap((data) => {console.log("Datasearch: ",data)}),
+			// debounceTime(100),
 			distinctUntilChanged(),
 			switchMap((data) => data ? this.itemService.getItemsBySearch(data) : of(null)),
 			map(res => res && res['data']),
