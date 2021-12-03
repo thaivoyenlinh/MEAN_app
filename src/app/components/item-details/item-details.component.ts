@@ -79,7 +79,13 @@ export class ItemDetailsComponent implements OnInit {
 		};
 		this.router.navigate(['/cart'], navigationExtras);
 	}
-	
+
+	buyNow(itemId: string){
+		let navigationExtras: NavigationExtras = {
+			queryParams:{ Id: itemId} 
+		};
+		this.router.navigate(['/checkout'], navigationExtras);
+	}
 
 }
 
