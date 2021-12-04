@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Category } from '../../interfaces/category/category';
 import { Item } from '../../interfaces/item/item';
 import { CategoryService } from '../../services/category/category.service';
+import { ItemService } from "../../services/item/item.service";
 
 import { Observable } from 'rxjs';
 
@@ -20,17 +21,25 @@ export class HomeComponent implements OnInit {
 	item$: Observable<Item[]>;
 	searchText: FormControl = new FormControl('');
 	Search: FormGroup;
+	newItem$: Observable<Item[]>;
 
 	constructor(private router: Router,
 				private categoryService: CategoryService,
+				private itemService: ItemService,
 				) { }
 	
 	ngOnInit() {
+		this.init();
+	}
+
+	init(){
 		this.categories$ = this.categoryService.getListOfCategories();
 		this.Search = new FormGroup ({
 			searchText: new FormControl('')
 		})
-	}
+
+		this.newItem$ = this.itemService.getListOfItems();
+	}	
 
 	onSearch(){
 		// console.log("Value: ", this.Search.value);
@@ -48,6 +57,13 @@ export class HomeComponent implements OnInit {
 			queryParams: { name: categoryName},
 		};
 		this.router.navigate(['/listitem'], navigationExtras);
+	}
+
+	selectItem(itemId: string){
+		let navigationExtras: NavigationExtras = {
+			queryParams: { Id: itemId},
+		};
+		this.router.navigate(['/itemdetails'], navigationExtras);
 	}
 
 }
