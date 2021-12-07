@@ -36,7 +36,7 @@
                         </mat-form-field>
                         <div *ngIf="UserInformationForm.get('address').invalid && (UserInformationForm.get('address').touched || UserInformationForm.get('address').dirty)" class="error-message">
                             <small *ngIf="UserInformationForm.get('address').errors?.required">*Address is required</small>
-                            <small *ngIf="UserInformationForm.get('address').errors?.pattern">*Address must have at least 10 and no more than 100 characters</small>
+                            <small *ngIf="UserInformationForm.get('address').errors?.pattern">*Address must have at least 10 and no more than 100 characters, does not contain special characters</small>
                         </div>
 
                         <div class="button">

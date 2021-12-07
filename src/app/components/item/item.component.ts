@@ -128,6 +128,7 @@ export class ItemComponent implements OnInit {
 	}
 
 	openItemDetailsDialog(row){
+		// console.log("row: ",row)
 		this.dialogService.openItemDetailsDialog(row);
 	}
 

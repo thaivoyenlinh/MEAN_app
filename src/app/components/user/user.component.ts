@@ -14,6 +14,7 @@ import { DialogService } from "../../services/dialog/dialog.service";
 })
 export class UserComponent implements OnInit {
   displayedColumns: string[] = [
+    "user_id",
     "user_name",
     "user_phone_number",
     "user_address",

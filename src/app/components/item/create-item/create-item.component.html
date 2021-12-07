@@ -12,7 +12,7 @@
                 <div *ngIf="CreateItemForm.get('item_name').invalid && (CreateItemForm.get('item_name').touched || CreateItemForm.get('item_name').dirty)" class="error-message">
                     <small *ngIf="CreateItemForm.get('item_name').errors?.required">*Name is required</small>
                     <small *ngIf="CreateItemForm.get('item_name').errors?.pattern">
-                        *Name contain only letter, at least 2 and no more than 30 characters 
+                        *Name contain only letter, at least 2 and no more than 50 characters 
                     </small>
                 </div>
             </div>

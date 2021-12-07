@@ -34,24 +34,28 @@
                 white-space: nowrap;
             }
 
+			.mat-column-user_id {
+				width: 21%;
+			}
+
 			.mat-column-user_name {
-				width: 20%;
+				width: 14%;
 			}
 
             .mat-column-user_phone_number {
-				width: 20%;
+				width: 9%;
 			}
 
             .mat-column-user_address {
-				width: 45%;
+				width: 41%;
 			}
 
 			.mat-column-action {
-				width: 10%;
-				padding: 0 20px;
+				width: 5%;
+				padding: 0 10px;
 
 				button {
-                    margin-left: 25%;
+                    margin-left: 15%;
 				}
 			}
 		}

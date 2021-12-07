@@ -44,7 +44,7 @@ export class CreateItemComponent implements OnInit {
     this.CreateItemForm = new FormGroup({
       item_name: new FormControl("", [
         Validators.required,
-        Validators.pattern("^[A-z0-9 ]{2,30}$"),
+        Validators.pattern("^[A-z0-9 ]{2,50}$"),
       ]),
       item_price: new FormControl("", [
         Validators.required,

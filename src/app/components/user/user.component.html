@@ -1,12 +1,16 @@
 <div class="user-container">
 	<div class="header">
 		<div class="name">
-			<span>User</span>
+			<span>Customer</span>
 		</div>
 	</div>
 
 	<div class="main-content">
 		<table mat-table [dataSource]="userData" class="mat-elevation-z8">
+			<ng-container matColumnDef="user_id">
+				<th mat-header-cell *matHeaderCellDef> Customer ID </th>
+				<td mat-cell *matCellDef="let element"> {{element._id}} </td>
+			</ng-container>
 			<ng-container matColumnDef="user_name">
 				<th mat-header-cell *matHeaderCellDef> Name </th>
 				<td mat-cell *matCellDef="let element"> {{element.user_name}} </td>

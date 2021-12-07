@@ -31,7 +31,7 @@ export class ConfirmOrderComponent implements OnInit {
     private userService: UserService,
     private orderService: OrderService,
     private dialogService: DialogService,
-    private loadingService: LoadingScreenService
+    private loadingService: LoadingScreenService,
   ) {}
 
   ngOnInit() {
@@ -81,4 +81,5 @@ export class ConfirmOrderComponent implements OnInit {
     this.dialogRef.close(false);
     this.router.navigateByUrl("/");
   }
+
 }
