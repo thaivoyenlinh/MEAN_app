@@ -33,13 +33,20 @@
             }
         }
     }
-
     
-    .list-categories, .list-new-items{
-        margin-top: 0.5%;
-        padding-bottom: 1%;
+    .wrap {
+        margin-top: 3%;
+        padding-bottom: 5%;
+    }
 
+    .new-item-list, .list-category {
+        margin-top: 2%;
+        padding-bottom: 1%;
+        overflow: hidden;
+        
         .name{
+            margin-left: 0.6%;
+
             span{
                 font-size: 23px;
                 font-family: 'Poppins', sans-serif;
@@ -52,19 +59,28 @@
                 width: 25px;
             }
         }
+        
+        .example-card {
+            width: 139px;
+            margin: 0 10px;
+            margin-top: 10px;
+            float: left;
+            font-family: 'Poppins', sans-serif;
 
-        .categories, .items{
-            display: grid;
-            grid-template-columns: 13.9% 13.9% 13.9% 13.9% 13.9% 13.9% 13.9%;
-            grid-gap: 3.5% 0.4%;
-            padding: 0.3% 0 3% 0;
+            .text-oneline ::ng-deep * {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                font-weight: 500;
+            }
 
-            .category, .item{
-                text-align: center;
-                font-size: 18px;
-                font-family: 'Poppins', sans-serif;
-                padding: 15px;
-                background-color: rgb(245, 242, 242);
+            img {
+                height: 170px;
+                width: 171px;
+            }
+
+            .category-name {
+                text-align: center
             }
         }
     }

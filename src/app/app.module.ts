@@ -41,6 +41,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
 
   // core.js:9110 ERROR Error: Uncaught (in promise): NullInjectorError: StaticInjectorError(AppModule)[GalleryComponent -> Gallery]: 
   // StaticInjectorError(Platform: core)[GalleryComponent -> Gallery]: 
@@ -109,6 +110,7 @@ import { OrderDetailsComponent } from './components/dialog/order-details/order-d
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
+    MatCardModule,
   ],
 
   providers: [Gallery],

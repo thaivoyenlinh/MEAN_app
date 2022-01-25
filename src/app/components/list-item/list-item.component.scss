@@ -31,32 +31,49 @@
         }
     }
 
-    .list-items{
-        margin-top: 1%;
+    .list-item {
+        margin-top: 2%;
+        padding-bottom: 1%;
+        overflow: hidden;
+        font-family: 'Poppins', sans-serif;
+        
+        .name{
+            margin-left: 0.6%;
 
-        .items{
-            display: grid;
-            grid-template-columns: 15% 15% 15% 15% 15% 15%;
-            grid-gap: 3% 2%;
-    
-            .item{
-                text-align: center;
+            span{
+                font-size: 23px;
+                letter-spacing: 1px;
+            }
+
+            img{
+                margin-bottom: -0.3%;
+                height: 25px;
+                width: 25px;
+            }
+        }
+        
+        .example-card {
+            width: 141px;
+            margin: 0 8px;
+            margin-top: 10px;
+            float: left;
+
+            .text-oneline ::ng-deep * {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                font-weight: 500;
+            }
+
+            .price {
+                color: orangered;
                 font-size: 16px;
                 font-family: 'Poppins', sans-serif;
-                padding: 15px;
-                background-color: #fff;
-                background-color: rgb(247, 244, 244);
-    
-                span{
-                    display: block;
-                    text-align: left;
-                    margin-left: 5px;
-                }
-    
-                .price {
-                    color: orangered;
-                    font-size: 18px;
-                }
+            }
+
+            img {
+                height: 170px;
+                width: 173px;
             }
         }
     }

@@ -9,37 +9,31 @@
         </form>
     </div>
 
-    <div class="list-new-items category">
+    <div class="new-item-list">
         <div class="name">
             <span>NEW ITEM</span>
             <img src="https://img.icons8.com/fluency/48/000000/star.png"/>
         </div>
-        <section class="items">
-            <div class="item" *ngFor="let item of newItem$ | async | slice:-7" (click)="selectItem(item._id)">
-                <div class="image">
-                    <img src="{{item.item_image[0]}}" width="100" height="100">
-                </div>
-                <div class="category-name">
-                    <span>{{item.item_name}}</span>
-                </div>
-            </div>
-        </section>
+        <mat-card class="example-card" *ngFor="let item of newItem$ | async | slice:-6" (click)="selectItem(item._id)">
+            <img mat-card-image src="{{item.item_image[0]}}">
+            <mat-card-content class="text-oneline">
+                <p>{{item.item_name}}</p>
+            </mat-card-content>
+        </mat-card>
     </div>
     
-    <div class="list-categories">
-        <div class="name">
-            <span>CATEGORY</span>
-        </div>
-        <section class="categories" >
-            <div class="category" *ngFor="let category of categories$ | async" (click)="selectCategory(category.category_name)">
-                <div class="image">
-                    <img src="{{category.category_image}}" width="100" height="100">
-                </div>
-                <div class="category-name">
-                    <span>{{category.category_name}}</span>
-                </div>
+    <div class="wrap">
+        <div class="list-category">
+            <div class="name">
+                <span>CATEGORY</span>
             </div>
-        </section>
+            <mat-card class="example-card" *ngFor="let category of categories$ | async" (click)="selectCategory(category.category_name)">
+                <img mat-card-image src="{{category.category_image}}">
+                <mat-card-content class="category-name">
+                    <p>{{category.category_name}}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>
     
