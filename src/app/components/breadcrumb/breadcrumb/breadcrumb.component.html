@@ -1,0 +1,7 @@
+<!-- <p>breadcrumb works!</p> -->
+
+<ul> 
+    <li *ngFor="let breadcrumb of (breadcrumbs$ | async)"> 
+      <a [href]="breadcrumb.url">{{ breadcrumb.label }}</a> 
+    </li> 
+</ul> 

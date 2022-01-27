@@ -58,6 +58,7 @@ import { UserComponent } from './components/user/user.component';
 import { OrderComponent } from './components/order/order.component';
 import { ConfirmOrderComponent } from './components/dialog/confirm-order/confirm-order.component';
 import { OrderDetailsComponent } from './components/dialog/order-details/order-details.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { OrderDetailsComponent } from './components/dialog/order-details/order-d
     OrderComponent,
     ConfirmOrderComponent,
     OrderDetailsComponent,
+    BreadcrumbComponent,
   ],
   imports: [
     BrowserModule,
