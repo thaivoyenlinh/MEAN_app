@@ -21,4 +21,5 @@ const itemStorage = multer.diskStorage({
 
 const uploadCategoryImage = multer({ storage: categoryStorage });
 const uploadItemImage = multer({ storage: itemStorage });
+
 module.exports = { uploadCategoryImage, uploadItemImage };

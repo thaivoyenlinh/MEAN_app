@@ -1,205 +1,93 @@
-const Category = require("../models/category");
-const baseURL = "http://localhost:4100";
+const logger = require("../config/logger");
+const categoryService = require("../services/category");
+const apiResponse = require("../utilities/apiResponses");
 
-class CategoryController {
-  storeCategory(req, res) {
-    setTimeout(() => {
-      try {
-        const pathToImage = `/images/categories/${req.file.filename}`;
-        console.log(pathToImage);
-        const data = {
-          category_name: req.body.category_name,
-          category_image: pathToImage,
-        };
-        const category = new Category(data);
-        category.save().then(() => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully inserted the category",
-            },
-            status: 1,
-          });
-          //* test ERROR Message
-          // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to insert the category"},  status: 0});
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: {
-            title: "ERROR",
-            content: "You have failed to insert the category",
-          },
-          status: 0,
-        });
-        //* test ERROR Message
-        // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully inserted the category"},  status: 1});
-      }
-    }, 500);
+exports.addCategory = async (req, res) => {
+  try {
+    logger.info("Category controller");
+    logger.info("addCategory()");
+    const pathToImage = `/images/categories/${req.file.filename}`;
+    logger.info("Category file uploaded succesfully!");
+    logger.info(`Filename: ${req.file.filename}`);
+    const data = {
+      category_name: req.body.category_name,
+      category_image: pathToImage,
+    };
+    await categoryService.addCategory(data);
+    logger.info("addCategory(): add the category sucessfully");
+    const messageObj = {
+      title: "SUCCESS",
+      content: "You have successfully inserted the category",
+    };
+    return apiResponse.successResponse(res, messageObj);
+  } catch (error) {
+    logger.error(
+      `addCategory(): add the category failure. Message: ${error.message}. Stack: ${error.stack}`
+    );
+    return apiResponse.errorResponse(
+      res,
+      "ERROR: Add the category is failure!!"
+    );
   }
+};
 
-  //! get all categories
-  /**
-   * Function to get list of categories
-   * @param {*} req : request from client
-   * @param {*} res : response from server
-   * @returns response object
-   */
-  getListOfCategories(req, res) {
-    setTimeout(() => {
-      try {
-        Category.find({}).then((data) => {
-          data.forEach((category) => {
-            category.category_image = baseURL + category.category_image;
-          });
-          return res.status(200).json({
-            message: "Fetch successfully list of categories",
-            status: 1,
-            data: data,
-          });
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: "ERROR: Fetch list of categories is failure!!",
-          status: 0,
-        });
-      }
-    }, 500);
-  }
-
-  /**
-   * Function to delete a category by its category id  (use remove method)
-   * This function just already to delete,
-   * not update this auto reload to update content, handle in client side
-   * @param {*} req
-   * @param {*} res
-   * @returns
-   */
-  deleteCategory(req, res) {
-    try {
-      const categoryId = req.params.id;
-      Category.remove({ _id: categoryId }).then(() => {
-        return res.status(200).json({
-          message: {
-            title: "SUCCESS",
-            content: "You have successfully deleted the category",
-          },
-          status: 1,
-        });
-        //* test ERROR message
-        // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to delete the category"},  status: 0});
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: {
-          title: "ERROR",
-          content: "You have failed to delete the category",
-        },
-        status: 0,
-      });
-      //* test ERROR message
-      // return res.status(500).json({ message: {title: "SUCCESS", content: "You have successfully deleted the category"},  status: 1});
+exports.getCategories = async (req, res) => {
+  try {
+    logger.info("Category controller");
+    logger.info("getCategories()");
+    const listOfCategories = await categoryService.getCategories();
+    if (listOfCategories.length > 0) {
+      logger.info("getCategories(): get all categories sucessfully");
+      return apiResponse.successResponseWithData(
+        res,
+        "Get successfully list of categories",
+        listOfCategories
+      );
+    } else {
+      return apiResponse.notFoundResponse(res, "No category found");
     }
+  } catch (error) {
+    logger.error(
+      `getCategories(): get list of categories failure. Message: ${error.message}. Stack: ${error.stack}`
+    );
+    return apiResponse.errorResponse(
+      res,
+      "ERROR: Get list of categories is failure!!"
+    );
   }
+};
 
-  //TODO EDIT FEATURE
-  /**
-   * Function to get a category by its category id
-   * @param {*} req : request from client
-   * @param {*} res : response from server
-   * @returns response object
-   */
-  getCategory(req, res) {
-    try {
-      const categoryId = req.params.id;
-      Category.findOne({ _id: categoryId }).then((data) => {
-        //? return message to notify,
-        //? with status to set condition navigaion to different page
-        //? transmis data from Server to Client
-        return res.status(200).json({
-          message: "Fetch successfully a category",
-          status: 1,
-          data: data,
-        });
-      });
-    } catch (error) {
-      return res
-        .status(500)
-        .json({ message: "ERROR: Fetch a category is failure!!", status: 0 });
+exports.getCategory = async (req, res) => {
+  try {
+    logger.info("Category controller");
+    const categoryID = req.params.id;
+    logger.info(`getCategory(), params: ${categoryID}`);
+    const category = await categoryService.getCategory(categoryID);
+    if (category.length > 0) {
+      logger.info(
+        `getCategory(): get the category with ID ${categoryID} sucessfully`
+      );
+      return apiResponse.successResponseWithData(
+        res,
+        "Get successfully the category",
+        category
+      );
+    } else {
+      return apiResponse.notFoundResponse(res, "No category found");
     }
+  } catch (error) {
+    logger.error(
+      `getCategory(): get the category failure. Message: ${error.message}. Stack: ${error.stack}`
+    );
+    return apiResponse.errorResponse(
+      res,
+      "ERROR: Get the categories is failure!!"
+    );
   }
+};
 
-  /**
-   * Function to update a category by its category id
-   * @param {*} req : request from client
-   * @param {*} res : response from server
-   * @returns response object
-   */
-  updateAllFieldCategory(req, res) {
-    setTimeout(() => {
-      try {
-        const categoryId = req.params.id;
-        const pathToImage = `/images/categories/${req.file.filename}`;
-        // console.log(categoryId);
-        let newCategory = {
-          category_name: req.body.category_name,
-          category_image: pathToImage,
-        };
+exports.updateCategory = async (req, res) => {};
 
-        console.log("newCategory: ", newCategory);
-        Category.updateOne({ _id: categoryId }, newCategory).then(() => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully updated the category",
-            },
-            status: 1,
-          });
-          // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: {
-            title: "ERROR",
-            content: "You have failed to update the category",
-          },
-          status: 0,
-        });
-        // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
-      }
-    }, 500);
-  }
+exports.updateAllFieldCategory = async (req, res) => {};
 
-  updateCategory(req, res) {
-    setTimeout(() => {
-      try {
-        const categoryId = req.params.id;
-        let newCategory = {
-          category_name: req.body.category_name,
-        };
-
-        console.log("newCategory: ", newCategory);
-        Category.updateOne({ _id: categoryId }, newCategory).then(() => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully updated the category",
-            },
-            status: 1,
-          });
-          // return res.status(200).json({ message: {title: "ERROR", content: "You have failed to update the category"}, status: 0});
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: {
-            title: "ERROR",
-            content: "You have failed to update the category",
-          },
-          status: 0,
-        });
-        // return res.status(500).json( {message: {title: "SUCCESS", content: "You have successfully updated the category"}, status: 1});
-      }
-    }, 500);
-  }
-}
-
-module.exports = new CategoryController();
+exports.deleteCategory = async (req, res) => {};

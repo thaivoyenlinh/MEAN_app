@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const CategoryController = require("../controllers/CategoryController");
-const { uploadCategoryImage } = require("../config/upload");
+const categoryController = require("../controllers/CategoryController");
+const fileUploadMiddleware = require("../middlewares/fileUpload");
 
 //! First declare, client side use what method to send request to server side,
 //! declare this method again in here
 
 router.post(
   "/category",
-  uploadCategoryImage.single("category_image"),
-  CategoryController.storeCategory
+  fileUploadMiddleware.uploadCategoryImage.single("category_image"),
+  categoryController.addCategory
 );
-router.get("/category/:id", CategoryController.getCategory);
-router.get("/categories", CategoryController.getListOfCategories);
-router.patch("/category/:id", CategoryController.updateCategory);
+router.get("/category/:id", categoryController.getCategory);
+router.get("/categories", categoryController.getCategories);
+router.patch("/category/:id", categoryController.updateCategory);
 router.put(
   "/category/:id",
-  uploadCategoryImage.single("category_image"),
-  CategoryController.updateAllFieldCategory
+  fileUploadMiddleware.uploadCategoryImage.single("category_image"),
+  categoryController.updateAllFieldCategory
 );
-router.delete("/category/:id", CategoryController.deleteCategory);
+router.delete("/category/:id", categoryController.deleteCategory);
 
 module.exports = router;

@@ -13,6 +13,8 @@ const route = require("./routers");
 //! has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 const cors = require("cors");
 
+const logger = require('./config/logger');
+
 //static file configuration to access public folder in server
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -40,8 +42,6 @@ route(app);
 
 if (!module.parent) {
   app.listen(process.env.SERVER_PORT, process.env.HOSTNAME, () => {
-    console.info(
-      `Server running at http://${process.env.HOSTNAME}:${process.env.SERVER_PORT}`
-    );
+    logger.info(`Server running at http://${process.env.HOSTNAME}:${process.env.SERVER_PORT}`);
   });
 }
