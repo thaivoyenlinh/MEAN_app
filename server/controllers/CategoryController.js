@@ -64,7 +64,7 @@ exports.getCategory = async (req, res) => {
     const categoryID = req.params.id;
     logger.info(`getCategory(), params: ${categoryID}`);
     const category = await categoryService.getCategory(categoryID);
-    if (category.length > 0) {
+    if (category) {
       logger.info(
         `getCategory(): get the category with ID ${categoryID} sucessfully`
       );
