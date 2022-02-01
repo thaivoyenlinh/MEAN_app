@@ -8,26 +8,27 @@ exports.addCategory = async (req, res) => {
     logger.info("addCategory()");
     const pathToImage = `/images/categories/${req.file.filename}`;
     logger.info("Category file uploaded succesfully!");
-    logger.info(`Filename: ${req.file.filename}`);
+    logger.info(`Path to file: ${pathToImage}`);
     const data = {
       category_name: req.body.category_name,
       category_image: pathToImage,
     };
     await categoryService.addCategory(data);
     logger.info("addCategory(): add the category sucessfully");
-    const messageObj = {
+    const successMessageObj = {
       title: "SUCCESS",
       content: "You have successfully inserted the category",
     };
-    return apiResponse.successResponse(res, messageObj);
+    return apiResponse.successResponse(res, successMessageObj);
   } catch (error) {
     logger.error(
       `addCategory(): add the category failure. Message: ${error.message}. Stack: ${error.stack}`
     );
-    return apiResponse.errorResponse(
-      res,
-      "ERROR: Add the category is failure!!"
-    );
+    const errorMessageObj = {
+      title: "ERROR",
+      content: "You have failed to insert the category",
+    };
+    return apiResponse.errorResponse(res, errorMessageObj);
   }
 };
 
@@ -86,8 +87,87 @@ exports.getCategory = async (req, res) => {
   }
 };
 
-exports.updateCategory = async (req, res) => {};
+exports.updateCategory = async (req, res) => {
+  try {
+    logger.info("Category controller");
+    const categoryID = req.params.id;
+    let newCategory = {
+      category_name: req.body.category_name,
+    };
+    logger.info(`updateCategory(), params: ${categoryID}`);
+    await categoryService.updateCategory(categoryID, newCategory);
+    logger.info(
+      `updateCategory(): update the category with ID ${categoryID}, new category data: ${newCategory} sucessfully`
+    );
+    const messageObj = {
+      title: "SUCCESS",
+      content: "You have successfully updated the category",
+    };
+    return apiResponse.successResponse(res, messageObj);
+  } catch (error) {
+    logger.error(
+      `updateAllFieldCategory(): update the category failure. Message: ${error.message}. Stack: ${error.stack}`
+    );
+    return apiResponse.errorResponse(
+      res,
+      "ERROR: Get the categories is failure!!"
+    );
+  }
+};
 
-exports.updateAllFieldCategory = async (req, res) => {};
+exports.updateAllFieldCategory = async (req, res) => {
+  try {
+    logger.info("Category controller");
+    const categoryID = req.params.id;
+    const pathToImage = `/images/categories/${req.file.filename}`;
+    let newCategory = {
+      category_name: req.body.category_name,
+      category_image: pathToImage,
+    };
+    logger.info(`updateAllFieldCategory(), params: ${categoryID}`);
+    await categoryService.updateCategory(categoryID, newCategory);
+    logger.info(
+      `updateAllFieldCategory(): update the category with ID ${categoryID}, new category data: ${newCategory} sucessfully`
+    );
+    const successMessageObj = {
+      title: "SUCCESS",
+      content: "You have successfully updated the category",
+    };
+    return apiResponse.successResponse(res, successMessageObj);
+  } catch (error) {
+    logger.error(
+      `updateAllFieldCategory(): update the category failure. Message: ${error.message}. Stack: ${error.stack}`
+    );
+    const errorMessageObj = {
+      title: "ERROR",
+      content: "You have failed to update the category",
+    };
+    return apiResponse.errorResponse(res, errorMessageObj);
+  }
+};
 
-exports.deleteCategory = async (req, res) => {};
+exports.deleteCategory = async (req, res) => {
+  try {
+    logger.info("Category controller");
+    const categoryID = req.params.id;
+    logger.info(`deleteCategory(), params: ${categoryID}`);
+    await categoryService.deleteCategory(categoryID);
+    logger.info(
+      `deleteCategory(): delete the category with ID ${categoryID} sucessfully`
+    );
+    const successMessageObj = {
+      title: "SUCCESS",
+      content: "You have successfully deleted the category",
+    };
+    return apiResponse.successResponse(res, successMessageObj);
+  } catch (error) {
+    logger.error(
+      `deleteCategory(): deelete the category failure. Message: ${error.message}. Stack: ${error.stack}`
+    );
+    const errorMessageObj = {
+      title: "ERROR",
+      content: "You have failed to delete the category",
+    };
+    return apiResponse.errorResponse(res, errorMessageObj);
+  }
+};
