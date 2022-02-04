@@ -91,7 +91,7 @@ exports.getCategory = async (req, res) => {
       );
       return apiResponse.errorResponse(
         res,
-        "ERROR: Get the categories is failure!!"
+        "ERROR: Get the category is failure!!"
       );
     }
   }, 500);

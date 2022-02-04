@@ -1,6 +1,4 @@
-const { async } = require("rxjs/internal/scheduler/async");
 const logger = require("../config/logger");
-const order = require("../models/order");
 const orderService = require("../services/order");
 const apiResponse = require("../utilities/apiResponses");
 
@@ -10,7 +8,6 @@ exports.addOrder = async (req, res) => {
       logger.info("Order controller");
       logger.info("addOrder()");
       const value = req.body;
-      console.log(value);
       const data = {
         user_id: value.userId,
         item_id: [value.itemId],
@@ -30,7 +27,7 @@ exports.addOrder = async (req, res) => {
       );
       const errorMessageObj = {
         title: "ERROR",
-        content: "You have ordered failure",
+        content: "Your order failure",
       };
       return apiResponse.errorResponse(res, errorMessageObj);
     }
@@ -63,7 +60,7 @@ exports.getOrders = async (req, res) => {
       );
       return apiResponse.errorResponse(
         res,
-        "ERROR: Get list of categories is failure!!"
+        "ERROR: Get list of orders is failure!!"
       );
     }
   }, 500);
@@ -120,33 +117,7 @@ exports.deleteOrder = async (req, res) => {
         title: "ERROR",
         content: "You have failed to delete the order",
       };
-      1;
       return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };
-
-//   deleteOrder(req, res) {
-//     setTimeout(() => {
-//       try {
-//         Order.remove({ _id: req.params.id }).then(() => {
-//           return res.status(200).json({
-//             message: {
-//               title: "SUCCESS",
-//               content: "You have successfully deleted the order",
-//             },
-//             status: 1,
-//           });
-//         });
-//       } catch (error) {
-//         return res.status(500).json({
-//           message: {
-//             title: "ERROR",
-//             content: "You have failed to delete the order",
-//           },
-//           status: 0,
-//         });
-//       }
-//     }, 500);
-//   }
-// }

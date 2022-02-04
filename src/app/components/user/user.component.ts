@@ -56,24 +56,27 @@ export class UserComponent implements OnInit {
   }
 
   onDelete(userId: string) {
-    console.log("ID user", userId);
     this.dialogService
-      .openConfirmDialog('user')
+      .openConfirmDialog("order")
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.userService
-            .deleteUser(userId)
-            .pipe(
-              tap((res) => {
-                res["status"] == 1
-                  ? (this.init(),
-                    this.snackBarService.showSuccessMessage(res["message"]))
-                  : this.snackBarService.showErrorMessage(res["message"]);
-              })
-            )
-            .subscribe();
+          this.deleteOrder(userId);
         }
       });
+  }
+
+  deleteOrder(userId: string) {
+    this.userService
+      .deleteUser(userId)
+      .pipe(
+        tap((res) => {
+          res["status"] == 1
+            ? (this.init(),
+              this.snackBarService.showSuccessMessage(res["message"]))
+            : this.snackBarService.showErrorMessage(res["message"]);
+        })
+      )
+      .subscribe();
   }
 }

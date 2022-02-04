@@ -1,7 +1,5 @@
 const Order = require("../models/order");
 const logger = require("../config/logger");
-const order = require("../models/order");
-const baseURL = "http://localhost:4100";
 
 const addOrder = async (data) => {
   try {
@@ -33,7 +31,7 @@ const getOrders = async () => {
   }
 };
 
-const getLatestOrder = async (orderID) => {
+const getLatestOrder = async () => {
   try {
     logger.info("Order service");
     const result = await Order.findOne({}).sort({ _id: -1 });
