@@ -44,7 +44,7 @@ export class OrderComponent implements OnInit {
       .pipe(
         tap(
           (data) => {
-            console.log("Data:", data);
+            // console.log("Data:", data);
             this.orderData = new MatTableDataSource(data);
             this.orderData.paginator = this.orderPaginator;
           },
@@ -60,28 +60,31 @@ export class OrderComponent implements OnInit {
   }
 
   onDelete(orderId: string) {
-    console.log("ID user", orderId);
     this.dialogService
       .openConfirmDialog("order")
       .afterClosed()
       .subscribe((res) => {
         if (res) {
-          this.orderService
-            .deleteOrder(orderId)
-            .pipe(
-              tap((res) => {
-                res["status"] == 1
-                  ? (this.init(),
-                    this.snackBarService.showSuccessMessage(res["message"]))
-                  : this.snackBarService.showErrorMessage(res["message"]);
-              })
-            )
-            .subscribe();
+          this.deleteOrder(orderId);
         }
       });
   }
 
-  openOrderDetailsDialog(row: string){
+  deleteOrder(orderId: string) {
+    this.orderService
+      .deleteOrder(orderId)
+      .pipe(
+        tap((res) => {
+          res["status"] == 1
+            ? (this.init(),
+              this.snackBarService.showSuccessMessage(res["message"]))
+            : this.snackBarService.showErrorMessage(res["message"]);
+        })
+      )
+      .subscribe();
+  }
+
+  openOrderDetailsDialog(row: string) {
     this.dialogService.openOrderDetailsDialog(row);
   }
 }

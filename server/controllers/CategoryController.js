@@ -40,7 +40,11 @@ exports.getCategories = async (req, res) => {
       logger.info("Category controller");
       logger.info("getCategories()");
       const listOfCategories = await categoryService.getCategories();
-      if (listOfCategories.length > 0) {
+      if (
+        listOfCategories &&
+        Array.isArray(listOfCategories) &&
+        listOfCategories.length > 0
+      ) {
         logger.info("getCategories(): get all categories sucessfully");
         return apiResponse.successResponseWithData(
           res,
@@ -124,7 +128,7 @@ exports.updateCategory = async (req, res) => {
 };
 
 exports.updateAllFieldCategory = async (req, res) => {
-  return await setTimeout(async () => {    
+  return await setTimeout(async () => {
     try {
       logger.info("Category controller");
       const categoryID = req.params.id;

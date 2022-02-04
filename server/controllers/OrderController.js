@@ -1,10 +1,14 @@
-const Order = require("../models/order");
-const baseURL = "http://localhost:4100";
+const { async } = require("rxjs/internal/scheduler/async");
+const logger = require("../config/logger");
+const order = require("../models/order");
+const orderService = require("../services/order");
+const apiResponse = require("../utilities/apiResponses");
 
-class OrderController {
-  storeOrder(req, res) {
-    console.log("Order Controller!");
+exports.addOrder = async (req, res) => {
+  return await setTimeout(async () => {
     try {
+      logger.info("Order controller");
+      logger.info("addOrder()");
       const value = req.body;
       console.log(value);
       const data = {
@@ -13,93 +17,136 @@ class OrderController {
         quantity_item: ["1"],
         total_price: value.totalPrice,
       };
-      const order = new Order(data);
-      order.save().then(() => {
-        return res.status(200).json({
-          message: {
-            title: "SUCCESS",
-            content: "You have ordered successfully",
-          },
-          status: 1,
-        });
-      });
+      await orderService.addOrder(data);
+      logger.info("addOrder(): add the order successfully");
+      const successMessageObj = {
+        title: "SUCCESS",
+        content: "You have ordered successfully",
+      };
+      return apiResponse.successResponse(res, successMessageObj);
     } catch (error) {
-      return res.status(500).json({
-        message: { title: "ERROR", content: "You have ordered failure" },
-        status: 0,
-      });
+      logger.error(
+        `addOrder(): add the order failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "You have ordered failure",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
-  }
+  }, 500);
+};
 
-  getLatestOrder(req, res) {
-    console.log("get Latest Order Controller: ");
+exports.getOrders = async (req, res) => {
+  return await setTimeout(async () => {
     try {
-      Order.findOne({})
-        .sort({ _id: -1 })
-        .then((data) => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully fetched the latest order",
-            },
-            status: 1,
-            data: data,
-          });
-        });
+      logger.info("Order Controller");
+      logger.info("getOrders()");
+      const listOfOrders = await orderService.getOrders();
+      if (
+        listOfOrders &&
+        Array.isArray(listOfOrders) &&
+        listOfOrders.length > 0
+      ) {
+        logger.info("getOrders(): get all orders successfully");
+        return apiResponse.successResponseWithData(
+          res,
+          "Get successfully list of orders",
+          listOfOrders
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No order found");
+      }
     } catch (error) {
-      return res.status(500).json({
-        message: {
-          title: "ERROR",
-          content: "You have failed to fetch the latest order",
-        },
-        status: 0,
-        data: data,
-      });
+      logger.error(
+        `getOrders(): get list of orders failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: Get list of categories is failure!!"
+      );
     }
-  }
+  }, 500);
+};
 
-  getListOfOrders(req, res) {
-    setTimeout(() => {
-      try {
-        Order.find({}).then((data) => {
-          return res.status(200).json({
-            message: "Fetch successfully list of orders",
-            status: 1,
-            data: data,
-          });
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: "ERROR: Fetch list of orders is failure!!",
-          status: 0,
-        });
+exports.getLatestOrder = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Order controller");
+      logger.info("getLatestOrder()");
+      const latestOrder = await orderService.getLatestOrder();
+      if (latestOrder) {
+        logger.info("getLatestOrder(): get the latest order successfully");
+        return apiResponse.successResponseWithData(
+          res,
+          "Get successfully the latest order",
+          latestOrder
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No latest order is found");
       }
-    }, 500);
-  }
+    } catch (error) {
+      logger.error(
+        `getLatestOrder(): get the latest order failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: get the lastest order is failre"
+      );
+    }
+  }, 500);
+};
 
-  deleteOrder(req, res) {
-    setTimeout(() => {
-      try {
-        Order.remove({ _id: req.params.id }).then(() => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully deleted the order",
-            },
-            status: 1,
-          });
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: {
-            title: "ERROR",
-            content: "You have failed to delete the order",
-          },
-          status: 0,
-        });
-      }
-    }, 500);
-  }
-}
+exports.deleteOrder = async (req, res) => {
+  return setTimeout(async () => {
+    try {
+      logger.info("Order controller");
+      const orderID = req.params.id;
+      logger.info(`deleteOrder(), params: ${orderID}`);
+      await orderService.deleteOrder(orderID);
+      logger.info(
+        `deleteOrder(): delete the order with ID: ${orderID} successfully`
+      );
+      const successMessageObj = {
+        title: "SUCCESS",
+        content: "You have successfully deleted the order",
+      };
+      return apiResponse.successResponse(res, successMessageObj);
+    } catch (error) {
+      logger.error(
+        `deleteOrder(): delete the order failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "You have failed to delete the order",
+      };
+      1;
+      return apiResponse.errorResponse(res, errorMessageObj);
+    }
+  }, 500);
+};
 
-module.exports = new OrderController();
+//   deleteOrder(req, res) {
+//     setTimeout(() => {
+//       try {
+//         Order.remove({ _id: req.params.id }).then(() => {
+//           return res.status(200).json({
+//             message: {
+//               title: "SUCCESS",
+//               content: "You have successfully deleted the order",
+//             },
+//             status: 1,
+//           });
+//         });
+//       } catch (error) {
+//         return res.status(500).json({
+//           message: {
+//             title: "ERROR",
+//             content: "You have failed to delete the order",
+//           },
+//           status: 0,
+//         });
+//       }
+//     }, 500);
+//   }
+// }

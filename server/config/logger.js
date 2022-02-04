@@ -1,7 +1,7 @@
 const winston = require("winston");
 const path = require("path");
 
-// logger config using winson
+// logger config using winston
 module.exports = winston.createLogger({
   format: winston.format.combine(
     winston.format.splat(),

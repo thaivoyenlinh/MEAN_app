@@ -71,7 +71,7 @@ const deleteCategory = async (categoryID) => {
     logger.debug(JSON.stringify(result));
   } catch (error) {
     logger.error(
-      `updateCategory(): Error occurs while update the category with ID: ${categoryID}. Message: ${error.message}. Stack: ${error.stack}`
+      `deleteCategory(): Error occurs while delete the category with ID: ${categoryID}. Message: ${error.message}. Stack: ${error.stack}`
     );
   }
 };
