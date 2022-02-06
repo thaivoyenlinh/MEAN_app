@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const ItemController = require("../controllers/ItemController");
-const { uploadItemImage } = require("../middlewares/fileUpload");
+const itemController = require("../controllers/ItemController");
+const fileIUploadMiddleware = require("../middlewares/fileUpload");
 
 //array have limit of file, any don't have limit
 router.post(
   "/item",
-  uploadItemImage.any("item_image"),
-  ItemController.storeItem
+  fileIUploadMiddleware.uploadItemImage.any("item_image"),
+  itemController.addItem
 );
-router.post("/items", ItemController.getItemBy);
-router.get("/items", ItemController.getListOfItems);
-router.delete("/item/:id", ItemController.deleteItem);
-router.put("/item/:id", ItemController.updateItem);
-router.get("/items/list/:name", ItemController.getItemsByCategory);
-router.get("/item/:id", ItemController.getItemById);
-router.get("/items/:search", ItemController.getItemBySearch);
+router.post("/items", itemController.getItemsBy);
+router.get("/items", itemController.getItems);
+router.delete("/item/:id", itemController.deleteItem);
+router.put("/item/:id", itemController.updateItem);
+router.get("/items/list/:name", itemController.getItemsByCategory);
+router.get("/item/:id", itemController.getItemByID);
+router.get("/items/:search", itemController.getItemsBySearchText);
 
 module.exports = router;

@@ -1,252 +1,263 @@
-const { base } = require("../models/item");
-const Item = require("../models/item");
-const baseURL = "http://localhost:4100";
+const logger = require("../config/logger");
+const itemService = require("../services/item");
+const apiResponse = require("../utilities/apiResponses");
 
-class ItemController {
-  storeItem(req, res) {
-    setTimeout(() => {
+exports.addItem = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      logger.info("addItem()");
       const files = req.files;
       const pathToImages = [];
-      try {
-        files.forEach((file) => {
-          const path = `/images/items/${req.body.item_name}/${file.filename}`;
-          pathToImages.push(path);
-        });
-        //! [Object: null prototype] => user parse to transfer to object {}
-        const obj = JSON.parse(JSON.stringify(req.body));
-        const data = {
-          item_name: obj.item_name,
-          item_price: obj.item_price,
-          item_category: obj.item_category,
-          item_type: obj.item_type,
-          item_discription: obj.item_discription,
-          item_image: pathToImages,
-        };
-        const item = new Item(data);
-        item.save().then(() => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully inserted the item",
-            },
-            status: 1,
-          });
-          // return res.status(200).json({
-          //     message: {title: "ERROR", content: "You have failed to insert the item"},
-          //     status: 0
-          // });
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: {
-            title: "ERROR",
-            content: "You have failed to insert the item",
-          },
-          status: 0,
-        });
-        // return res.status(500).json({
-        //     message: {title: "SUCCESS", content: "You have successfully inserted the item"},
-        //     status: 1
-        // });
-      }
-    }, 500);
-  }
-
-  getListOfItems(req, res) {
-    // setTimeout(() => {
-    try {
-      Item.find({}).then((data) => {
-        data.forEach((item) => {
-          /*can not use forEach in for array item_image this case 
-                            because value of this variable cannot be get out of function in forEach. 
-                            Need to directively impact to value in this case and get out*/
-          /*data.forEach(item => {
-                                item.item_image.forEach(path => {
-                                    path = baseURL + path;
-                                }) 
-                            }); */
-
-          for (let i = 0; i < item.item_image.length; i++) {
-            item.item_image[i] = baseURL + item.item_image[i];
-          }
-        });
-        // console.log(data);
-        return res.json({
-          message: "Fetch list of items successful!!",
-          status: 1,
-          data: data,
-        });
+      files.forEach((file) => {
+        const path = `/images/items/${req.body.item_name}/${file.filename}`;
+        pathToImages.push(path);
+        logger.info(`path to file: ${pathToImages}`);
       });
+      const obj = JSON.parse(JSON.stringify(req.body));
+      const data = {
+        item_name: obj.item_name,
+        item_price: obj.item_price,
+        item_category: obj.item_category,
+        item_type: obj.item_type,
+        item_discription: obj.item_discription,
+        item_image: pathToImages,
+      };
+      await itemService.addItem(data);
+      logger.info("addItem(): add the item successfully");
+      const successMessageObj = {
+        title: "SUCCESS",
+        content: "You have successfully inserted the item",
+      };
+      return apiResponse.successResponse(res, successMessageObj);
     } catch (error) {
-      return res.json({ message: "Fetch list of items failure!!", status: 0 });
-    }
-    // }, 500)
-  }
-
-  deleteItem(req, res) {
-    try {
-      const itemId = req.params.id;
-      Item.remove({ _id: itemId }).then(() => {
-        return res.status(200).json({
-          message: {
-            title: "SUCCESS",
-            content: "You have successfully deleted the item",
-          },
-          status: 1,
-        });
-        // return res.status(200).json({
-        //     message: {title: "ERROR", content: "You have failed to delete the item"},
-        //     status: 0
-        // });
-      });
-    } catch (error) {
-      return res.status(500).json({
-        message: {
-          title: "ERROR",
-          content: "You have failed to delete the item",
-        },
-        status: 0,
-      });
-      // return res.status(500).json({
-      //     message: {title: "SUCCESS", content: "You have successfully deleted the item"},
-      //     status: 1
-      // });
-    }
-  }
-
-  getItemBySearch(req, res) {
-    console.log("SEARCH ITEM CONTROLLER: ");
-    const text = req.params.search;
-    console.log("text", text);
-    try {
-      Item.find({
-        item_name: {
-          // i: To match both lower case and upper case pattern in the string.
-          $regex: text,
-          $options: "i",
-        },
-      }).then((data) => {
-        data.forEach((item) => {
-          for (let i = 0; i < item.item_image.length; i++) {
-            item.item_image[i] = baseURL + item.item_image[i];
-          }
-        });
-        console.log("DATA", data);
-        return res.json({
-          message: "get items by search successful!!",
-          status: 1,
-          data: data,
-        });
-      });
-    } catch (error) {
-      return res.json({ message: "Fetch list of items failure!!", status: 0 });
-    }
-  }
-
-  updateItem(req, res) {
-    setTimeout(() => {
-      try {
-        const itemId = req.params.id,
-          data = req.body;
-        let newItem = {
-          item_name: data.item_name_replace,
-          item_price: data.item_price_replace,
-          item_category: data.item_category_replace,
-          item_type: data.item_type_replace,
-          item_discription: data.item_discription_replace,
-        };
-        Item.updateOne({ _id: itemId }, newItem).then(() => {
-          return res.status(200).json({
-            message: {
-              title: "SUCCESS",
-              content: "You have successfully updated the item",
-            },
-            status: 1,
-          });
-          // return res.status(200).json({
-          //     message: {title: "ERROR", content: "You have failed to update the item"},
-          //     status: 0
-          // });
-        });
-      } catch (error) {
-        return res.status(500).json({
-          message: {
-            title: "ERROR",
-            content: "You have failed to update the item",
-          },
-          status: 0,
-        });
-        // return res.status(500).json({
-        //     message: {title: "SUCCESS", content: "You have successfully updated the item"},
-        //     status: 1
-        // });
-      }
-    }, 500);
-  }
-
-  getItemsByCategory(req, res) {
-    try {
-      const categoryName = req.params.name;
-      Item.find({ item_category: categoryName }).then((data) => {
-        data.forEach((item) => {
-          for (let i = 0; i < item.item_image.length; i++) {
-            item.item_image[i] = baseURL + item.item_image[i];
-          }
-        });
-        return res.json({
-          message: "Fetch item successful!!",
-          status: 1,
-          data: data,
-        });
-      });
-    } catch (error) {
-      return res.json({ message: "Fetch item failure!!", status: 0 });
-    }
-  }
-
-  getItemById(req, res) {
-    try {
-      const itemId = req.params.id;
-      Item.findOne({ _id: itemId }).then((data) => {
-        for (let i = 0; i < data.item_image.length; i++) {
-          data.item_image[i] = baseURL + data.item_image[i];
-        }
-
-        return res.json({
-          message: "Fetch item successful!!",
-          status: 1,
-          data: data,
-        });
-      });
-    } catch (error) {
-      return res.json({ message: "Fetch item failure!!", status: 0 });
-    }
-  }
-
-  getItemBy(req, res) {
-    console.log(req.body);
-    const filterKey = req.body.filter;
-    const filterValue = req.body.filterValue;
-    try {
-      Item.find({ [filterKey]: { $regex: filterValue, $options: "i" } }).then(
-        (data) => {
-          data.forEach((item) => {
-            for (let i = 0; i < item.item_image.length; i++) {
-              item.item_image[i] = baseURL + item.item_image[i];
-            }
-          });
-          console.log("DATA", data);
-          return res.json({
-            message: "get items by search successful!!",
-            status: 1,
-            data: data,
-          });
-        }
+      logger.error(
+        `addItem(): add the item failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-    } catch (error) {
-      return res.json({ message: "Fetch list of items failure!!", status: 0 });
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "You have failed to insert the item",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
-  }
-}
+  }, 500);
+};
 
-module.exports = new ItemController();
+exports.getItems = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      logger.info("getItems()");
+      const listOfItems = await itemService.getItems();
+      if (listOfItems && Array.isArray(listOfItems) && listOfItems.length > 0) {
+        logger.info("getItems(): get all items sucessfully");
+        return apiResponse.successResponseWithData(
+          res,
+          "Get successfully list of items",
+          listOfItems
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No item found");
+      }
+    } catch (error) {
+      logger.error(
+        `getItems(): get list of items failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: Get list of items is failure"
+      );
+    }
+  }, 300);
+};
+
+exports.deleteItem = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      const itemID = req.params.id;
+      logger.info(`deleteItem(), params: ${itemID}`);
+      await itemService.deleteItem(itemID);
+      logger.info(
+        `deleteItem(): delete the item with ID ${itemID} sucessfully`
+      );
+      const successMessageObj = {
+        title: "SUCCESS",
+        content: "You have successfully deleted the item",
+      };
+      return apiResponse.successResponse(res, successMessageObj);
+    } catch (error) {
+      logger.error(
+        `deleteItem(): deelete the item failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "You have failed to delete the item",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
+    }
+  }, 500);
+};
+
+//Search item in admin page
+exports.getItemsBySearchText = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      const text = req.params.search;
+      logger.info(`getItemBySearchText(), searchText: ${text}`);
+      const listOfItems = await itemService.getItemsBySearchText(text);
+      logger.info(listOfItems);
+      if (listOfItems && Array.isArray(listOfItems) && listOfItems.length > 0) {
+        logger.info(
+          "getItemBySearchText(): get items by search text sucessfully"
+        );
+        return apiResponse.successResponseWithData(
+          res,
+          "Get successfully items by search text",
+          listOfItems
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No item found");
+      }
+    } catch (error) {
+      logger.error(
+        `getItemBySearchText(): get items by search text failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: Get items by search text is failure"
+      );
+    }
+  }, 200);
+};
+
+exports.getItemsByCategory = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      const categoryName = req.params.name;
+      logger.info(`getItemsByCategory(), categoryName: ${categoryName}`);
+      const listOfItems = await itemService.getItemsByCategory(categoryName);
+      if (listOfItems && Array.isArray(listOfItems) && listOfItems.length > 0) {
+        logger.info(
+          "getItemsByCategory(): get items by category name sucessfully"
+        );
+        return apiResponse.successResponseWithData(
+          res,
+          "Get items by category name successfully",
+          listOfItems
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No item found");
+      }
+    } catch (error) {
+      logger.error(
+        `getItemsByCategory(): get items by categogy name failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: Get items by categogy name is failure"
+      );
+    }
+  }, 200);
+};
+
+exports.getItemByID = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      const itemID = req.params.id;
+      logger.info(`getItemByID(), ID: ${itemID}`);
+      const item = await itemService.getItemByID(itemID);
+      console.log(item);
+      if (item) {
+        logger.info(
+          `getItemByID(): get the item with ID ${itemID} sucessfully`
+        );
+        return apiResponse.successResponseWithData(
+          res,
+          "Get successfully the item",
+          item
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No item found");
+      }
+    } catch (error) {
+      logger.error(
+        `getItemByID(): get the item failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(res, "ERROR: Get the item is failure!!");
+    }
+  }, 200);
+};
+
+//show data in home page (use in list-item component)
+exports.getItemsBy = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      const filterKey = req.body.filter;
+      const filterValue = req.body.filterValue;
+      logger.info(
+        `getItemsBy(), filterKey: ${filterKey}, filterValue: ${filterValue}`
+      );
+      const listOfItems = await itemService.getItemsBy(filterKey, filterValue);
+      if (listOfItems && Array.isArray(listOfItems) && listOfItems.length > 0) {
+        logger.info(
+          `getItemsBy(): get items by ${filterKey}, value: ${filterValue} sucessfully`
+        );
+        return apiResponse.successResponseWithData(
+          res,
+          `getItemsBy(): get the items sucessfully`,
+          listOfItems
+        );
+      } else {
+        return apiResponse.notFoundResponse(res, "No item found");
+      }
+    } catch (error) {
+      logger.error(
+        `getItemsBy(): get the items failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: Get the items is failure!!"
+      );
+    }
+  }, 200);
+};
+
+exports.updateItem = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("Item controller");
+      const itemID = req.params.id;
+      logger.info(`updateItem(), ID: ${itemID}`);
+      const data = req.body;
+      let newItemData = {
+        item_name: data.item_name_replace,
+        item_price: data.item_price_replace,
+        item_category: data.item_category_replace,
+        item_type: data.item_type_replace,
+        item_discription: data.item_discription_replace,
+      };
+      await itemService.updateItem(itemID, newItemData);
+      logger.info(
+        `updateItem(): update the item with ID ${itemID}, new category data: ${newItemData} sucessfully`
+      );
+      const messageObj = {
+        title: "SUCCESS",
+        content: "You have successfully updated the item",
+      };
+      return apiResponse.successResponse(res, messageObj);
+    } catch (error) {
+      logger.error(
+        `updateItem(): update the item failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      return apiResponse.errorResponse(
+        res,
+        "ERROR: Update the item is failure!!"
+      );
+    }
+  }, 500);
+};

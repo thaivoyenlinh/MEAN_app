@@ -117,11 +117,11 @@ exports.updateCategory = async (req, res) => {
       return apiResponse.successResponse(res, messageObj);
     } catch (error) {
       logger.error(
-        `updateAllFieldCategory(): update the category failure. Message: ${error.message}. Stack: ${error.stack}`
+        `updateCategory(): update the category failure. Message: ${error.message}. Stack: ${error.stack}`
       );
       return apiResponse.errorResponse(
         res,
-        "ERROR: Get the categories is failure!!"
+        "ERROR: Update the category is failure!!"
       );
     }
   }, 500);
