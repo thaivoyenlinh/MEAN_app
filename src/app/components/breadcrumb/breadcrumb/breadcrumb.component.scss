@@ -1,24 +1,42 @@
-ul {
-    & {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-  
-    li {
-      & {
-        display: inline;
-      }
-  
-      &:before {
-        content: ">";
-        margin: 0 6px;
-      }
-  
-      &:first-child:before {
-        content: "";
-        margin: 0;
-      }
+@import "../../../colorCustom.scss";
+
+.breadcrumb {
+  font-size: 1em;
+  margin: 0;
+  overflow: hidden;
+  padding: 7px 30px;
+
+  span {
+    color: $backgroundmix-color2;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+
+    &:hover {
+      color: $main-color;
     }
   }
-  
+
+  li {
+    list-style: none;
+    float: left;
+
+    &:last-child {
+      span {
+        color: rgb(192, 189, 189);
+      }
+      &::after {
+        content: "";
+      }
+    }
+
+    &::after {
+      padding-left: 4px;
+      padding-right: 8px;
+      color: grey;
+      font-size: 1.1em;
+      content: "|";
+    }
+  }
+}

@@ -1,100 +1,103 @@
-@import '../../colorCustom.scss';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import "../../colorCustom.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
 .admin-container {
-	height: 100%;
-	width: 100%;
-	position: relative;
-	font-family: 'Poppins', sans-serif;
-  
-	.navbar {
-		background-color: $navbar-color; 
-		width: 83%;
-		height: 10%;
-		position: sticky;
-		top: 0;
-		left: 17%;
-		z-index: 1;
-		
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-family: "Poppins", sans-serif;
 
-		.authentication {
-			display: inline;
-			float: right;
-			padding: 18.5px;
-			color: white;
-            letter-spacing: 2px;
-            font-weight: 600;
-            font-size: 14px;
-			cursor: pointer;
+  .navbar {
+    background-color: $navbar-color;
+    width: 83%;
+    height: 10%;
+    position: sticky;
+    top: 0;
+    left: 17%;
+    z-index: 1;
 
-			&:hover {
-				background: #5757e6;
-				transition: 0.5s;
-				color: white;
-			}
-		}
-  	}
+    .authentication {
+      display: inline;
+      float: right;
+      padding: 18.5px;
+      color: white;
+      letter-spacing: 2px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
 
-	.sidenav-container {
-		height: 100%;
-		width: 100%;
-		position: absolute;
+      &:hover {
+        background: #5757e6;
+        transition: 0.5s;
+        color: white;
+      }
+    }
+  }
 
-		.sidebar {
-			height: 100%;
-			width: 17%;
-			background: #5757e6;
-			position: fixed; 
-			z-index: 1; /* Stay on top */
-			top: 0; /* Say at the top */
-			left: 0;
-			overflow-x: hidden; /* Disable horizontal scroll */
+  .sidenav-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 
-			.logo {
-				background-color: #4518af; 
-				width: 100%;
-				height: 10%;
-				display: block;
-				line-height: 60px;
-				color: honeydew;
-				letter-spacing: 4px;
-				font-size: 24px;
-				padding-left: 12%;
-				cursor: pointer;
-			}
-	
-			button {
-				top: 2%;
-				width: 100%;
-				height: 8%;
-				display: flex;
-				align-items: center;
-				background: #5757e6;
-				color: white;
-				font-size: 16px;
-				letter-spacing: 1.2px;
-				cursor: pointer;
-	
-				mat-icon {
-					margin: 0px 10px;
-				}
-	
-				&:hover {
-					background: honeydew;
-					transition: 0.7s;
-					color: $navbar-color;
-				}
-			}
-		}
-	
-		.main-content {
-			margin-left: 17%;
-			padding-bottom: 1%;
+    .sidebar {
+      height: 100%;
+      width: 17%;
+      background: #5757e6;
+      position: fixed;
+      z-index: 1; /* Stay on top */
+      top: 0; /* Say at the top */
+      left: 0;
+      overflow-x: hidden; /* Disable horizontal scroll */
 
-			.display-content {
-				margin: 2% 3%;
-			}
-		}
-	}
+      .logo {
+        background-color: #4518af;
+        width: 100%;
+        height: 10%;
+        display: block;
+        line-height: 60px;
+        color: honeydew;
+        letter-spacing: 4px;
+        font-size: 24px;
+        padding-left: 12%;
+        cursor: pointer;
+      }
 
+      button {
+        top: 2%;
+        width: 100%;
+        height: 8%;
+        display: flex;
+        align-items: center;
+        background: #5757e6;
+        color: white;
+        font-size: 16px;
+        letter-spacing: 1.2px;
+        cursor: pointer;
+
+        mat-icon {
+          margin: 0px 10px;
+        }
+
+        &:hover {
+          background: honeydew;
+          transition: 0.7s;
+          color: $navbar-color;
+        }
+      }
+    }
+
+    .main-content {
+      margin-left: 17%;
+      padding-bottom: 1%;
+
+      .breadcrumb {
+        margin: 0;
+        background-color: rgb(243, 241, 241);
+      }
+
+      .display-content {
+        margin: 2% 3%;
+      }
+    }
+  }
 }

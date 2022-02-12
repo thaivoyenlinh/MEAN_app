@@ -13,9 +13,6 @@ import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { UserComponent } from "./components/user/user.component";
 import { OrderComponent } from "./components/order/order.component";
 
-//! Lazy-loading Component is import at that component
-//import { CreateComponent } from './components/admin/create/create.component';
-
 const routes: Routes = [
   { path: "", component: HomeComponent },
 
@@ -27,6 +24,7 @@ const routes: Routes = [
 
   { path: "checkout", component: CheckoutComponent },
 
+  // Load nested routes in same router-outlet (breadcrumb)
   {
     path: "admin",
     component: AdminComponent,
@@ -34,43 +32,56 @@ const routes: Routes = [
     children: [
       {
         path: "category",
-        component: CategoryComponent,
         data: { breadcrumb: "Category" },
+        children: [
+          {
+            path: "",
+            component: CategoryComponent,
+          },
+          {
+            path: "create",
+            data: { breadcrumb: "Create Category" },
+            loadChildren: () =>
+              import(
+                "./components/category/create-category/create-category.module"
+              ).then((m) => m.CreateCategoryModule),
+          },
+          {
+            path: "edit",
+            data: { breadcrumb: "Edit Category" },
+            loadChildren: () =>
+              import(
+                "./components/category/edit-category/edit-category.module"
+              ).then((m) => m.EditCategoryModule),
+          },
+        ],
       },
 
       {
-        path: "category/create",
-        data: { breadcrumb: "Create Category" },
-        loadChildren: () =>
-          import(
-            "./components/category/create-category/create-category.module"
-          ).then((m) => m.CreateCategoryModule),
-      },
-
-      {
-        path: "category/edit",
-        loadChildren: () =>
-          import(
-            "./components/category/edit-category/edit-category.module"
-          ).then((m) => m.EditCategoryModule),
-      },
-
-      { path: "item", component: ItemComponent, data: { breadcrumb: "Item" } },
-
-      {
-        path: "item/create",
-        loadChildren: () =>
-          import("./components/item/create-item/create-item.module").then(
-            (m) => m.CreateItemModule
-          ),
-      },
-
-      {
-        path: "item/edit",
-        loadChildren: () =>
-          import("./components/item/edit-item/edit-item.module").then(
-            (m) => m.EditItemModule
-          ),
+        path: "item",
+        data: { breadcrumb: "Item" },
+        children: [
+          {
+            path: "",
+            component: ItemComponent,
+          },
+          {
+            path: "create",
+            data: { breadcrumb: "Create Item" },
+            loadChildren: () =>
+              import("./components/item/create-item/create-item.module").then(
+                (m) => m.CreateItemModule
+              ),
+          },
+          {
+            path: "edit",
+            data: { breadcrumb: "Edit Item" },
+            loadChildren: () =>
+              import("./components/item/edit-item/edit-item.module").then(
+                (m) => m.EditItemModule
+              ),
+          },
+        ],
       },
 
       { path: "user", component: UserComponent, data: { breadcrumb: "User" } },
