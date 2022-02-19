@@ -8,13 +8,14 @@ exports.addUser = async (req, res) => {
       logger.info("User controller");
       logger.info("addUser()");
       const value = req.body;
+      console.log(value.password);
       const data = {
-        user_name: value.name,
+        user_name: value.username,
         user_phoneNumber: value.phoneNumber,
-        user_address: value.address,
+        user_password: value.password,
       };
       await userService.addUser(data);
-      logger.info("addOrder(): add the order successfully");
+      logger.info("addUser(): add the user successfully");
       const successMessageObj = {
         title: "SUCCESS",
         content: "You have successfully inserted the user",

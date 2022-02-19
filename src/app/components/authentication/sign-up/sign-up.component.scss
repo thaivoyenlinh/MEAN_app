@@ -1,72 +1,86 @@
-@import '../../../colorCustom.scss';
+@import "../../../colorCustom.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
 .container {
-    height: 100%;
-    position: relative;
-    background-image: linear-gradient(to bottom right, $backgroundmix-color1, $backgroundmix-color2);
+  height: 100%;
+  position: relative;
+  // background-image: linear-gradient(to bottom right, $backgroundmix-color1, $backgroundmix-color2);
+  background-image: linear-gradient(
+    to bottom right,
+    $backgroundmix-color1,
+    #870cd3
+  );
+  font-family: "Poppins", sans-serif;
+  .sign-up-content {
+    position: absolute;
+    width: 32%;
+    margin: 7% 34%;
+    padding: 1.5% 0;
+    text-align: center;
+    background: honeydew;
+    border-radius: 8px;
 
-    .sign-up-content {
-        position: absolute;
-        width: 32%;
-        margin: 20px 34%;
-        text-align: center;
-        background: honeydew;
-        border-radius: 25px;
+    .name {
+      height: 40px;
 
-        .name {
-            margin-top: 5px;
-            height: 40px;
-    
-            span {
-                font-size: 30px;
-                color: #6E00B3;
-            }
-        }
-
-        form {
-
-            mat-form-field {
-                width: 70%;
-
-                mat-label {
-                    color: #6E00B3;
-                }
-            }
-
-            mat-radio-group {
-                display: block;
-                margin: 5px 9% 5px 0px;
-
-                mat-label {
-                    color: #6E00B3;
-                    font-size: 18px;
-                    margin-right: 8%;
-                }
-
-                mat-radio-button {
-                    color: rgb(85, 83, 83);
-                    margin-right: 15px;
-                    font-size: 14.5px;
-                }
-
-            }
-
-            .button {
-
-                button {
-                    height: 38px;
-                    width: max-content;
-                    margin: -5px 5px 15px 5px;
-                    background: honeydew;
-                    color: #5c0891;
-
-                    &:hover {
-                        background: #8c1bd3;
-                        transition: 0.4s;
-                        color: white;
-                    }
-                }
-            }
-        }
+      span {
+        font-size: 30px;
+        color: $main-color;
+      }
     }
+
+    form {
+      mat-form-field {
+        width: 70%;
+
+        mat-label {
+          color: $main-color;
+        }
+      }
+
+      .error-message {
+        width: 70%;
+        margin: -4% 0 0 17%;
+        color: red;
+        font-size: 11px;
+        text-align: left;
+        font-style: italic;
+      }
+
+      mat-radio-group {
+        display: block;
+        margin: 5px 9% 5px 0px;
+
+        mat-label {
+          color: #6e00b3;
+          font-size: 18px;
+          margin-right: 8%;
+        }
+
+        mat-radio-button {
+          color: rgb(85, 83, 83);
+          margin-right: 15px;
+          font-size: 14.5px;
+        }
+      }
+
+      .button {
+        button {
+          height: 38px;
+          width: max-content;
+          margin: 10px 5px 3px 5px;
+          background: $main-color;
+          color: rgb(234, 248, 234);
+          cursor: pointer;
+
+          &:hover {
+            background: rgb(234, 248, 234);
+            transition: 0.4s;
+            color: $main-color;
+            border: 1px solid $main-color;
+          }
+        }
+      }
+    }
+  }
 }

@@ -84,7 +84,7 @@ const routes: Routes = [
         ],
       },
 
-      { path: "user", component: UserComponent, data: { breadcrumb: "User" } },
+      { path: "user", component: UserComponent, data: { breadcrumb: "Customer" } },
 
       {
         path: "order",

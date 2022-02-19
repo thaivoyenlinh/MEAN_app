@@ -41,6 +41,7 @@ export class UserComponent implements OnInit {
       .pipe(
         tap(
           (data) => {
+            console.log(data);
             this.userData = new MatTableDataSource(data);
             this.userData.paginator = this.userPaginator;
           },
@@ -57,7 +58,7 @@ export class UserComponent implements OnInit {
 
   onDelete(userId: string) {
     this.dialogService
-      .openConfirmDialog("order")
+      .openConfirmDialog("user")
       .afterClosed()
       .subscribe((res) => {
         if (res) {

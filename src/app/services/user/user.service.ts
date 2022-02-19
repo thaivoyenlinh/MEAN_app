@@ -13,8 +13,8 @@ export class UserService {
 
 	constructor(private http: HttpClient) { }
 
-	storeUser(userFormValue: any) : Observable<void>{
-		return this.http.post<void>(`${this.SERVER_URL}/user`, userFormValue);
+	storeUser(userData: any) : Observable<void>{
+		return this.http.post<void>(`${this.SERVER_URL}/user`, userData);
 	} 
 
 	getLatestUser() : Observable<User>{
