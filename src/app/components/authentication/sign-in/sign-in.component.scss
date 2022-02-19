@@ -1,10 +1,16 @@
 @import '../../../colorCustom.scss';
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
 
 .container {
     height: 100%;
     position: relative;
     background: $navbar-color;
-    background-image: linear-gradient(to bottom right, $backgroundmix-color1, $backgroundmix-color2);
+    background-image: linear-gradient(
+        to bottom right,
+        $backgroundmix-color1,
+        #870cd3
+    );
+    font-family: "Poppins", sans-serif;
 
     .sign-in-content {
         position: absolute;
@@ -12,15 +18,15 @@
         margin: 100px 34%;
         text-align: center;
         background: honeydew;
-        border-radius: 25px;
+        border-radius: 15px;
         
         .name {
-            margin-top: 5px;
+            margin-top: 8px;
             height: 40px;
     
             span {
                 font-size: 30px;
-                color: #6E00B3;
+                color: $main-color;
             }
         }
 
@@ -30,7 +36,7 @@
                 width: 70%;
 
                 mat-label {
-                    color: #6E00B3;
+                    color: $main-color;
                 }
             }
 
@@ -39,16 +45,18 @@
                 button {
                     height: 38px;
                     width: max-content;
-                    margin: -5px 5px 15px 5px;
-                    background: honeydew;
-                    color: #6E00B3;
-
+                    margin: 10px 5px 20px 5px;
+                    background: $main-color;
+                    color: rgb(234, 248, 234);
+                    cursor: pointer;
+          
                     &:hover {
-                        background: #8c1bd3;
-                        transition: 0.4s;
-                        color: white;
+                      background: rgb(234, 248, 234);
+                      transition: 0.4s;
+                      color: $main-color;
+                      border: 1px solid $main-color;
                     }
-                }
+                  }
             }
         }
     }

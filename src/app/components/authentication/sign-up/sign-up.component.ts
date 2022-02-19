@@ -6,6 +6,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { Router } from "@angular/router";
+import { tap } from "rxjs/operators";
 import { UserService } from "../../../services/user/user.service";
 @Component({
   selector: "app-sign-up",
@@ -71,7 +72,14 @@ export class SignUpComponent implements OnInit {
       // Destructuring ES6
       const { passwordConfirm, ...userData } = value;
       console.log(userData);
-      this.userService.storeUser(userData).subscribe();
+      this.userService.storeUser(userData).pipe(
+        tap(
+          (data) => {
+            if(data["status"]==1)
+              this.router.navigateByUrl("/sign_in");  
+          }
+        )
+      ).subscribe();
     }
   }
 
