@@ -16,40 +16,45 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd),
-        distinctUntilChanged(),
-    ).subscribe(() => {
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        distinctUntilChanged()
+      )
+      .subscribe(() => {
         this.breadcrumbs = this.buildBreadcrumb(this.activatedRoute.root);
-    })
+      });
   }
 
-  buildBreadcrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Breadcrumb[] = []): Breadcrumb[] {
-    let label =
-      route.routeConfig && route.routeConfig.data
-        ? route.routeConfig.data.breadcrumb
-        : "";
-    let path =
-      route.routeConfig && route.routeConfig.data ? route.routeConfig.path : "";
-    
-    const nextUrl = path ? `${url}/${path}` : url;
-
+  buildBreadcrumb(
+    route: ActivatedRoute,
+    url: string = "",
+    breadcrumbs: Breadcrumb[] = []
+  ): Breadcrumb[] {
     const breadcrumb: Breadcrumb = {
-      label: label,
-      url: nextUrl
+      /// '...'spread operator
+      // '!!' ckeck cover (null, '', undefind,...) khi ma minh khong Fxac dinh dc kieu dl
+      ...(!!(
+        route.routeConfig &&
+        route.routeConfig.data &&
+        route.routeConfig.path
+      )
+        ? {
+            label: route.routeConfig.data.breadcrumb,
+            url: `${url}/${route.routeConfig.path}`,
+          }
+        : {
+            label: "",
+            url: "",
+          }),
     };
 
-    const newBreadcrumbs = breadcrumb.label
+    const newBreadcrumbs = !!breadcrumb.label
       ? [...breadcrumbs, breadcrumb]
-      : [...breadcrumbs];
-    if (route.firstChild) {
-      //If we are not on our current path yet,
-      //there will be more children to look after, to build our breadcumb
-      return this.buildBreadcrumb(route.firstChild, nextUrl, newBreadcrumbs);
-    }
-    return newBreadcrumbs;
+      : breadcrumbs;
 
-  
+    return route.firstChild
+      ? this.buildBreadcrumb(route.firstChild, breadcrumb.url, newBreadcrumbs)
+      : newBreadcrumbs;
   }
-
 }
