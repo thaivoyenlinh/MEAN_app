@@ -5,7 +5,7 @@ import { ToastMessageComponent } from '../../components/snackbar/toast-message/t
 @Injectable({
   	providedIn: 'root'
 })
-export class SnackbarService {
+export class ToastService {
 
 	constructor(private snackBar: MatSnackBar) { }
 

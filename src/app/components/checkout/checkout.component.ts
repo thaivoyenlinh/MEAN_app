@@ -9,7 +9,7 @@ import { User } from "../../interfaces/user/user";
 import { ItemService } from "../../services/item/item.service";
 import { UserService } from "../../services/user/user.service";
 import { LoadingScreenService } from "../../services/loading-screen/loading-screen.service";
-import { SnackbarService } from "../../services/snackbar/snackbar.service";
+import { ToastService } from "../../services/toast/toast.service";
 import { OrderService } from "../../services/order/order.service";
 import { DialogService } from "../../services/dialog/dialog.service";
 
@@ -33,7 +33,7 @@ export class CheckoutComponent implements OnInit {
     private itemService: ItemService,
     private userService: UserService,
     private loadingSreenService: LoadingScreenService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private orderService: OrderService,
     private dialogService: DialogService,
   ) {
@@ -86,11 +86,11 @@ export class CheckoutComponent implements OnInit {
       .pipe(
         tap(
           (res) => {
-            this.snackBarService.showSuccessMessage(res["message"]);
+            this.toastService.showSuccessMessage(res["message"]);
             this.saveBtnDisable = true;
           },
           (error) => {
-            this.snackBarService.showErrorMessage(error.message);
+            this.toastService.showErrorMessage(error.error["message"]);
           }
         ),
         switchMap(() => this.userService.getLatestUser()),
@@ -102,7 +102,8 @@ export class CheckoutComponent implements OnInit {
             this.orderBtnDisable = false;
           },
           (error) => {
-            this.snackBarService.showErrorMessage(error.message);
+            this.toastService.showErrorMessage(error.error["message"]);
+            this.loadingSreenService.hide();
           },
           () => {
             this.loadingSreenService.hide();

@@ -11,7 +11,7 @@ import { NavigationExtras } from "@angular/router";
 //! call service from server
 import { CategoryService } from "../../services/category/category.service";
 import { DialogService } from "../../services/dialog/dialog.service";
-import { SnackbarService } from "../../services/snackbar/snackbar.service";
+import { ToastService } from "../../services/toast/toast.service";
 import { LoadingScreenService } from "../../services/loading-screen/loading-screen.service";
 
 import { MatPaginator, MatTableDataSource } from "@angular/material";
@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit {
     private router: Router,
     private categoryService: CategoryService,
     private dialogService: DialogService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private loadingScreenService: LoadingScreenService
   ) {}
 
@@ -53,7 +53,8 @@ export class CategoryComponent implements OnInit {
             this.categoryData.paginator = this.categoryPaginator;
           },
           (error) => {
-            this.snackBarService.showErrorMessage(error.message);
+            this.toastService.showErrorMessage(error.error['message']);
+            this.loadingScreenService.hide();
           },
           () => {
             this.loadingScreenService.hide();
@@ -81,9 +82,9 @@ export class CategoryComponent implements OnInit {
         tap((res) => {
           if (res["status"] == 1) {
             this.init();
-            this.snackBarService.showSuccessMessage(res["message"]);
+            this.toastService.showSuccessMessage(res["message"]);
           } else {
-            this.snackBarService.showErrorMessage(res["message"]);
+            this.toastService.showErrorMessage(res["message"]);
           }
         })
       )

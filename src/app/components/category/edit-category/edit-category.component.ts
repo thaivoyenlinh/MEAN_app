@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { tap } from "rxjs/operators";
 
 import { CategoryService } from "../../../services/category/category.service";
-import { SnackbarService } from "../../../services/snackbar/snackbar.service";
+import { ToastService } from "../../../services/toast/toast.service";
 import { LoadingScreenService } from "../../../services/loading-screen/loading-screen.service";
 
 @Component({
@@ -30,7 +30,7 @@ export class EditCategoryComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private loadingService: LoadingScreenService
   ) {
     this.EditCategoryForm = this.fb.group({
@@ -81,8 +81,8 @@ export class EditCategoryComponent implements OnInit {
             (data) => {
               this.loadingService.hide();
               data["status"] == 1
-                ? this.snackBarService.showSuccessMessage(data["message"])
-                : this.snackBarService.showErrorMessage(data["message"]);
+                ? this.toastService.showSuccessMessage(data["message"])
+                : this.toastService.showErrorMessage(data["message"]);
             },
             (error) => {},
             () => {
@@ -99,8 +99,8 @@ export class EditCategoryComponent implements OnInit {
             (data) => {
               this.loadingService.hide();
               data["status"] == 1
-                ? this.snackBarService.showSuccessMessage(data["message"])
-                : this.snackBarService.showErrorMessage(data["message"]);
+                ? this.toastService.showSuccessMessage(data["message"])
+                : this.toastService.showErrorMessage(data["message"]);
             },
             (error) => {},
             () => {

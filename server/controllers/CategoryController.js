@@ -46,9 +46,13 @@ exports.getCategories = async (req, res) => {
         listOfCategories.length > 0
       ) {
         logger.info("getCategories(): get all categories sucessfully");
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully list of categories",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully list of categories",
+          successMessageObj,
           listOfCategories
         );
       } else {
@@ -58,10 +62,11 @@ exports.getCategories = async (req, res) => {
       logger.error(
         `getCategories(): get list of categories failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get list of categories is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get list of categories is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };
@@ -77,9 +82,13 @@ exports.getCategory = async (req, res) => {
         logger.info(
           `getCategory(): get the category with ID ${categoryID} sucessfully`
         );
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully the category",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully the category",
+          successMessageObj,
           category
         );
       } else {
@@ -89,10 +98,11 @@ exports.getCategory = async (req, res) => {
       logger.error(
         `getCategory(): get the category failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get the category is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the category is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };
@@ -119,10 +129,11 @@ exports.updateCategory = async (req, res) => {
       logger.error(
         `updateCategory(): update the category failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Update the category is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Update the category is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };

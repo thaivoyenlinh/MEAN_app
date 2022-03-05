@@ -3,7 +3,7 @@ import { MatPaginator, MatTableDataSource } from "@angular/material";
 import { tap } from "rxjs/operators";
 
 import { OrderService } from "../../services/order/order.service";
-import { SnackbarService } from "../../services/snackbar/snackbar.service";
+import { ToastService } from "../../services/toast/toast.service";
 import { LoadingScreenService } from "../../services/loading-screen/loading-screen.service";
 import { DialogService } from "../../services/dialog/dialog.service";
 
@@ -28,7 +28,7 @@ export class OrderComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private loadingService: LoadingScreenService,
     private dialogService: DialogService
   ) {}
@@ -49,7 +49,8 @@ export class OrderComponent implements OnInit {
             this.orderData.paginator = this.orderPaginator;
           },
           (error) => {
-            this.snackBarService.showErrorMessage(error.message);
+            this.toastService.showErrorMessage(error.error["message"]);
+            this.loadingService.hide();
           },
           () => {
             this.loadingService.hide();
@@ -77,8 +78,8 @@ export class OrderComponent implements OnInit {
         tap((res) => {
           res["status"] == 1
             ? (this.init(),
-              this.snackBarService.showSuccessMessage(res["message"]))
-            : this.snackBarService.showErrorMessage(res["message"]);
+              this.toastService.showSuccessMessage(res["message"]))
+            : this.toastService.showErrorMessage(res["message"]);
         })
       )
       .subscribe();

@@ -7,7 +7,7 @@ import { tap } from 'rxjs/operators';
 
 import { ItemService } from '../../../services/item/item.service';
 import { CategoryService } from '../../../services/category/category.service';
-import { SnackbarService } from '../../../services/snackbar/snackbar.service';
+import { ToastService } from '../../../services/toast/toast.service';
 import { LoadingScreenService } from '../../../services/loading-screen/loading-screen.service';
 
 @Component({
@@ -39,7 +39,7 @@ export class EditItemComponent implements OnInit {
 				private route: ActivatedRoute,
 				private itemService: ItemService,
 				private categoryService: CategoryService,
-				private snackBarService: SnackbarService,
+				private toastService: ToastService,
 				private loadingService: LoadingScreenService) {
 		
 		this.EditItemForm = this.fb.group({
@@ -80,8 +80,8 @@ export class EditItemComponent implements OnInit {
 			tap(
 				(data) => {
 					this.loadingService.hide();
-					data['status'] == 1 ? this.snackBarService.showSuccessMessage(data['message']) :
-					this.snackBarService.showErrorMessage(data['message']); 
+					data['status'] == 1 ? this.toastService.showSuccessMessage(data['message']) :
+					this.toastService.showErrorMessage(data['message']); 
 				},
 				(error)=>{
 				},

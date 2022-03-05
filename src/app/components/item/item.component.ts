@@ -19,7 +19,7 @@ import { Category } from "../../interfaces/category/category";
 import { ItemService } from "src/app/services/item/item.service";
 import { CategoryService } from "../../services/category/category.service";
 import { DialogService } from "../../services/dialog/dialog.service";
-import { SnackbarService } from "../../services/snackbar/snackbar.service";
+import { ToastService } from "../../services/toast/toast.service";
 import { LoadingScreenService } from "../../services/loading-screen/loading-screen.service";
 
 interface FilterCritiria {
@@ -59,7 +59,7 @@ export class ItemComponent implements OnInit {
     private itemService: ItemService,
     private categoryService: CategoryService,
     private dialogService: DialogService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private loadingScreenService: LoadingScreenService
   ) {}
 
@@ -85,9 +85,9 @@ export class ItemComponent implements OnInit {
         tap((res) => {
           if (res["status"] == 1) {
             this.init();
-            this.snackBarService.showSuccessMessage(res["message"]);
+            this.toastService.showSuccessMessage(res["message"]);
           } else {
-            this.snackBarService.showErrorMessage(res["message"]);
+            this.toastService.showErrorMessage(res["message"]);
           }
         })
       )

@@ -7,7 +7,7 @@ import { tap } from "rxjs/operators";
 import { Category } from "../../../interfaces/category/category";
 import { ItemService } from "../../../services/item/item.service";
 import { CategoryService } from "../../../services/category/category.service";
-import { SnackbarService } from "../../../services/snackbar/snackbar.service";
+import { ToastService } from "../../../services/toast/toast.service";
 import { LoadingScreenService } from "../../../services/loading-screen/loading-screen.service";
 
 @Component({
@@ -35,7 +35,7 @@ export class CreateItemComponent implements OnInit {
     protected router: Router,
     private itemService: ItemService,
     private categoryService: CategoryService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private loadingSevice: LoadingScreenService
   ) {}
 
@@ -70,8 +70,8 @@ export class CreateItemComponent implements OnInit {
         tap(
           (data) => {
             data["status"] == 1
-              ? this.snackBarService.showSuccessMessage(data["message"])
-              : this.snackBarService.showErrorMessage(data["message"]);
+              ? this.toastService.showSuccessMessage(data["message"])
+              : this.toastService.showErrorMessage(data["message"]);
           },
           (error) => {},
           () => {
