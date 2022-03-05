@@ -51,9 +51,13 @@ exports.getItems = async (req, res) => {
       const listOfItems = await itemService.getItems();
       if (listOfItems && Array.isArray(listOfItems) && listOfItems.length > 0) {
         logger.info("getItems(): get all items sucessfully");
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully list of items",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully list of items",
+          successMessageObj,
           listOfItems
         );
       } else {
@@ -63,10 +67,11 @@ exports.getItems = async (req, res) => {
       logger.error(
         `getItems(): get list of items failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get list of items is failure"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get list of items is failure",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 300);
 };
@@ -112,9 +117,13 @@ exports.getItemsBySearchText = async (req, res) => {
         logger.info(
           "getItemBySearchText(): get items by search text sucessfully"
         );
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully items by search text",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully items by search text",
+          successMessageObj,
           listOfItems
         );
       } else {
@@ -124,10 +133,11 @@ exports.getItemsBySearchText = async (req, res) => {
       logger.error(
         `getItemBySearchText(): get items by search text failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get items by search text is failure"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get items by search text is failure",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 200);
 };
@@ -143,9 +153,13 @@ exports.getItemsByCategory = async (req, res) => {
         logger.info(
           "getItemsByCategory(): get items by category name sucessfully"
         );
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get items by category name successfully",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get items by category name successfully",
+          successMessageObj,
           listOfItems
         );
       } else {
@@ -155,10 +169,11 @@ exports.getItemsByCategory = async (req, res) => {
       logger.error(
         `getItemsByCategory(): get items by categogy name failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get items by categogy name is failure"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get items by categogy name is failure",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 200);
 };
@@ -175,9 +190,13 @@ exports.getItemByID = async (req, res) => {
         logger.info(
           `getItemByID(): get the item with ID ${itemID} sucessfully`
         );
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully the item",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully the item",
+          successMessageObj,
           item
         );
       } else {
@@ -187,7 +206,11 @@ exports.getItemByID = async (req, res) => {
       logger.error(
         `getItemByID(): get the item failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(res, "ERROR: Get the item is failure!!");
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the item is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 200);
 };
@@ -207,9 +230,13 @@ exports.getItemsBy = async (req, res) => {
         logger.info(
           `getItemsBy(): get items by ${filterKey}, value: ${filterValue} sucessfully`
         );
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "get the items sucessfully",
+        };
         return apiResponse.successResponseWithData(
           res,
-          `getItemsBy(): get the items sucessfully`,
+          successMessageObj,
           listOfItems
         );
       } else {
@@ -219,10 +246,11 @@ exports.getItemsBy = async (req, res) => {
       logger.error(
         `getItemsBy(): get the items failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get the items is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the items is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 200);
 };
@@ -254,10 +282,11 @@ exports.updateItem = async (req, res) => {
       logger.error(
         `updateItem(): update the item failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Update the item is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Update the item is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };

@@ -42,9 +42,13 @@ exports.getUsers = async (req, res) => {
       const listOfUsers = await userService.getUsers();
       if (listOfUsers && Array.isArray(listOfUsers) && listOfUsers.length > 0) {
         logger.info("getUsers(): get all users successfully");
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully list of users",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully list of users",
+          successMessageObj,
           listOfUsers
         );
       } else {
@@ -54,10 +58,11 @@ exports.getUsers = async (req, res) => {
       logger.error(
         `getOrders(): get list of users failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get list of users is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get list of users is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };
@@ -70,9 +75,13 @@ exports.getLatestUser = async (req, res) => {
       const latestUser = await userService.getLatestuser();
       if (latestUser) {
         logger.info("getLatestUser(): get the latest order successfully");
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully the latest user",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully the latest user",
+          successMessageObj,
           latestUser
         );
       } else {
@@ -82,10 +91,11 @@ exports.getLatestUser = async (req, res) => {
       logger.error(
         `getLatestUser(): get the latest user failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: get the lastest order is failre"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the lastest order is failre!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 400);
 };
@@ -99,9 +109,13 @@ exports.getUser = async (req, res) => {
       const user = await userService.getUser(userID);
       if (user) {
         logger.info(`getUser(): get the user with ID ${userID} sucessfully`);
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully the user by ID",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully the user by ID",
+          successMessageObj,
           user
         );
       } else {
@@ -111,10 +125,11 @@ exports.getUser = async (req, res) => {
       logger.error(
         `getUser(): get the user failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: get the user by ID is failure"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the user by ID is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 200);
 };

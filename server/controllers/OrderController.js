@@ -46,9 +46,13 @@ exports.getOrders = async (req, res) => {
         listOfOrders.length > 0
       ) {
         logger.info("getOrders(): get all orders successfully");
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully list of orders",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully list of orders",
+          successMessageObj,
           listOfOrders
         );
       } else {
@@ -58,10 +62,11 @@ exports.getOrders = async (req, res) => {
       logger.error(
         `getOrders(): get list of orders failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: Get list of orders is failure!!"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get list of orders is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };
@@ -74,9 +79,13 @@ exports.getLatestOrder = async (req, res) => {
       const latestOrder = await orderService.getLatestOrder();
       if (latestOrder) {
         logger.info("getLatestOrder(): get the latest order successfully");
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully the latest order",
+        };
         return apiResponse.successResponseWithData(
           res,
-          "Get successfully the latest order",
+          successMessageObj,
           latestOrder
         );
       } else {
@@ -86,10 +95,11 @@ exports.getLatestOrder = async (req, res) => {
       logger.error(
         `getLatestOrder(): get the latest order failure. Message: ${error.message}. Stack: ${error.stack}`
       );
-      return apiResponse.errorResponse(
-        res,
-        "ERROR: get the lastest order is failre"
-      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the lastest order is failre",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 500);
 };

@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { CategoryService } from "../../../services/category/category.service";
 import { Category } from "../../../interfaces/category/category";
 
-import { SnackbarService } from "../../../services/snackbar/snackbar.service";
+import { ToastService } from "../../../services/toast/toast.service";
 import { LoadingScreenService } from "../../../services/loading-screen/loading-screen.service";
 import { tap } from "rxjs/operators";
 
@@ -24,7 +24,7 @@ export class CreateCategoryComponent implements OnInit {
   constructor(
     protected router: Router,
     private categoryService: CategoryService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private loadingService: LoadingScreenService
   ) {}
 
@@ -62,8 +62,8 @@ export class CreateCategoryComponent implements OnInit {
         tap(
           (data) => {
             data["status"] == 1
-              ? this.snackBarService.showSuccessMessage(data["message"])
-              : this.snackBarService.showErrorMessage(data["message"]);
+              ? this.toastService.showSuccessMessage(data["message"])
+              : this.toastService.showErrorMessage(data["message"]);
           },
           (error) => {},
           () => {

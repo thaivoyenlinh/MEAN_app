@@ -4,7 +4,7 @@ import { tap } from "rxjs/operators";
 
 import { UserService } from "../../services/user/user.service";
 import { LoadingScreenService } from "../../services/loading-screen/loading-screen.service";
-import { SnackbarService } from "../../services/snackbar/snackbar.service";
+import { ToastService } from "../../services/toast/toast.service";
 import { DialogService } from "../../services/dialog/dialog.service";
 
 @Component({
@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private loadingService: LoadingScreenService,
-    private snackBarService: SnackbarService,
+    private toastService: ToastService,
     private dialogService: DialogService
   ) {}
 
@@ -46,7 +46,8 @@ export class UserComponent implements OnInit {
             this.userData.paginator = this.userPaginator;
           },
           (error) => {
-            this.snackBarService.showErrorMessage(error.message);
+            this.toastService.showErrorMessage(error.error["message"]);
+            this.loadingService.hide();
           },
           () => {
             this.loadingService.hide();
@@ -74,8 +75,8 @@ export class UserComponent implements OnInit {
         tap((res) => {
           res["status"] == 1
             ? (this.init(),
-              this.snackBarService.showSuccessMessage(res["message"]))
-            : this.snackBarService.showErrorMessage(res["message"]);
+              this.toastService.showSuccessMessage(res["message"]))
+            : this.toastService.showErrorMessage(res["message"]);
         })
       )
       .subscribe();
