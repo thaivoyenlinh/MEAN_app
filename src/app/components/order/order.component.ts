@@ -44,12 +44,13 @@ export class OrderComponent implements OnInit {
       .pipe(
         tap(
           (data) => {
-            // console.log("Data:", data);
             this.orderData = new MatTableDataSource(data);
             this.orderData.paginator = this.orderPaginator;
           },
           (error) => {
-            this.toastService.showErrorMessage(error.error["message"]);
+            if (error.error.title === "ERROR") {
+              this.toastService.showErrorMessage(error.error["message"]);
+            }
             this.loadingService.hide();
           },
           () => {
@@ -75,12 +76,15 @@ export class OrderComponent implements OnInit {
     this.orderService
       .deleteOrder(orderId)
       .pipe(
-        tap((res) => {
-          res["status"] == 1
-            ? (this.init(),
-              this.toastService.showSuccessMessage(res["message"]))
-            : this.toastService.showErrorMessage(res["message"]);
-        })
+        tap(
+          (data) => {
+            this.init();
+            this.toastService.showSuccessMessage(data["message"]);
+          },
+          (error) => {
+            this.toastService.showErrorMessage(error.error["message"]);
+          }
+        )
       )
       .subscribe();
   }

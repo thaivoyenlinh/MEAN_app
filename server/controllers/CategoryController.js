@@ -56,7 +56,11 @@ exports.getCategories = async (req, res) => {
           listOfCategories
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No category found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No category found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(

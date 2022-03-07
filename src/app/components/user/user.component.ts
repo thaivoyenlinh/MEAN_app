@@ -41,12 +41,13 @@ export class UserComponent implements OnInit {
       .pipe(
         tap(
           (data) => {
-            console.log(data);
             this.userData = new MatTableDataSource(data);
             this.userData.paginator = this.userPaginator;
           },
           (error) => {
-            this.toastService.showErrorMessage(error.error["message"]);
+            if (error.error.title === "ERROR") {
+              this.toastService.showErrorMessage(error.error["message"]);
+            }
             this.loadingService.hide();
           },
           () => {
@@ -72,12 +73,15 @@ export class UserComponent implements OnInit {
     this.userService
       .deleteUser(userId)
       .pipe(
-        tap((res) => {
-          res["status"] == 1
-            ? (this.init(),
-              this.toastService.showSuccessMessage(res["message"]))
-            : this.toastService.showErrorMessage(res["message"]);
-        })
+        tap(
+          (data) => {
+            this.init();
+            this.toastService.showSuccessMessage(data["message"]);
+          },
+          (error) => {
+            this.toastService.showErrorMessage(error.error["message"]);
+          }
+        )
       )
       .subscribe();
   }

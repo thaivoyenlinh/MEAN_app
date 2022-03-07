@@ -38,7 +38,6 @@ export class CreateCategoryComponent implements OnInit {
         Validators.required,
         Validators.pattern("^[a-z A-Z]{2,20}$"),
       ]),
-      // set category_image to clear form after submit
       category_image: new FormControl(null, Validators.required),
     });
   }
@@ -48,7 +47,6 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   onChooseFile(event) {
-    // console.log("event:", event.target.files[0]);
     this.imageData = event.target.files[0];
   }
 
@@ -61,11 +59,12 @@ export class CreateCategoryComponent implements OnInit {
       .pipe(
         tap(
           (data) => {
-            data["status"] == 1
-              ? this.toastService.showSuccessMessage(data["message"])
-              : this.toastService.showErrorMessage(data["message"]);
+            this.toastService.showSuccessMessage(data["message"]);
           },
-          (error) => {},
+          (error) => {
+            this.toastService.showErrorMessage(error.error["message"]);
+            this.loadingService.hide();
+          },
           () => {
             this.loadingService.hide();
             this.init();

@@ -40,7 +40,6 @@ export class ItemComponent implements OnInit {
     "item_type",
     "action",
   ];
-  // dataSource: Item[] = [];
   searchText: FormControl = new FormControl("");
   category: FormControl = new FormControl("");
 
@@ -51,7 +50,6 @@ export class ItemComponent implements OnInit {
     new BehaviorSubject<FilterCritiria>({});
 
   itemData = new MatTableDataSource();
-  // itemDataSource: Item[] = [];
   @ViewChild(MatPaginator, { static: false }) itemPaginator: MatPaginator;
 
   constructor(
@@ -82,14 +80,15 @@ export class ItemComponent implements OnInit {
     this.itemService
       .deleteItem(itemId)
       .pipe(
-        tap((res) => {
-          if (res["status"] == 1) {
+        tap(
+          (data) => {
             this.init();
-            this.toastService.showSuccessMessage(res["message"]);
-          } else {
-            this.toastService.showErrorMessage(res["message"]);
+            this.toastService.showSuccessMessage(data["message"]);
+          },
+          (error) => {
+            this.toastService.showErrorMessage(error.error["message"]);
           }
-        })
+        )
       )
       .subscribe();
   }
@@ -127,11 +126,19 @@ export class ItemComponent implements OnInit {
           }
         }),
         delay(500),
-        tap((data) => {
-          this.itemData = new MatTableDataSource(data);
-          this.itemData.paginator = this.itemPaginator;
-          this.loadingScreenService.hide();
-        })
+        tap(
+          (data) => {
+            this.itemData = new MatTableDataSource(data);
+            this.itemData.paginator = this.itemPaginator;
+            this.loadingScreenService.hide();
+          },
+          (error) => {
+            if (error.error.title === "ERROR") {
+              this.toastService.showErrorMessage(error.error["message"]);
+            }
+            this.loadingScreenService.hide();
+          }
+        )
       )
       .subscribe();
   }
@@ -144,7 +151,6 @@ export class ItemComponent implements OnInit {
   }
 
   selectFilter(filterValue: string) {
-    // console.log(filterValue);
     let currentObj = this.filterSubject.getValue();
     console.log("curObj: ", currentObj);
     this.filterSubject.next({
@@ -161,7 +167,6 @@ export class ItemComponent implements OnInit {
   }
 
   openItemDetailsDialog(row) {
-    // console.log("row: ",row)
     this.dialogService.openItemDetailsDialog(row);
   }
 }
