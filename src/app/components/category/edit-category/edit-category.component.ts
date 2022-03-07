@@ -24,7 +24,6 @@ export class EditCategoryComponent implements OnInit {
   categoryId: string;
   imageData: File = null;
 
-  //* Router to catch the data form Category Component
   constructor(
     protected router: Router,
     private fb: FormBuilder,
@@ -34,11 +33,10 @@ export class EditCategoryComponent implements OnInit {
     private loadingService: LoadingScreenService
   ) {
     this.EditCategoryForm = this.fb.group({
-      category_name_replace: new FormControl('', [
+      category_name_replace: new FormControl("", [
         Validators.required,
         Validators.pattern("^[a-z A-Z]{2,20}$"),
       ]),
-      // category_image_replace: new FormControl(null, Validators.required),
     });
 
     //! catch the data
@@ -48,7 +46,6 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onChooseFile(event) {
-    // console.log("EVENT:", event.target.files[0].name);
     this.imageData = event.target.files[0];
   }
 
@@ -66,7 +63,6 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    //! submit form and update new data
     const newCategoryName = this.EditCategoryForm.value.category_name_replace;
     this.loadingService.show();
     if (this.imageData !== null) {
@@ -79,13 +75,14 @@ export class EditCategoryComponent implements OnInit {
         .pipe(
           tap(
             (data) => {
-              this.loadingService.hide();
-              data["status"] == 1
-                ? this.toastService.showSuccessMessage(data["message"])
-                : this.toastService.showErrorMessage(data["message"]);
+              this.toastService.showSuccessMessage(data["message"]);
             },
-            (error) => {},
+            (error) => {
+              this.toastService.showErrorMessage(error.error["message"]);
+              this.loadingService.hide();
+            },
             () => {
+              this.loadingService.hide();
               this.router.navigateByUrl("/admin/category");
             }
           )
@@ -97,13 +94,14 @@ export class EditCategoryComponent implements OnInit {
         .pipe(
           tap(
             (data) => {
-              this.loadingService.hide();
-              data["status"] == 1
-                ? this.toastService.showSuccessMessage(data["message"])
-                : this.toastService.showErrorMessage(data["message"]);
+              this.toastService.showSuccessMessage(data["message"]);
             },
-            (error) => {},
+            (error) => {
+              this.toastService.showErrorMessage(error.error["message"]);
+              this.loadingService.hide();
+            },
             () => {
+              this.loadingService.hide();
               this.router.navigateByUrl("/admin/category");
             }
           )

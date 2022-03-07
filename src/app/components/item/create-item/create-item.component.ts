@@ -36,7 +36,7 @@ export class CreateItemComponent implements OnInit {
     private itemService: ItemService,
     private categoryService: CategoryService,
     private toastService: ToastService,
-    private loadingSevice: LoadingScreenService
+    private loadingService: LoadingScreenService
   ) {}
 
   ngOnInit() {
@@ -63,19 +63,20 @@ export class CreateItemComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loadingSevice.show();
+    this.loadingService.show();
     this.itemService
       .storeItem(this.CreateItemForm.value, this.imageData)
       .pipe(
         tap(
           (data) => {
-            data["status"] == 1
-              ? this.toastService.showSuccessMessage(data["message"])
-              : this.toastService.showErrorMessage(data["message"]);
+            this.toastService.showSuccessMessage(data["message"]);
           },
-          (error) => {},
+          (error) => {
+            this.toastService.showErrorMessage(error.error["message"]);
+            this.loadingService.hide();
+          },
           () => {
-            this.loadingSevice.hide();
+            this.loadingService.hide();
             this.CreateItemForm.reset();
           }
         )

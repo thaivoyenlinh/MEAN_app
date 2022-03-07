@@ -52,7 +52,11 @@ exports.getUsers = async (req, res) => {
           listOfUsers
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No user found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No user found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -85,7 +89,11 @@ exports.getLatestUser = async (req, res) => {
           latestUser
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No latest user found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No latest user found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -119,7 +127,11 @@ exports.getUser = async (req, res) => {
           user
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No user found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No user found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(

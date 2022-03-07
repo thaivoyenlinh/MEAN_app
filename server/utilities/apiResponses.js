@@ -1,7 +1,6 @@
 exports.successResponse = function (res, msg) {
   // response data
   var resData = {
-    status: 1, // OK
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {
@@ -15,7 +14,6 @@ exports.successResponse = function (res, msg) {
 
 exports.successResponseWithData = function (res, msg, data) {
   var resData = {
-    status: 1,
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {
@@ -30,7 +28,6 @@ exports.successResponseWithData = function (res, msg, data) {
 
 exports.errorResponse = function (res, msg) {
   var resData = {
-    status: 0,
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {
@@ -44,7 +41,6 @@ exports.errorResponse = function (res, msg) {
 
 exports.notFoundResponse = function (res, msg) {
   var resData = {
-    status: 0, // ERROR
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {
@@ -58,7 +54,6 @@ exports.notFoundResponse = function (res, msg) {
 
 exports.validationError = function (res, msg) {
   var resData = {
-    status: 0,
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {
@@ -72,7 +67,6 @@ exports.validationError = function (res, msg) {
 
 exports.validationErrorWithData = function (res, msg, data) {
   var resData = {
-    status: 0,
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {
@@ -87,7 +81,6 @@ exports.validationErrorWithData = function (res, msg, data) {
 
 exports.unauthorizedResponse = function (res, msg) {
   var resData = {
-    status: 0,
     message:
       typeof msg === "object" && !Array.isArray(msg) && msg !== null
         ? {

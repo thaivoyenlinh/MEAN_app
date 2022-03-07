@@ -61,7 +61,11 @@ exports.getItems = async (req, res) => {
           listOfItems
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No item found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No item found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -127,7 +131,11 @@ exports.getItemsBySearchText = async (req, res) => {
           listOfItems
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No item found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No item found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -163,7 +171,11 @@ exports.getItemsByCategory = async (req, res) => {
           listOfItems
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No item found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No item found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -200,7 +212,11 @@ exports.getItemByID = async (req, res) => {
           item
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No item found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No item found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -240,7 +256,11 @@ exports.getItemsBy = async (req, res) => {
           listOfItems
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No item found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No item found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(

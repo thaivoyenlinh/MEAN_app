@@ -35,7 +35,7 @@ export class CheckoutComponent implements OnInit {
     private loadingSreenService: LoadingScreenService,
     private toastService: ToastService,
     private orderService: OrderService,
-    private dialogService: DialogService,
+    private dialogService: DialogService
   ) {
     route.queryParams.subscribe((params) => {
       this.itemId = params["Id"];
@@ -78,7 +78,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log("info: ", this.UserInformationForm.value);
     this.loadingSreenService.show();
     const userFormValue = this.UserInformationForm.value;
     this.userService
@@ -96,9 +95,7 @@ export class CheckoutComponent implements OnInit {
         switchMap(() => this.userService.getLatestUser()),
         tap(
           (res) => {
-            // console.log("RES: ", res);
             this.userId = res._id;
-            // console.log("User Id: ", this.userId);
             this.orderBtnDisable = false;
           },
           (error) => {
@@ -115,13 +112,12 @@ export class CheckoutComponent implements OnInit {
 
   onOrder() {
     this.orderService
-      .storeOrder(this.userId, this.itemId, this.totalPrice).pipe(
+      .storeOrder(this.userId, this.itemId, this.totalPrice)
+      .pipe(
         switchMap(() => this.orderService.getLatestOrder()),
-        tap(
-          (res) => { 
-            this.dialogService.openConfirmOrderDialog(res).afterClosed()
-          }
-        )
+        tap((res) => {
+          this.dialogService.openConfirmOrderDialog(res).afterClosed();
+        })
       )
       .subscribe();
   }

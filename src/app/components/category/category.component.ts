@@ -24,7 +24,6 @@ import { ViewChild } from "@angular/core";
 })
 export class CategoryComponent implements OnInit {
   displayedColumns: string[] = ["category_name", "category_image", "action"];
-  // categories$ : Observable<Category[]>;
   categoryData = new MatTableDataSource();
 
   @ViewChild(MatPaginator, { static: false }) categoryPaginator: MatPaginator;
@@ -42,7 +41,6 @@ export class CategoryComponent implements OnInit {
   }
 
   init() {
-    // this.categories$ =  this.categoryService.getListOfCategories();
     this.loadingScreenService.show();
     this.categoryService
       .getListOfCategories()
@@ -53,7 +51,10 @@ export class CategoryComponent implements OnInit {
             this.categoryData.paginator = this.categoryPaginator;
           },
           (error) => {
-            this.toastService.showErrorMessage(error.error['message']);
+            if (error.error.title === "ERROR") {
+              //eleminated ERROR404 notFoundResponse() case
+              this.toastService.showErrorMessage(error.error["message"]);
+            }
             this.loadingScreenService.hide();
           },
           () => {
@@ -79,14 +80,15 @@ export class CategoryComponent implements OnInit {
     this.categoryService
       .deleteCategory(categoryId)
       .pipe(
-        tap((res) => {
-          if (res["status"] == 1) {
+        tap(
+          (data) => {
             this.init();
-            this.toastService.showSuccessMessage(res["message"]);
-          } else {
-            this.toastService.showErrorMessage(res["message"]);
+            this.toastService.showSuccessMessage(data["message"]);
+          },
+          (error) => {
+            this.toastService.showErrorMessage(error.error["message"]);
           }
-        })
+        )
       )
       .subscribe();
   }

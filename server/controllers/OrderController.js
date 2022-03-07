@@ -56,7 +56,11 @@ exports.getOrders = async (req, res) => {
           listOfOrders
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No order found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No order found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
@@ -89,7 +93,11 @@ exports.getLatestOrder = async (req, res) => {
           latestOrder
         );
       } else {
-        return apiResponse.notFoundResponse(res, "No latest order is found");
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No latest order is found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
     } catch (error) {
       logger.error(
