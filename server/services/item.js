@@ -18,15 +18,17 @@ const addItem = async (data) => {
 const getItems = async () => {
   try {
     logger.info("Item service");
-    const result = await Item.find({});
+    //! trans mongoose obj (Schema) to plain obj in js
+    //! 1: lean(): option enabled are plain javascript objects
+    let result = await Item.find({}).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      result.forEach((item) => {
-        for (let i = 0; i < item.item_image.length; i++) {
-          item.item_image[i] = baseURL + item.item_image[i];
-        }
-      });
-      return result;
+      //! trans mongoose obj (Schema) to plain obj in js
+      //2: result = result.map(item => item.toObject());
+      return result.map((item) => ({
+        ...item,
+        item_image: item.item_image.map((image) => baseURL + image),
+      }));
     } else {
       return null;
     }
@@ -58,15 +60,13 @@ const getItemsBySearchText = async (text) => {
         $regex: text,
         $options: "i",
       },
-    });
+    }).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      result.forEach((item) => {
-        for (let i = 0; i < item.item_image.length; i++) {
-          item.item_image[i] = baseURL + item.item_image[i];
-        }
-      });
-      return result;
+      return result.map((item) => ({
+        ...item,
+        item_image: item.item_image.map((image) => baseURL + image),
+      }));
     } else {
       return null;
     }
@@ -80,14 +80,13 @@ const getItemsBySearchText = async (text) => {
 const getItemsByCategory = async (categoryName) => {
   try {
     logger.info("Item service");
-    const result = await Item.find({ item_category: categoryName });
+    const result = await Item.find({ item_category: categoryName }).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      result.forEach((item) => {
-        for (let i = 0; i < item.item_image.length; i++) {
-          item.item_image[i] = baseURL + item.item_image[i];
-        }
-      });
+      result = result.map((item) => ({
+        ...item,
+        item_image: item.item_image.map((image) => baseURL + image),
+      }));
       return result;
     } else {
       return null;
@@ -102,12 +101,10 @@ const getItemsByCategory = async (categoryName) => {
 const getItemByID = async (itemID) => {
   try {
     logger.info("Item service");
-    const result = await Item.findOne({ _id: itemID });
+    let result = await Item.findOne({ _id: itemID }).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      for (let i = 0; i < result.item_image.length; i++) {
-        result.item_image[i] = baseURL + result.item_image[i];
-      }
+      result["item_image"] = result.item_image.map((image) => baseURL + image);
       return result;
     } else {
       return null;
@@ -124,15 +121,13 @@ const getItemsBy = async (filterKey, filterValue) => {
     logger.info("Item service");
     const result = await Item.find({
       [filterKey]: { $regex: filterValue, $options: "i" },
-    });
+    }).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      result.forEach((item) => {
-        for (let i = 0; i < item.item_image.length; i++) {
-          item.item_image[i] = baseURL + item.item_image[i];
-        }
-      });
-      return result;
+      return result.map((item) => ({
+        ...item,
+        item_image: item.item_image.map((image) => baseURL + image),
+      }));
     } else {
       return null;
     }

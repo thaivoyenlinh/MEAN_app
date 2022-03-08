@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
 import { Category } from "../../../interfaces/category/category";
+import { Item } from "../../../interfaces/item/item";
 import { ItemService } from "../../../services/item/item.service";
 import { CategoryService } from "../../../services/category/category.service";
 import { ToastService } from "../../../services/toast/toast.service";
@@ -58,14 +59,17 @@ export class CreateItemComponent implements OnInit {
   }
 
   onUploadFiles(event) {
-    const files = event.target.files;
-    this.imageData = files;
+    this.imageData = event.target.files;
   }
 
   onSubmit() {
     this.loadingService.show();
+    const itemObj: Item = {
+      ...this.CreateItemForm.value,
+      item_image: [...this.imageData]
+    };
     this.itemService
-      .storeItem(this.CreateItemForm.value, this.imageData)
+      .storeItem(itemObj)
       .pipe(
         tap(
           (data) => {

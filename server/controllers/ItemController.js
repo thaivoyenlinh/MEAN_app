@@ -7,20 +7,12 @@ exports.addItem = async (req, res) => {
     try {
       logger.info("Item controller");
       logger.info("addItem()");
-      const files = req.files;
-      const pathToImages = [];
-      files.forEach((file) => {
-        const path = `/images/items/${req.body.item_name}/${file.filename}`;
-        pathToImages.push(path);
-        logger.info(`path to file: ${pathToImages}`);
-      });
-      const obj = JSON.parse(JSON.stringify(req.body));
+      const pathToImages = req.files.map(
+        (file) => `/images/items/${req.body.item_name}/${file.filename}`
+      );
+      logger.info(`path to file: ${pathToImages}`);
       const data = {
-        item_name: obj.item_name,
-        item_price: obj.item_price,
-        item_category: obj.item_category,
-        item_type: obj.item_type,
-        item_discription: obj.item_discription,
+        ...JSON.parse(JSON.stringify(req.body)),
         item_image: pathToImages,
       };
       await itemService.addItem(data);
@@ -49,6 +41,7 @@ exports.getItems = async (req, res) => {
       logger.info("Item controller");
       logger.info("getItems()");
       const listOfItems = await itemService.getItems();
+      // console.log(listOfItems);
       if (listOfItems && Array.isArray(listOfItems) && listOfItems.length > 0) {
         logger.info("getItems(): get all items sucessfully");
         const successMessageObj = {
@@ -197,7 +190,6 @@ exports.getItemByID = async (req, res) => {
       const itemID = req.params.id;
       logger.info(`getItemByID(), ID: ${itemID}`);
       const item = await itemService.getItemByID(itemID);
-      console.log(item);
       if (item) {
         logger.info(
           `getItemByID(): get the item with ID ${itemID} sucessfully`
