@@ -18,13 +18,14 @@ const addCategory = async (data) => {
 const getCategories = async () => {
   try {
     logger.info("Category service");
-    const result = await Category.find({});
+    const result = await Category.find({}).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      result.forEach((category) => {
-        category.category_image = baseURL + category.category_image;
-      });
-      return result;
+      console.log(result);
+      return result.map((category) => ({
+        ...category,
+        category_image: baseURL + category.category_image,
+      }));
     } else {
       return null;
     }

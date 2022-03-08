@@ -11,6 +11,7 @@ import { tap } from "rxjs/operators";
 import { CategoryService } from "../../../services/category/category.service";
 import { ToastService } from "../../../services/toast/toast.service";
 import { LoadingScreenService } from "../../../services/loading-screen/loading-screen.service";
+import { Category } from "src/app/interfaces/category/category";
 
 @Component({
   selector: "app-edit-category",
@@ -63,15 +64,14 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    const newCategoryName = this.EditCategoryForm.value.category_name_replace;
+    const categoryObj: Category = {
+      category_name: this.EditCategoryForm.value.category_name_replace,
+      category_image: this.imageData,
+    };
     this.loadingService.show();
     if (this.imageData !== null) {
       this.categoryService
-        .updateAllFieldCategory(
-          this.categoryId,
-          newCategoryName,
-          this.imageData
-        )
+        .updateAllFieldCategory(this.categoryId, categoryObj)
         .pipe(
           tap(
             (data) => {
@@ -90,7 +90,7 @@ export class EditCategoryComponent implements OnInit {
         .subscribe();
     } else {
       this.categoryService
-        .updateOneFieldCategory(this.categoryId, newCategoryName)
+        .updateOneFieldCategory(this.categoryId, categoryObj.category_name)
         .pipe(
           tap(
             (data) => {

@@ -106,7 +106,7 @@ export class ItemComponent implements OnInit {
         data ? this.itemService.getItemsBySearch(data) : of(null)
       ),
       map((res) => res && res["data"]),
-      tap((data) => console.log(data))
+      // tap((data) => console.log(data))
     );
     combineLatest([
       this.itemService.getListOfItems(),

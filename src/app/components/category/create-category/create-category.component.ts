@@ -51,11 +51,14 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   onSubmit() {
-    const categoryName = this.CreateCategoryForm.value.category_name;
+    const categoryObj: Category = {
+      category_name: this.CreateCategoryForm.value.category_name,
+      category_image: this.imageData,
+    };
     this.isSubmitted = true;
     this.loadingService.show();
     this.categoryService
-      .storeCategory(categoryName, this.imageData)
+      .storeCategory(categoryObj)
       .pipe(
         tap(
           (data) => {
