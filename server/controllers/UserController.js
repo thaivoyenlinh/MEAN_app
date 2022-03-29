@@ -63,8 +63,11 @@ exports.userProfile = async (req, res) => {
       if (user) {
         //delete multi attribute from object in nodejs
         //! need to trans from mongoose obj (Schema) to plain obj in js "lean()"
-        const { user_password, saltSecret, createdAt, updatedAt, ...userData } = user;
-        logger.info(`getUserProfile(): get the user profile with ID sucessfully`);
+        const { user_password, saltSecret, createdAt, updatedAt, ...userData } =
+          user;
+        logger.info(
+          `getUserProfile(): get the user profile with ID sucessfully`
+        );
         const successMessageObj = {
           title: "SUCCESS",
           content: "Get successfully the user profile by ID",
@@ -92,7 +95,7 @@ exports.userProfile = async (req, res) => {
       return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 200);
-}
+};
 
 exports.getUsers = async (req, res) => {
   return await setTimeout(async () => {
@@ -232,4 +235,4 @@ exports.deleteUser = async (req, res) => {
       return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 400);
-}
+};
