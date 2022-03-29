@@ -1,8 +1,9 @@
 const logger = require("../config/logger");
 const userService = require("../services/user");
 const apiResponse = require("../utilities/apiResponses");
+const passport = require("passport");
 
-exports.addUser = async (req, res) => {
+exports.register = async (req, res) => {
   return await setTimeout(async () => {
     try {
       logger.info("User controller");
@@ -33,6 +34,65 @@ exports.addUser = async (req, res) => {
     }
   }, 200);
 };
+
+exports.login = (req, res, next) => {
+  console.log("authenticate controller:");
+  passport.authenticate("local", (err, user, info) => {
+    //error from passport midleware
+    if (err) {
+      return res.status(400).json(err);
+    }
+    //registered user
+    else if (user) {
+      // console.log(user);
+      return res.status(200).json({ token: user.generateJWT() });
+    }
+    //unknown user or wrong password
+    else {
+      return res.status(404).json(info);
+    }
+  })(req, res);
+};
+
+exports.userProfile = async (req, res) => {
+  return await setTimeout(async () => {
+    try {
+      logger.info("User controller");
+      logger.info("userProfile()");
+      const user = await userService.getUserProfile(req._id);
+      if (user) {
+        //delete multi attribute from object in nodejs
+        //! need to trans from mongoose obj (Schema) to plain obj in js "lean()"
+        const { user_password, saltSecret, createdAt, updatedAt, ...userData } = user;
+        logger.info(`getUserProfile(): get the user profile with ID sucessfully`);
+        const successMessageObj = {
+          title: "SUCCESS",
+          content: "Get successfully the user profile by ID",
+        };
+        return apiResponse.successResponseWithData(
+          res,
+          successMessageObj,
+          userData
+        );
+      } else {
+        const notFoundMessageObj = {
+          title: "ERROR404",
+          content: "No user found",
+        };
+        return apiResponse.notFoundResponse(res, notFoundMessageObj);
+      }
+    } catch (err) {
+      logger.error(
+        `getUserProfile(): get the user profile failure. Message: ${error.message}. Stack: ${error.stack}`
+      );
+      const errorMessageObj = {
+        title: "ERROR",
+        content: "Get the user profile by ID is failure!",
+      };
+      return apiResponse.errorResponse(res, errorMessageObj);
+    }
+  }, 200);
+}
 
 exports.getUsers = async (req, res) => {
   return await setTimeout(async () => {
@@ -172,4 +232,4 @@ exports.deleteUser = async (req, res) => {
       return apiResponse.errorResponse(res, errorMessageObj);
     }
   }, 400);
-};
+}

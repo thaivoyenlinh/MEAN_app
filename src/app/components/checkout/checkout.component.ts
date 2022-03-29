@@ -78,47 +78,47 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loadingSreenService.show();
-    const userFormValue = this.UserInformationForm.value;
-    this.userService
-      .storeUser(userFormValue)
-      .pipe(
-        tap(
-          (res) => {
-            this.toastService.showSuccessMessage(res["message"]);
-            this.saveBtnDisable = true;
-          },
-          (error) => {
-            this.toastService.showErrorMessage(error.error["message"]);
-          }
-        ),
-        switchMap(() => this.userService.getLatestUser()),
-        tap(
-          (res) => {
-            this.userId = res._id;
-            this.orderBtnDisable = false;
-          },
-          (error) => {
-            this.toastService.showErrorMessage(error.error["message"]);
-            this.loadingSreenService.hide();
-          },
-          () => {
-            this.loadingSreenService.hide();
-          }
-        )
-      )
-      .subscribe();
+    // this.loadingSreenService.show();
+    // const userFormValue = this.UserInformationForm.value;
+    // this.userService
+    //   .storeUser(userFormValue)
+    //   .pipe(
+    //     tap(
+    //       (res) => {
+    //         this.toastService.showSuccessMessage(res["message"]);
+    //         this.saveBtnDisable = true;
+    //       },
+    //       (error) => {
+    //         this.toastService.showErrorMessage(error.error["message"]);
+    //       }
+    //     ),
+    //     switchMap(() => this.userService.getLatestUser()),
+    //     tap(
+    //       (res) => {
+    //         this.userId = res._id;
+    //         this.orderBtnDisable = false;
+    //       },
+    //       (error) => {
+    //         this.toastService.showErrorMessage(error.error["message"]);
+    //         this.loadingSreenService.hide();
+    //       },
+    //       () => {
+    //         this.loadingSreenService.hide();
+    //       }
+    //     )
+    //   )
+    //   .subscribe();
   }
 
   onOrder() {
-    this.orderService
-      .storeOrder(this.userId, this.itemId, this.totalPrice)
-      .pipe(
-        switchMap(() => this.orderService.getLatestOrder()),
-        tap((res) => {
-          this.dialogService.openConfirmOrderDialog(res).afterClosed();
-        })
-      )
-      .subscribe();
+    // this.orderService
+    //   .storeOrder(this.userId, this.itemId, this.totalPrice)
+    //   .pipe(
+    //     switchMap(() => this.orderService.getLatestOrder()),
+    //     tap((res) => {
+    //       this.dialogService.openConfirmOrderDialog(res).afterClosed();
+    //     })
+    //   )
+    //   .subscribe();
   }
 }

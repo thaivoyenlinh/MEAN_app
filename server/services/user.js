@@ -14,6 +14,21 @@ const addUser = async (data) => {
   }
 };
 
+const getUserProfile = async (userID) => {
+  try {
+    logger.info("User service");
+    const result = await User.findOne({ _id: userID }).lean();
+    if(result) {
+      logger.debug(JSON.stringify(result));
+      return result;
+    } else return null;
+  } catch (err) {
+    logger.error(
+      `getUserProfile(): Error occurs while get user profile with ID ${userID}. Message: ${error.message}. Stack: ${error.stack}`
+    );
+  }
+}
+
 const getUsers = async () => {
   try {
     logger.info("User service");
@@ -60,7 +75,7 @@ const getUser = async (userID) => {
     }
   } catch (error) {
     logger.error(
-      `getCategory(): Error occurs while get user with ID ${userID}. Message: ${error.message}. Stack: ${error.stack}`
+      `getUser(): Error occurs while get user with ID ${userID}. Message: ${error.message}. Stack: ${error.stack}`
     );
   }
 };
@@ -79,8 +94,9 @@ const deleteUser = async (userID) => {
 
 module.exports = {
   addUser,
+  getUserProfile,
   getUsers,
   getLatestuser,
   getUser,
-  deleteUser,
+  deleteUser
 };

@@ -71,15 +71,29 @@ export class SignUpComponent implements OnInit {
       const value = this.AccountRegistrationForm.value;
       // Destructuring ES6
       const { passwordConfirm, ...userData } = value;
-      console.log(userData);
-      this.userService.storeUser(userData).pipe(
+      // console.log(userData);
+      // this.userService.storeUser(userData).pipe(
+      //   tap(
+      //     (data) => {
+      //       if(data["status"]==1)
+      //         this.router.navigateByUrl("/sign_in");  
+      //     }
+      //   )
+      // ).subscribe();
+      // )
+      this.userService.register(userData).pipe(
         tap(
           (data) => {
-            if(data["status"]==1)
+            // console.log(data['message'].title);
+            if(data['message'].title == "SUCCESS"){
+              console.log("Your account have created!");
               this.router.navigateByUrl("/sign_in");  
+            }
           }
         )
       ).subscribe();
+
+
     }
   }
 

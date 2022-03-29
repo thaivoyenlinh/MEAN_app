@@ -1,0 +1,8 @@
+<app-nav-home></app-nav-home>
+<div>
+  <p>{{ userDetails.user_name }}</p>
+  <p>{{ userDetails.user_phoneNumber }}</p>
+</div>
+
+<button mat-raised-button (click)="SignOut()">Sign-out</button>
+<button mat-raised-button (click)="router.navigateByUrl('/')">Home</button>

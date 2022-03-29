@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
   displayedColumns: string[] = [
     "user_id",
     "user_name",
-    "user_phone_number",
+    "user_phoneNumber",
     "user_address",
     "action",
   ];

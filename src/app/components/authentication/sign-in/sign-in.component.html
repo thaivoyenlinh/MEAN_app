@@ -3,7 +3,7 @@
         <div class="name">
             <span>Sign In</span>
         </div>
-        <form [formGroup]="SignInForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="SignInForm" (ngSubmit)="SignInForm.valid && onSubmit()">
             
             <div class="form-group">
                 <mat-form-field>
@@ -24,8 +24,8 @@
 
             <div class="form-group">
                 <div class="button">
-                <button mat-raised-button type="submit">Sign-In</button>
-                <button mat-raised-button (click)="router.navigateByUrl('/')">Back</button>
+                    <button mat-raised-button type="submit" >Sign-In</button>
+                    <button mat-raised-button (click)="router.navigateByUrl('/')">Back</button>
                 </div>
             </div>
         </form>

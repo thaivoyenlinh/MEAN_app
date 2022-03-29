@@ -21,7 +21,6 @@ const getCategories = async () => {
     const result = await Category.find({}).lean();
     if (result) {
       logger.debug(JSON.stringify(result));
-      console.log(result);
       return result.map((category) => ({
         ...category,
         category_image: baseURL + category.category_image,

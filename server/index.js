@@ -1,7 +1,9 @@
+require("./config/passport");
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
 const path = require("path");
+const passport = require("passport");
 
 const dotenv = require("dotenv");
 //* dotenv configuration
@@ -13,7 +15,7 @@ const route = require("./routers");
 //! has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 const cors = require("cors");
 
-const logger = require('./config/logger');
+const logger = require("./config/logger");
 
 //static file configuration to access public folder in server
 app.use(express.static(path.join(__dirname, "public")));
@@ -38,10 +40,14 @@ app.use(
 );
 app.use(express.json());
 
+app.use(passport.initialize());
+
 route(app);
 
 if (!module.parent) {
   app.listen(process.env.SERVER_PORT, process.env.HOSTNAME, () => {
-    logger.info(`Server running at http://${process.env.HOSTNAME}:${process.env.SERVER_PORT}`);
+    logger.info(
+      `Server running at http://${process.env.HOSTNAME}:${process.env.SERVER_PORT}`
+    );
   });
 }

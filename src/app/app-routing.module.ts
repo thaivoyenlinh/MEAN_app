@@ -12,6 +12,9 @@ import { CartComponent } from "./components/cart/cart.component";
 import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { UserComponent } from "./components/user/user.component";
 import { OrderComponent } from "./components/order/order.component";
+import { UserProfileComponent } from "./components/user-profile/user-profile.component";
+
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -84,7 +87,11 @@ const routes: Routes = [
         ],
       },
 
-      { path: "user", component: UserComponent, data: { breadcrumb: "Customer" } },
+      {
+        path: "user",
+        component: UserComponent,
+        data: { breadcrumb: "Customer" },
+      },
 
       {
         path: "order",
@@ -94,8 +101,13 @@ const routes: Routes = [
     ],
   },
 
-  { path: "sign_up", component: SignUpComponent },
+  { path: "register", component: SignUpComponent },
   { path: "sign_in", component: SignInComponent },
+  {
+    path: "userprofile",
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
