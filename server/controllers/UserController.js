@@ -61,10 +61,7 @@ exports.userProfile = async (req, res) => {
       logger.info("userProfile()");
       const user = await userService.getUserProfile(req._id);
       if (user) {
-        //delete multi attribute from object in nodejs
-        //! need to trans from mongoose obj (Schema) to plain obj in js "lean()"
-        const { user_password, saltSecret, createdAt, updatedAt, ...userData } =
-          user;
+        // delete user.user_password;
         logger.info(
           `getUserProfile(): get the user profile with ID sucessfully`
         );
@@ -75,7 +72,7 @@ exports.userProfile = async (req, res) => {
         return apiResponse.successResponseWithData(
           res,
           successMessageObj,
-          userData
+          user
         );
       } else {
         const notFoundMessageObj = {
@@ -84,7 +81,7 @@ exports.userProfile = async (req, res) => {
         };
         return apiResponse.notFoundResponse(res, notFoundMessageObj);
       }
-    } catch (err) {
+    } catch (error) {
       logger.error(
         `getUserProfile(): get the user profile failure. Message: ${error.message}. Stack: ${error.stack}`
       );

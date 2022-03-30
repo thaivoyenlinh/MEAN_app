@@ -1,11 +1,11 @@
 const passport = require("passport");
 const localStrategy = require("passport-local");
-// const mongoose = require("mongoose");
 const User = require("../models/user");
+const logger = require("./logger");
 
 const localLogin = new localStrategy(async (username, password, done) => {
+  logger.info("localLogin:");
   let user = await User.findOne({ user_name: username });
-  // console.log(user);
   if (!user) {
     return done(null, false, { message: "Username is not registered" });
   } else if (!user.verifyPassword(password)) {

@@ -17,7 +17,7 @@ const addUser = async (data) => {
 const getUserProfile = async (userID) => {
   try {
     logger.info("User service");
-    const result = await User.findOne({ _id: userID }).lean();
+    const result = await User.findOne({ _id:  userID }, { user_password: 0, saltSecret: 0 });
     if(result) {
       logger.debug(JSON.stringify(result));
       return result;
